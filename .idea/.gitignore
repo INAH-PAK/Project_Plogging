@@ -1,0 +1,6 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# 여기서 xml 파일 만들고 그 파일 위치를 적으면 됨
+# app/src/main/res/values/api_key.xml 하고 commit 하면 내가 하고 싶은 string 리소스를 깃에 안올릴 수 있음 !
+
