@@ -1,25 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/tab_background"
+    android:backgroundTint="@color/sky"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="여기는 메인"
-        />
+        android:background="@color/white">
 
-    <Button
-        android:id="@+id/btn"
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" 이거 누르면 맵 액티비티"/>
+        app:layout_collapseMode="pin">
+
+        <!-- pin: 스크롤 시 고정 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:background="@drawable/appbar_bacground">
+
+            <ImageView
+                android:id="@+id/iv_app_weather"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_cloud_24"
+                />
+
+            <TextView
+                android:id="@+id/tv01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toRightOf="@id/iv_app_weather"
+                android:text="반가워요 "
+                android:textSize="20dp" />
 
 
-  </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:overScrollMode="never"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+    <FrameLayout
+        android:id="@+id/container"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_weight="1"/>
+
+
+<!-- 바텀-->
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:fabAlignmentMode="end"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="5dp"
+        app:fabCradleRoundedCornerRadius="10dp">
+
+<!--       앱바의 기본 leftmargin에 맞춰서 right 마진 설정  :  android:layout_marginRight="16dp"-->
+<!--       투명 맞춘다. 나중에 알아보기   :   android:background="@android:color/transparent"-->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            app:menu="@menu/bottom_navigation_menu"/>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_anchor="@id/bottomAppBar"/>
+
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "774564097815",
+    "project_id": "plogging-8e2c1",
+    "storage_bucket": "plogging-8e2c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774564097815:android:781fa3a1c6baed76ce5152",
+        "android_client_info": {
+          "package_name": "com.wookie_soft.inah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774564097815-sd83s0v674vg7jilc8nj6ffip52gm2pb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmAc-EMgqAILNgBKnbS73RdnZkJy5uQOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774564097815-sd83s0v674vg7jilc8nj6ffip52gm2pb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

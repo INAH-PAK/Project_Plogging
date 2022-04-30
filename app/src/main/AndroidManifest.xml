@@ -10,16 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Plogging">
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Map3Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Map2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Map1Activity"
+            android:name=".AddPlanActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"
@@ -33,6 +25,19 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".Map3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Map2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Map1Activity"
+            android:exported="false" />
     </application>
 
 </manifest>

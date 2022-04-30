@@ -7,12 +7,50 @@
     android:orientation="vertical"
     tools:context=".Map1Activity">
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="300dp"
-        android:text="누르면 다음 Map2"
-        />
+        android:background="@color/white">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="걷기 .  액션바 수정 요망">
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="재활용장"
+            android:textSize="20dp"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="화장실"
+            android:textSize="20dp"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주의"
+            android:textSize="20dp"/>
+    </com.google.android.material.chip.ChipGroup>
+
+    <map
+
+
+
+
+
+
 </LinearLayout>

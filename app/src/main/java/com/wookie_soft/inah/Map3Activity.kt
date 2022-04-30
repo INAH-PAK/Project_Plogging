@@ -11,7 +11,6 @@ class Map3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map3)
 
-        val d="dd"
     }
 
 
