@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pager1SecondFragment">
+
+<!--    내 일정 페이지 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내일정"/>
+
+<!--     달력     -->
+<com.kizitonwose.calendarview.CalendarView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cv_dayViewResource="@layout/calender_day_latout"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="달력 띄우기 "/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_tab1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+<!--     플로어팅 버튼 클릭 시 나타날 액티비티 ~~  -->
+<!--     map.xml 들-->
+
+</LinearLayout>

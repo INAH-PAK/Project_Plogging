@@ -60,9 +60,15 @@ class MainActivity : AppCompatActivity() {
             //SAM 변환시는 return 이라는 단어를 아예 안써야 리턴이 됨.
             true
 
-        }//on
+        }
 
-    }
+        binding.floatingButton.setOnClickListener {
+            val intent:Intent = Intent(this, Map1Activity::class.java)
+            startActivity(intent)
+        }
+
+
+    }//on
 
 
 

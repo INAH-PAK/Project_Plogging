@@ -1,13 +1,15 @@
 package com.wookie_soft.inah
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.wookie_soft.inah.databinding.ActivityIntroBinding
 import java.util.*
+import com.kakao.sdk.common.util.Utility
+import android.util.Log
+
 
 class IntroActivity : AppCompatActivity() {
 
@@ -19,10 +21,8 @@ class IntroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val keyHash:String = Util.
-        String keyHash = Utility.getKeyHash(this);
-
-        Log.i("KEY",keyHash);
+        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
+        Log.d("키해쉬", keyHash)
 
         // 인트로 에니메이션 종료 후 intent 로 Login Activity 시작
             val animationListener = object : Animation.AnimationListener {

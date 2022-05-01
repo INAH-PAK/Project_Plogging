@@ -1,56 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Map1Activity">
-
-
-    <com.google.android.material.appbar.AppBarLayout
+    android:padding="4dp"
+    tools:context=".MainActivity">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-        <com.google.android.material.appbar.MaterialToolbar
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="걷기 .  액션바 수정 요망">
+            android:text="카카오 지도 테스트"
+            android:textSize="20dp"/>
 
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-        </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="분리수거장"
+                android:textSize="10dp"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="화장실"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="주의"/>
+        </com.google.android.material.chip.ChipGroup>
 
-    <com.google.android.material.chip.ChipGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        <LinearLayout
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:orientation="vertical"/>
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip01"
+        <Button
+            android:id="@+id/btn01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재활용장"
-            android:textSize="20dp"/>
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip02"
+            android:text="마커 추가"
+            android:textSize="10dp"
+            android:layout_gravity="right"
+            android:textStyle="bold"
+            android:backgroundTint="@color/teal_200"/>
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text=" 현재 위치 : "
+            />
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text=" 타이머 : "
+            />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="50dp"
+            />
+
+        <Button
+            android:id="@+id/btn02_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="화장실"
-            android:textSize="20dp"/>
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip03"
+            android:text="START"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/teal_200"/>
+        <Button
+            android:id="@+id/btn03_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주의"
-            android:textSize="20dp"/>
-    </com.google.android.material.chip.ChipGroup>
+            android:text="계속"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/teal_200"/>
 
-    <map
-
-
-
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

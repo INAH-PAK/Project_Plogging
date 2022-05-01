@@ -18,7 +18,7 @@
         android:layout_marginTop="120dp"
         android:text="환영합니다!"
         android:textColor="@color/white"
-        android:textSize="50dp"
+        android:textSize="30dp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,24 +30,22 @@
         android:layout_marginTop="10dp"
         android:text="안녕하세요 😄"
         android:textColor="@color/white"
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et"
-        android:layout_width="350dp"
-        android:layout_height="45dp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
         android:layout_below="@id/tv2"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:padding="8dp"
-
         android:ems="10"
-        android:hint="어떤 이름으로 불러드릴까요?"
+        android:hint="  어떤 이름으로 불러드릴까요?"
         android:imeOptions="actionDone"
         android:inputType="text"
-        android:maxLength="10">
+        android:maxLength="6">
         <requestFocus />
     </EditText>
     <TextView
@@ -71,7 +69,7 @@
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/teal_200"
         android:text="입력"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:textStyle="bold" />
 
 
