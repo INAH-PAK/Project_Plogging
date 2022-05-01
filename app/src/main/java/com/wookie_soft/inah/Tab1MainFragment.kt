@@ -38,6 +38,8 @@ class Tab1MainFragment:Fragment(){
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()
 
+
+
     }
 
 
