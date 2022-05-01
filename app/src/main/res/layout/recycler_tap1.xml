@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:padding="8dp"
     android:layout_margin="4dp"
-    android:background="@color/black">
+    android:background="@color/white">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
 <TextView
     android:id="@+id/tv01_tab1"
@@ -35,5 +40,5 @@
     android:layout_toRightOf="@id/tv03"
     android:layout_alignBaseline="@id/tv03"
     android:text=" 길동이랑 도산공원"/>
-
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

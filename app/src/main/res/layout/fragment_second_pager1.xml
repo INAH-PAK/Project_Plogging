@@ -16,7 +16,7 @@
 <!--     달력     -->
 <com.kizitonwose.calendarview.CalendarView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     app:cv_dayViewResource="@layout/calender_day_latout"/>
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +26,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_tab1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:scrollbars="vertical"/>
 
 
 <!--     플로어팅 버튼 클릭 시 나타날 액티비티 ~~  -->
