@@ -101,6 +101,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:backgroundTint="@color/yellow"
+        app:srcCompat="@drawable/icons_go_100"
         app:layout_anchor="@id/bottomAppBar"/>
 
 

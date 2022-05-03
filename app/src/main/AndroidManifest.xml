@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".StartApplicationForKakao"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_Plogging"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".SignUpEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".IntroActivity"
             android:exported="true">
@@ -29,7 +35,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".NameActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible" />
         <activity
@@ -45,8 +51,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="a33c0710225e373358c18e0f1936e7e0" />
-
-
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
 
 </manifest>

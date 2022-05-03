@@ -3,7 +3,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-
     }
 }
 dependencyResolutionManagement {
@@ -12,8 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        // 카카오 Map / Login API 모듈
         maven {url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
-
     }
 }
 rootProject.name = "Project_Plogging"

@@ -3,6 +3,7 @@
     <string name="text_label_1">홈</string>
     <string name="text_label_2">게시판</string>
     <string name="text_label_3">텃밭</string>
+    <string name="text_label_setting">설정</string>
 
     <string name="text_label_4">내 활동</string>
     <string name="text_label_5">일정</string>

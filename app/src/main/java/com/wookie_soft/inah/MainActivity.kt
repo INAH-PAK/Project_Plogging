@@ -1,9 +1,12 @@
 package com.wookie_soft.inah
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.wookie_soft.inah.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,39 +22,44 @@ class MainActivity : AppCompatActivity() {
         val userName = intent.getStringExtra("UserName")
         binding.tv01.setText(" 반가워요 $userName !")
 
-        fragments.add(Tab1MainFragment()) //0
-        fragments.add(Tab2MainFragment()) //1
-        fragments.add(Tab3MainFragment()) //2
+        // 총 4개의 탭
+        fragments.add(Tab1MainFragment()) //0 - 홈
+        fragments.add(Tab2MainFragment()) //1 - 내 일정 , 게시판
+        fragments.add(Tab3MainFragment()) //2 - 내 텃밭
+        fragments.add(Tab4MainSettingFragment()) //3   - 설정
 
+        // 프레그먼트 동적으로 추가.
         supportFragmentManager.beginTransaction().add(R.id.container, fragments[0]).commit()
 
         binding.bnv.background = null
 
 
-
-
-
         binding.bnv.setOnItemSelectedListener {
 
-            supportFragmentManager.fragments.forEach{
+            supportFragmentManager.fragments.forEach {
                 supportFragmentManager.beginTransaction().hide(it).commit()
             }
             val tran = supportFragmentManager.beginTransaction()
 
-            when( it.itemId){
-                R.id.bnv_menu_tab1 ->{
+            when (it.itemId) {
+                R.id.bnv_menu_tab1 -> {
                     //   supportFragmentManager.beginTransaction().show(fragments[0]).commit()
                     tran.show(fragments[0])
                 }
-                R.id.bnv_menu_tab2 ->{
-                    if( !supportFragmentManager.fragments.contains(fragments[1]))
-                        tran.add(R.id.container,fragments[1])
+                R.id.bnv_menu_tab2 -> {
+                    if (!supportFragmentManager.fragments.contains(fragments[1]))
+                        tran.add(R.id.container, fragments[1])
                     tran.show(fragments[1])
                 }
-                R.id.bnv_menu_tab3 ->{
-                    if( !supportFragmentManager.fragments.contains(fragments[2]))
-                        tran.add(R.id.container,fragments[2])
+                R.id.bnv_menu_tab3 -> {
+                    if (!supportFragmentManager.fragments.contains(fragments[2]))
+                        tran.add(R.id.container, fragments[2])
                     tran.show(fragments[2])
+                }
+                R.id.bnv_menu_tab4 -> {
+                    if (!supportFragmentManager.fragments.contains(fragments[3]))
+                        tran.add(R.id.container, fragments[3])
+                    tran.show(fragments[3])
                 }
 
             }
@@ -63,14 +71,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.floatingButton.setOnClickListener {
-            val intent:Intent = Intent(this, Map1Activity::class.java)
+            val intent: Intent = Intent(this, Map1Activity::class.java)
             startActivity(intent)
         }
 
 
 
-
     }//on
+
+
+
+
+
 
 
 
