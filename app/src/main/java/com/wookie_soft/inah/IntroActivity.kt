@@ -19,11 +19,9 @@ class IntroActivity : AppCompatActivity() {
     val ani:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.anim_intro) }
     var isFirstRun:Boolean = true
     lateinit var userName:String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
 
         val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
         Log.d("키해쉬", keyHash)
