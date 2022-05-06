@@ -7,7 +7,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.wookie_soft.inah.databinding.ActivityIntroBinding
-import com.kakao.sdk.common.util.Utility
 import android.util.Log
 import android.widget.Toast
 import androidx.preference.PreferenceManager
@@ -19,12 +18,13 @@ class IntroActivity : AppCompatActivity() {
     val ani:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.anim_intro) }
     var isFirstRun:Boolean = true
     lateinit var userName:String
+    lateinit var pref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
-        Log.d("키해쉬", keyHash)
+    val pref :SharedPreferences=  PreferenceManager.getDefaultSharedPreferences(this)
+//        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
+//        Log.d("키해쉬", keyHash)
 
         loadPreference()  // SharedPreference 값 읽어오기
 
@@ -48,8 +48,6 @@ class IntroActivity : AppCompatActivity() {
                 }
             }
 
-
-
         binding.tv.startAnimation(ani)
         ani.setAnimationListener(animationListener)
 
@@ -58,7 +56,6 @@ class IntroActivity : AppCompatActivity() {
 
     // 저장되어 있는 shered preference에 저장된 값들을 읽어오기 ( 사용자가 설정한 값들 ~~)
     private fun loadPreference(){
-        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         isFirstRun = pref.getBoolean("isFirstRun",false)
         userName = pref.getString("userName","").toString()
         var isLogin:Boolean = pref.getBoolean(("login"),false)

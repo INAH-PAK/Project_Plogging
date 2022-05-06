@@ -54,8 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
         binging.btnGoogle.setOnClickListener{ clickGoogle()}
         binging.ivKakao.setOnClickListener{ clickKakao()}
-
-
         binging.btnUnlink.setOnClickListener { clickUnlink() }
 
 
@@ -65,9 +63,6 @@ class LoginActivity : AppCompatActivity() {
         // 이메일과 비번으로 로그인
         val email = binging.etEmail.text.toString()
         val pw = binging.etPw.text.toString()
-
-
-
         firebaseAuth.signInWithEmailAndPassword(email, pw).addOnCompleteListener {
                 if (it.isSuccessful) {
 
@@ -75,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "이메일 로그인 성공", Toast.LENGTH_SHORT).show()
                         val mail: String = firebaseAuth.currentUser!!.email.toString()
                         binging.tvEmail.text = "사용자 이메일 :" + mail
+                        User.loginType = User.EMAIL
                      } else {
                     Toast.makeText(this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                     }
@@ -147,6 +143,7 @@ class LoginActivity : AppCompatActivity() {
             prefEditor.putString("userEmail",email).commit()
 
             binging.tvGoogleAccount.setText(" 구글 이메일은 : $email")
+            User.loginType = User.GOOGLE
 
         })
 
@@ -179,9 +176,10 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "카카오 로그인 실패 : ${error}", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(this, "카카오 로그인 성공 : ${error}", Toast.LENGTH_SHORT).show()
+                    User.loginType = User.KAKAO
                 }
                 // 어차피 카카오 로그인은 콜백메소드 무조건 실행하니, 여기서 정보를 가져오자.
-                loadUserInfo()
+                loadKakaoUserInfo()
             })
 
         }else{
@@ -192,31 +190,36 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun clickUnlink(){
-        firebaseAuth.signOut()
-        // TODO 아예 계정연동 다 끊는거 써야함.
-        Toast.makeText(this, "로그아웃 되셨습니다.", Toast.LENGTH_SHORT).show()
+        when(User.loginType) {
 
-        UserApiClient.instance.unlink {
-            if(it != null){
-                Toast.makeText(this, "연결끊기 실패", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "연결끊기 성공", Toast.LENGTH_SHORT).show()
-                binging.tvKakaoNickname.text = "닉네임"
-                binging.tvKakaoEmail.text = "카카오 로그인해주세여 - 이메일"
-                //Glide.with(this).load(R.mipmap.ic_launcher_round).into(binging.civProfile)
+            User.GOOGLE,User.EMAIL -> firebaseAuth.signOut()
+            User.KAKAO -> {
+                UserApiClient.instance.unlink {
+                    if(it != null){
+                        Toast.makeText(this, "연결끊기 실패", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this, "연결끊기 성공", Toast.LENGTH_SHORT).show()
+                        binging.tvKakaoNickname.text = "닉네임"
+                        binging.tvKakaoEmail.text = "카카오 로그인해주세여 - 이메일"
+                        //Glide.with(this).load(R.mipmap.ic_launcher_round).into(binging.civProfile)
+                    }
+                }
             }
+
         }
+
     }
 
-    private fun loadUserInfo(){
+    // 카카오 로그인 성공 시 데이터를 가져오는 메소드
+    private fun loadKakaoUserInfo(){
         UserApiClient.instance.me { user, error ->
             if(error != null)   Toast.makeText(this, "사용자 정보 요청 실패 ", Toast.LENGTH_SHORT).show()
             else if ( user != null ){
                 // 어떤 정보를 받아올 지 ~~
                 val memberId:Long? = user.id    // 회원번호 -> 회원식별자로 사용 가능 . . . 근데 지금 우린 별로 필료하지 않음
-                val nickName = user.kakaoAccount?.profile?.nickname
+                pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
+                val nickName =
                 val email = user.kakaoAccount?.email
-                val profileImag = user.kakaoAccount?.profile?.profileImageUrl
 
                 binging.tvKakaoNickname.text = nickName
                 binging.tvKakaoEmail.text = email
