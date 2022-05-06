@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Project_Plogging</string>
+    <string name="text_label_1">홈</string>
+    <string name="text_label_2">게시판</string>
+    <string name="text_label_3">텃밭</string>
+    <string name="text_label_setting">설정</string>
+
+    <string name="text_label_4">내 활동</string>
+    <string name="text_label_5">일정</string>
+
+    <string name="text_label_6">내 일지</string>
+    <string name="text_label_7">커뮤니티</string>
+
+    <string name="text_label_8">텃밭</string>
+
+
 </resources>

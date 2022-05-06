@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:text=" D+2 "/>
+    <TextView
+        android:id="@+id/tv02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv01"
+        android:layout_alignBaseline="@id/tv01"
+        android:text=" 2022년 03월 26일 "/>
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv01"
+        android:src="@drawable/siba"/>
+    <TextView
+        android:id="@+id/tv03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv"
+        android:layout_below="@id/tv01"
+        android:layout_margin="6dp"
+        android:ems="150"
+        android:ellipsize="end"
+        android:text=" 길동이와의 저녁산책은 재밌었다 . 길 가다가 언니를 만났는데 루류ㅗ듀ㅏ누ㅜㅇ재ㅐ웆더ㅕ룾둘"/>
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

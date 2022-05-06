@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pager2FirstFragment"
+    android:padding="8dp">
+    <!--     내 일지들 화면-->
+
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INAH 님,"
+        android:textSize="25dp"/>
+    <TextView
+        android:id="@+id/tv02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plogging 은 어떠셨나요? "
+        android:textSize="25dp"
+        android:padding="4dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+        <TextView
+            android:id="@+id/tv03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:paddingTop="4dp"/>
+        <TextView
+            android:id="@+id/tv04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="경험을 기록해보세요"
+            android:layout_toRightOf="@id/tv03"
+            android:layout_alignBottom="@id/tv03"
+            android:paddingLeft="10dp"/>
+        <Button
+            android:id="@+id/tv05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성하기"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/yellow"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+<com.google.android.material.divider.MaterialDivider
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    />
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/tv06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" 나의 기록들 "
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:paddingBottom="4dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:scrollbars="vertical"
+        android:padding="8dp"/>
+
+
+
+</LinearLayout>

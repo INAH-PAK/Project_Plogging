@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pager2SecondFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="커뮤니티"/>
+<com.google.android.material.chip.ChipGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인기순"
+        />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인기순"
+        />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="최신순"
+        />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요"
+        />
+</com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:scrollbars="vertical"/>
+</LinearLayout>

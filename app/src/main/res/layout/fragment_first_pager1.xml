@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pager1FirstFragment"
+    android:padding="16dp">
+
+<!--     내 활동 기록 보여주는 첫 페이지     -->
+
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" INAN 님 , 총 0번 참여 하셨고 "
+        android:paddingTop="4dp"
+        android:textSize="25dp"/>
+    <TextView
+        android:id="@+id/tv02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="이번 달 총 0번 참여하셨네요 !"
+        android:paddingTop="16dp"
+        android:textSize="25dp"
+        android:paddingBottom="16dp"/>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
+    <TextView
+        android:id="@+id/tv03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 수집한 쓰레기 비율 "
+        android:paddingTop="16dp"
+        android:textSize="25dp"/>
+
+
+
+    <ImageView
+        android:id="@+id/iv01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/siba"/>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

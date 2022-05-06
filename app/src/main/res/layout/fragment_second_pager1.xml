@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pager1SecondFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+<!--    내 일정 페이지 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내일정"/>
+
+<!--     달력     -->
+<CalendarView
+    android:id="@+id/calender"
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    android:padding="4dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="달력 띄우기 "/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_tab1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:scrollbars="vertical"/>
+
+
+<!--     플로어팅 버튼 클릭 시 나타날 액티비티 ~~  -->
+<!--     map.xml 들-->
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>
