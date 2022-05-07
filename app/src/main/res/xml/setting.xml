@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <PreferenceCategory
         app:title=" 개인 설정" >
         <PreferenceScreen
@@ -10,15 +11,12 @@
             app:summary="계정 로그인으로 확장된 기능을 무료로 누려보세요">
             <intent android:targetPackage="com.wookie_soft.inah"
                 android:targetClass="com.wookie_soft.inah.LoginActivity"/>
-
         </PreferenceScreen>
 
         <EditTextPreference
         app:key="userName"
         app:title=" 사용자 이름 "
-        app:summary="USER"/>
-
-
+        app:summary="user"/>
 
     </PreferenceCategory>
 

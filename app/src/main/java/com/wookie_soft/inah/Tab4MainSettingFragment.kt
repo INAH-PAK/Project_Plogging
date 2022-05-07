@@ -3,7 +3,9 @@ package com.wookie_soft.inah
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.preference.*
+
 // 환경설정 화면
 class Tab4MainSettingFragment: PreferenceFragmentCompat() {
     //
