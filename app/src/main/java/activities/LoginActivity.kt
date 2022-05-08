@@ -1,5 +1,6 @@
-package com.wookie_soft.inah
+package activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -19,7 +20,9 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityLoginBinding
+import model.User
 import java.util.*
 
 
@@ -176,7 +179,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "카카오 로그인 실패 : ${error}", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(this, "카카오 로그인 성공 : ${error}", Toast.LENGTH_SHORT).show()
-                    User.loginType = User.KAKAO
+                    User.loginType = User.KAKAOLOGIN
                 }
                 // 어차피 카카오 로그인은 콜백메소드 무조건 실행하니, 여기서 정보를 가져오자.
                 loadKakaoUserInfo()
@@ -192,8 +195,8 @@ class LoginActivity : AppCompatActivity() {
     private fun clickUnlink(){
         when(User.loginType) {
 
-            User.GOOGLE,User.EMAIL -> firebaseAuth.signOut()
-            User.KAKAO -> {
+            User.GOOGLE, User.EMAIL -> firebaseAuth.signOut()
+            User.KAKAOLOGIN -> {
                 UserApiClient.instance.unlink {
                     if(it != null){
                         Toast.makeText(this, "연결끊기 실패", Toast.LENGTH_SHORT).show()
@@ -211,6 +214,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // 카카오 로그인 성공 시 데이터를 가져오는 메소드
+    @SuppressLint("CommitPrefEdits")
     private fun loadKakaoUserInfo(){
         UserApiClient.instance.me { user, error ->
             if(error != null)   Toast.makeText(this, "사용자 정보 요청 실패 ", Toast.LENGTH_SHORT).show()
@@ -218,10 +222,10 @@ class LoginActivity : AppCompatActivity() {
                 // 어떤 정보를 받아올 지 ~~
                 val memberId:Long? = user.id    // 회원번호 -> 회원식별자로 사용 가능 . . . 근데 지금 우린 별로 필료하지 않음
                 pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
-                val nickName =
+               // val nickName : 카카오 별명
                 val email = user.kakaoAccount?.email
 
-                binging.tvKakaoNickname.text = nickName
+             //   binging.tvKakaoNickname.text = nickName
                 binging.tvKakaoEmail.text = email
             //    Glide.with(this).load(profileImag).into(binging.civProfile)
             }

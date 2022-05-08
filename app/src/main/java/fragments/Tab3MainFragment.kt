@@ -1,4 +1,4 @@
-package com.wookie_soft.inah
+package fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

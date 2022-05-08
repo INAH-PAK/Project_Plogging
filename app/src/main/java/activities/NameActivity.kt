@@ -1,4 +1,4 @@
-package com.wookie_soft.inah
+package activities
 
 import android.content.Context
 import android.content.Intent
@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
+import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityNameBinding
 
 // 로그인 화면
@@ -26,7 +27,7 @@ class NameActivity : AppCompatActivity() {
 
     val binding:ActivityNameBinding by lazy { ActivityNameBinding.inflate(layoutInflater)  }
     private lateinit var manager: InputMethodManager
-    val ani: Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.anim_shake) }
+    val ani: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.anim_shake) }
     lateinit var userName:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,7 +102,7 @@ class NameActivity : AppCompatActivity() {
 
             }else {
                 // 힌트 텍스트 에니메이션 넣기
-                binding.tv3.setTextColor(this.getColor( R.color.red))
+                binding.tv3.setTextColor(this.getColor(R.color.red))
                 binding.tv3.startAnimation(ani)
             }
         }

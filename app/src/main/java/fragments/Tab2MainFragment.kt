@@ -1,4 +1,4 @@
-package com.wookie_soft.inah
+package fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wookie_soft.inah.databinding.FragmentMainTab2Binding
+import adapters.PagerFragmentAdapterTap2
 
 class Tab2MainFragment:Fragment() {
     lateinit var binding:FragmentMainTab2Binding

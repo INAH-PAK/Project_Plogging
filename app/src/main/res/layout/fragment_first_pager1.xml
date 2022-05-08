@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pager1FirstFragment"
+    tools:context="fragments.Pager1FirstFragment"
     android:padding="16dp">
 
 <!--     내 활동 기록 보여주는 첫 페이지     -->

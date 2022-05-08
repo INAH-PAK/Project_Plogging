@@ -1,16 +1,16 @@
-package com.wookie_soft.inah
+package fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.preference.*
+import com.wookie_soft.inah.R
 
 // 환경설정 화면
 class Tab4MainSettingFragment: PreferenceFragmentCompat() {
     //
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.setting, rootKey)
+        setPreferencesFromResource(R.xml.root_preferences, rootKey)
     }
 
     val pref: SharedPreferences by lazy {

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pager1SecondFragment">
+    tools:context="fragments.Pager1SecondFragment">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,17 +14,17 @@
 
 
 <!--    내 일정 페이지 -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="내일정"/>
 
 <!--     달력     -->
-<CalendarView
-    android:id="@+id/calender"
+<!--    커스텀 문서 : -->
+<com.applandeo.materialcalendarview.CalendarView
+    android:id="@+id/calender_view"
     android:layout_width="match_parent"
-    android:layout_height="320dp"
-    android:padding="4dp"/>
+    android:layout_height="wrap_content"
+    app:type="one_day_picker"
+    app:eventsEnabled="true"
+    android:layout_margin="4dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +38,5 @@
         android:scrollbars="vertical"/>
 
 
-<!--     플로어팅 버튼 클릭 시 나타날 액티비티 ~~  -->
-<!--     map.xml 들-->
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>
