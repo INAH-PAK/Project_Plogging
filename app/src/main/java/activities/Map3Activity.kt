@@ -1,7 +1,8 @@
-package com.wookie_soft.inah
+package activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wookie_soft.inah.R
 
 class Map3Activity : AppCompatActivity() {
 

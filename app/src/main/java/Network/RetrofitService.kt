@@ -1,0 +1,7 @@
+package Network
+
+interface RetrofitService {
+
+
+
+}

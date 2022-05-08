@@ -1,12 +1,10 @@
-package com.wookie_soft.inah
+package fragments
 
-import android.os.Binder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wookie_soft.inah.databinding.FragmentFirstPager1Binding
 

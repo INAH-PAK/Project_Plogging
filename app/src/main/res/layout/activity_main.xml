@@ -8,7 +8,7 @@
     android:background="@drawable/tab_background"
     android:backgroundTint="@color/sky"
     android:padding="10dp"
-    tools:context=".MainActivity">
+    tools:context="activities.MainActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout

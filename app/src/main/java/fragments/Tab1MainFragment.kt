@@ -1,15 +1,15 @@
-package com.wookie_soft.inah
+package fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wookie_soft.inah.databinding.FragmentMainTab1Binding
+import adapters.PagerFragmentAdapterTap1
 
 class Tab1MainFragment:Fragment(){
 

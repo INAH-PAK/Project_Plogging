@@ -11,8 +11,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        // 카카오 Map / Login API 모듈
+        // 카카오 ui.Map / ui.Login API 모듈
         maven {url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
+        jcenter()
     }
 }
 rootProject.name = "Project_Plogging"

@@ -1,18 +1,15 @@
-package com.wookie_soft.inah
+package adapters
 
-import android.content.ClipData
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wookie_soft.inah.databinding.RecyclerTap1Binding
-import com.wookie_soft.inah.databinding.RecyclerTap2FirstBinding
 import com.wookie_soft.inah.databinding.RecyclerTap2SecondBinding
+import model.ItemTab2Second
 
 class RecyclerAdaopterTab2Second constructor(val context: Context, var items: MutableList<ItemTab2Second>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab2Second.VH>(){
 

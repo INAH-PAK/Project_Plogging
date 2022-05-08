@@ -1,4 +1,4 @@
-package com.wookie_soft.inah
+package activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,6 +14,8 @@ import android.widget.Toast
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
 import com.wookie_soft.inah.databinding.ActivityMap1Binding
+import model.MyMap
+import model.MyMap.Companion.marker
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
@@ -76,7 +78,6 @@ class Map1Activity : AppCompatActivity() {
             startActivity(intent)
 
 
-
         }
 
 
@@ -105,24 +106,21 @@ class Map1Activity : AppCompatActivity() {
 
         mapView.setMapCenterPoint( mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble() ) ,true )
 
-        val marker = MapPOIItem()
-        marker.itemName = "Default Marker"
-        marker.tag = 0
+        MyMap.marker.itemName = "Default Marker"
+        MyMap.marker.tag = 0
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
-        val mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also { marker.mapPoint = it }
-        marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
-        marker.selectedMarkerType =
+
+        MyMap.mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also {  MyMap.marker.mapPoint = it }
+        MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+        MyMap.marker.selectedMarkerType =
             MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        mapView.addPOIItem(marker)
+        mapView.addPOIItem(MyMap.marker)
 
         pplocation = location
 
-
-
         return location
     }
-
 
     @SuppressLint("MissingPermission")
     fun requestLocationUpdate(){

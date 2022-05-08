@@ -1,13 +1,12 @@
-package com.wookie_soft.inah
+package activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
+import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityMainBinding
+import fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         fragments.add(Tab1MainFragment()) //0 - 홈
         fragments.add(Tab2MainFragment()) //1 - 내 일정 , 게시판
         fragments.add(Tab3MainFragment()) //2 - 내 텃밭
-        fragments.add(Tab4MainSettingFragment()) //3   - 설정
+        fragments.add(SettingsFragment()) //3   - 설정
 
         // 프레그먼트 동적으로 추가.
         supportFragmentManager.beginTransaction().add(R.id.container, fragments[0]).commit()

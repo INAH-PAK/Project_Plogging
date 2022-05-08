@@ -17,13 +17,7 @@
         android:theme="@style/Theme.Project_Plogging"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUpEmailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".IntroActivity"
+            android:name="activities.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,21 +25,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name="activities.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="activities.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".NameActivity"
+            android:name="activities.NameActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".Map3Activity"
+            android:name="activities.Map3Activity"
             android:exported="false" />
         <activity
-            android:name=".Map2Activity"
+            android:name="activities.Map2Activity"
             android:exported="false" />
         <activity
-            android:name=".Map1Activity"
+            android:name="activities.Map1Activity"
             android:exported="false" />
 
         <meta-data
