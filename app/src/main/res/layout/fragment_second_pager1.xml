@@ -16,14 +16,15 @@
 <!--    내 일정 페이지 -->
 
 <!--     달력     -->
-<!--    커스텀 문서 : -->
+<!--    커스텀 문서 :  https://github.com/INAH-PAK/Material-Calendar-View -->
 <com.applandeo.materialcalendarview.CalendarView
     android:id="@+id/calender_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:type="one_day_picker"
     app:eventsEnabled="true"
-    android:layout_margin="4dp"/>
+    android:layout_margin="4dp"
+    app:swipeEnabled="false"/>
 
     <TextView
         android:layout_width="match_parent"

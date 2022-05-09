@@ -30,6 +30,7 @@
         android:layout_margin="16dp"
         android:src="@drawable/siba"
         />
+
     <EditText
         android:id="@+id/et"
         android:layout_width="300dp"
@@ -43,6 +44,7 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLength="6">
+
         <requestFocus />
     </EditText>
     <TextView
