@@ -1,5 +1,6 @@
 package fragments
 
+import activities.RecordActivity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.wookie_soft.inah.R
 import adapters.RecyclerAdaopterTab2First
+import android.content.Intent
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.DatePicker
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
@@ -62,14 +64,14 @@ class Pager2FirstFragment : Fragment() {
 //
 
         fragmentBinding.btn.setOnClickListener {
-            bottomSheetDialog.show()
-            bottomSheetLayoutBinding.tv01.text
+            val intent = Intent(requireContext(), RecordActivity::class.java)
+            startActivity(intent)
         }
-//
-//        // 일단 테스트 목적으로 아이템 만들어두자.
-//        items.add(ItemTab2First("D+1","2022년 4월 26일", R.drawable.siba))
-//        items.add(ItemTab2First("D+3","2022년 4월 28일", R.drawable.siba ))
-//        items.add(ItemTab2First("D+5","2022년 4월 30일", R.drawable.siba))
+
+        // 일단 테스트 목적으로 아이템 만들어두자.
+        items.add(ItemTab2First("D+1","2022년 4월 26일", R.drawable.siba))
+        items.add(ItemTab2First("D+3","2022년 4월 28일", R.drawable.siba ))
+        items.add(ItemTab2First("D+5","2022년 4월 30일", R.drawable.siba))
 
         recyclerView = fragmentBinding.recycler
         fragmentBinding.recycler.adapter = childFragmentManager?.let{ RecyclerAdaopterTab2First(activity as Context, items , it) }

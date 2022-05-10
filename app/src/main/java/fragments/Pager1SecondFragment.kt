@@ -5,6 +5,7 @@ import Network.RetrofitService
 import adapters.RecyclerAdaopterTab1
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.CalendarView
@@ -31,6 +31,10 @@ import model.MySharedPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 // 달력 부분!!!
@@ -48,8 +52,9 @@ class Pager1SecondFragment : Fragment() {
     lateinit var btmBinding:BottomDialogCalenderBinding
     val datePickerBuilder: DatePickerBuilder by lazy {DatePickerBuilder(requireContext(),listener ).setPickerType(CalendarView.ONE_DAY_PICKER)}
     val datePicker: DatePicker by lazy {  datePickerBuilder.build() }
+    val calendarView:CalendarView by lazy { fragmentBinding.calenderView }
 
-    lateinit var title:String
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +62,7 @@ class Pager1SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         fragmentBinding = FragmentSecondPager1Binding.inflate( inflater , container , false )
+
         return fragmentBinding.root
 
     }
@@ -66,6 +72,8 @@ class Pager1SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         pref =MySharedPreference(requireContext())
         user_email = pref.getString("userEmail","non Email")
 
@@ -74,8 +82,8 @@ class Pager1SecondFragment : Fragment() {
         // 바인딩 사용하니까, 프레그먼트는 바인드 후에 써야 함 !!!
 
 
-
-        // 일단 테스트 목적으로 아이템 만들어두자.
+//
+//        // 일단 테스트 목적으로 아이템 만들어두자.
 //        items.add(ItemCalender("D-1","2022년 4월 26일", "오후 6시"," 길동이랑 만나기"))
 //        items.add(ItemCalender("D-3","2022년 4월 28일","오후66시"," 춘향이랑 아침산책"))
 //        items.add(ItemCalender("D-5","2022년 4월 30일", "오후8시"," 가족들과 저녁후 산책"))
@@ -93,6 +101,7 @@ class Pager1SecondFragment : Fragment() {
         bottomSheetDialog.window!!.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
         )
+        var title:String = ""
         // 키패드의 입력 버튼을 누르면
         btmBinding.etTitle.setOnEditorActionListener { v,actionId, event ->
             var handled = false
@@ -131,21 +140,46 @@ class Pager1SecondFragment : Fragment() {
         }// clickSave()
 
 
-        val calendarView:CalendarView = fragmentBinding.calenderView
+
+        // 오늘 날짜
+
+        var now = System.currentTimeMillis()
+        var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()
+        var month = SimpleDateFormat("MM", Locale.KOREAN).format(now).toInt()
+        var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
+
+        Log.i(" 이번년도 년도냔돈녿",year.toString() + " 달 : " + month + " : " + day)
+
+        var calender = Calendar.getInstance()
+        calender.set(year,month,day )
+        calendarView.setDate(calender)
+
+
+        // 그럼 우리가 저장할 때 마다 이거 쓰잖아?
+
+
+
+
+
         calendarView.setOnDayClickListener{
             val clickedDay = it.calendar
             Log.i("날짜 선택함 !!!!",clickedDay.toString())
                 // 다이알로그 띄우기 ...
                 // 바텀시트 다이알로그로 만들쟝
 
+            var alaert= AlertDialog.Builder(requireContext())
+            var dialog = alaert.create()
+
             bottomSheetDialog.setContentView(bottomSheetView)
             showKeyboardFrom(bottomSheetView)
             bottomSheetDialog.show()
+
         }
 
         bottomSheetDialog.setOnDismissListener {
             fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
         }
+
 
 
     }

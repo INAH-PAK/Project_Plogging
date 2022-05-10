@@ -6,7 +6,8 @@ package model
 // 내 닷홈 DB :  plogging.dothome.co.kr/myadmin
 //  no	user_email	date	title	message	 location_latitude	location_longitude	file
 
-data class ItemCalenderVO constructor( var date:String,
+data class ItemCalenderVO constructor(
+                                        var date:String,
                                        var title:String,
                                        var message:String = "no Massege" ,
                                        var user_email:String = "non Email",

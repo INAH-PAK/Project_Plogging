@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.gms.location.*
@@ -83,6 +84,13 @@ class Map1Activity : AppCompatActivity() {
 
 
     }//onCreatMethod
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+        }
+        return  super.onOptionsItemSelected(item)
+    }
 
     override fun onPause() {
         super.onPause()
