@@ -25,7 +25,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.BottomDialogCalenderBinding
 import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
-import model.ItemVO
+import model.Borad
+import model.Item
+
 import model.MySharedPreference
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,7 +42,7 @@ class Pager1SecondFragment : Fragment() {
 
     lateinit var fragmentBinding:FragmentSecondPager1Binding
     lateinit var recyclerView: RecyclerView
-    var calenderItems = mutableListOf<ItemVO>()
+   var calenderItems = mutableListOf<Item>()
 
     lateinit var pref: MySharedPreference
     lateinit var user_email:String
@@ -69,8 +71,6 @@ class Pager1SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         pref =MySharedPreference(requireContext())
         user_email = pref.getString("userEmail","non Email")
@@ -132,7 +132,7 @@ class Pager1SecondFragment : Fragment() {
 
             // 여기서 아이템 리사이클러 만들고, 레트로핏으로 보내야 함.
             // 일단 예시로 ..
-            calenderItems.add(ItemVO(5,user_email,btmBinding.etMsg.text.toString()))
+         //   calenderItems.add(ItemVO(5,user_email,btmBinding.etMsg.text.toString()))
             bottomSheetDialog.dismiss()
 
         }// clickSave()
@@ -191,7 +191,7 @@ class Pager1SecondFragment : Fragment() {
 
     fun clickSave(){
 
-        calenderItems.add( ItemVO(3, pref.getString("userEmail","minsun0405"),btmBinding.etTitle.toString()))
+        calenderItems.add( Item(3, pref.getString("userEmail","minsun0405"),btmBinding.etTitle.toString()))
 
         val retrofit = RetrofitHelper.getRetrofitInstance()
         val retrofitService = retrofit!!.create(RetrofitService::class.java)
@@ -209,10 +209,10 @@ class Pager1SecondFragment : Fragment() {
 
         val call= retrofitService.postCalenderDataToServer(ArrayList(calenderItems))
 
-        call.enqueue(object : Callback<ArrayList<ItemVO>>{
+        call.enqueue(object : Callback<ArrayList<Item>>{
             override fun onResponse(
-                call: Call<ArrayList<ItemVO>>,
-                response: Response<ArrayList<ItemVO>>
+                call: Call<ArrayList<Item>>,
+                response: Response<ArrayList<Item>>
             ) {
                calenderItems.clear()
                 fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
@@ -221,13 +221,13 @@ class Pager1SecondFragment : Fragment() {
                 for(ItemCalender in list){
                     if(ItemCalender != null){
                         calenderItems.add(0,
-                            ItemVO(1,"inahpakkr@rrr.rrr","메세지 테스트")
+                            Item(1,"inahpakkr@rrr.rrr","메세지 테스트")
                         )
                     }
                     fragmentBinding.recyclerTab1.adapter?.notifyItemInserted(0)
                 }
             }
-            override fun onFailure(call: Call<ArrayList<ItemVO>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<Item>>, t: Throwable) {
                 AlertDialog.Builder(context as Activity).setMessage(t.message).create().show()
             }
 

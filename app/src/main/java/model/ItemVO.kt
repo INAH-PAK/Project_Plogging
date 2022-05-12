@@ -6,11 +6,9 @@ package model
 // 내 닷홈 DB :  plogging.dothome.co.kr/myadmin
 //  no	user_email	date	title	message	 location_latitude	location_longitude	file
 
-data class ItemVO constructor(var no :Int,
+data class Item constructor(var no :Int,
                               var user_email:String,
-                              var title:String = ""){
-
-}
+                              var title:String = "")
 
 data class Borad(var email_user:String,
                  var email_join_user:String,
@@ -21,12 +19,34 @@ data class Borad(var email_user:String,
                  var location_longitude:String,
                  var run_time:String,
                  var is_share:String,
-                 var fav_num:String ){
+                 var fav_num:String )
 
-}
-5
+data class FavHistory(var user_email:String,
+                      var board_num:String )
 
-data class
+data class Markers(var user_email:String,
+                   var location_latitude:String,
+                   var location_longitude:String ,
+                   var file:String)
+
+data class Garden(var user_email:String,
+                  var ear_challenge:String,
+                  var ear_complete:String )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //
 //    (

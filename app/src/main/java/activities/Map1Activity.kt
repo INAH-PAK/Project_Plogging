@@ -116,11 +116,13 @@ class Map1Activity : AppCompatActivity() {
 
         MyMap.marker.itemName = "Default Marker"
         MyMap.marker.tag = 0
+        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icon_marker2
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
+        MyMap.marker.markerType = MapPOIItem.MarkerType.CustomImage
 
         MyMap.mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also {  MyMap.marker.mapPoint = it }
-        MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+       // MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
         MyMap.marker.selectedMarkerType =
             MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         mapView.addPOIItem(MyMap.marker)

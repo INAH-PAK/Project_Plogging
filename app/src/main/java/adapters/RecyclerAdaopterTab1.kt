@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wookie_soft.inah.databinding.RecyclerTap1Binding
-import model.ItemVO
+import model.Item
 
-class RecyclerAdaopterTab1(val context: Context, var items: MutableList<ItemVO>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
+class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Item>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding:RecyclerTap1Binding = RecyclerTap1Binding.inflate(LayoutInflater.from(parent.context),parent,false)
