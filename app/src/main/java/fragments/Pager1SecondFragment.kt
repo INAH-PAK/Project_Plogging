@@ -5,7 +5,6 @@ import Network.RetrofitService
 import adapters.RecyclerAdaopterTab1
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,13 +25,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.BottomDialogCalenderBinding
 import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
-import model.ItemCalenderVO
+import model.ItemVO
 import model.MySharedPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,7 +40,7 @@ class Pager1SecondFragment : Fragment() {
 
     lateinit var fragmentBinding:FragmentSecondPager1Binding
     lateinit var recyclerView: RecyclerView
-    var calenderItems = mutableListOf<ItemCalenderVO>()
+    var calenderItems = mutableListOf<ItemVO>()
 
     lateinit var pref: MySharedPreference
     lateinit var user_email:String
@@ -134,7 +132,7 @@ class Pager1SecondFragment : Fragment() {
 
             // 여기서 아이템 리사이클러 만들고, 레트로핏으로 보내야 함.
             // 일단 예시로 ..
-            calenderItems.add(ItemCalenderVO("2022년 4월 8일",title,btmBinding.etMsg.text.toString(),user_email))
+            calenderItems.add(ItemVO(5,user_email,btmBinding.etMsg.text.toString()))
             bottomSheetDialog.dismiss()
 
         }// clickSave()
@@ -193,7 +191,7 @@ class Pager1SecondFragment : Fragment() {
 
     fun clickSave(){
 
-        calenderItems.add( ItemCalenderVO("2022년 테스트",btmBinding.etTitle.toString(),btmBinding.etMsg.toString(), user_email = pref.getString("userEmail","non Email")))
+        calenderItems.add( ItemVO(3, pref.getString("userEmail","minsun0405"),btmBinding.etTitle.toString()))
 
         val retrofit = RetrofitHelper.getRetrofitInstance()
         val retrofitService = retrofit!!.create(RetrofitService::class.java)
@@ -211,10 +209,10 @@ class Pager1SecondFragment : Fragment() {
 
         val call= retrofitService.postCalenderDataToServer(ArrayList(calenderItems))
 
-        call.enqueue(object : Callback<ArrayList<ItemCalenderVO>>{
+        call.enqueue(object : Callback<ArrayList<ItemVO>>{
             override fun onResponse(
-                call: Call<ArrayList<ItemCalenderVO>>,
-                response: Response<ArrayList<ItemCalenderVO>>
+                call: Call<ArrayList<ItemVO>>,
+                response: Response<ArrayList<ItemVO>>
             ) {
                calenderItems.clear()
                 fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
@@ -223,13 +221,13 @@ class Pager1SecondFragment : Fragment() {
                 for(ItemCalender in list){
                     if(ItemCalender != null){
                         calenderItems.add(0,
-                            ItemCalenderVO("2022callcallcall","테스트제목","메세지 테스트","inahpakkr@rrr.rrr")
+                            ItemVO(1,"inahpakkr@rrr.rrr","메세지 테스트")
                         )
                     }
                     fragmentBinding.recyclerTab1.adapter?.notifyItemInserted(0)
                 }
             }
-            override fun onFailure(call: Call<ArrayList<ItemCalenderVO>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<ItemVO>>, t: Throwable) {
                 AlertDialog.Builder(context as Activity).setMessage(t.message).create().show()
             }
 

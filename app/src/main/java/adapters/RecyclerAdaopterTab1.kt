@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wookie_soft.inah.databinding.RecyclerTap1Binding
-import model.ItemCalenderVO
+import model.ItemVO
 
-class RecyclerAdaopterTab1(val context: Context, var items: MutableList<ItemCalenderVO>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
+class RecyclerAdaopterTab1(val context: Context, var items: MutableList<ItemVO>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding:RecyclerTap1Binding = RecyclerTap1Binding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -27,10 +27,10 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<ItemCale
         // 여기서 클릭 이벤트 처리해야 하나? ㄴㄴ 프레그먼트 가자..
 
 
-
-        holder.dDay.setText( items[position].date.toString())
-        holder.day.setText( items[position].date.toString())
-        holder.time.setText(items[position].date.toString())
+//
+//        holder.dDay.setText( items[position].date.toString())
+//        holder.day.setText( items[position].date.toString())
+        holder.time.setText(items[position].user_email.toString())
         holder.title.setText( items[position].title.toString())
 
     }

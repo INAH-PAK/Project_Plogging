@@ -18,7 +18,6 @@ import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wookie_soft.inah.databinding.BottomDialogCalenderBinding
 import com.wookie_soft.inah.databinding.FragmentFirstPager2Binding
-import model.ItemCalenderVO
 import model.ItemTab2First
 import model.MySharedPreference
 
