@@ -116,7 +116,7 @@ class Map1Activity : AppCompatActivity() {
 
         MyMap.marker.itemName = "Default Marker"
         MyMap.marker.tag = 0
-        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icon_marker2
+        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icons3
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
         MyMap.marker.markerType = MapPOIItem.MarkerType.CustomImage

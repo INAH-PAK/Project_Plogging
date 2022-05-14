@@ -111,6 +111,7 @@ class Pager1SecondFragment : Fragment() {
                     val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(btmBinding.etTitle.windowToken, 0)
                     handled = true
+                    fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
                     bottomSheetDialog.dismiss()
                     return@setOnEditorActionListener true
                 }
@@ -133,6 +134,7 @@ class Pager1SecondFragment : Fragment() {
             // 여기서 아이템 리사이클러 만들고, 레트로핏으로 보내야 함.
             // 일단 예시로 ..
          //   calenderItems.add(ItemVO(5,user_email,btmBinding.etMsg.text.toString()))
+            fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
             bottomSheetDialog.dismiss()
 
         }// clickSave()
@@ -156,9 +158,6 @@ class Pager1SecondFragment : Fragment() {
         // 그럼 우리가 저장할 때 마다 이거 쓰잖아?
 
 
-
-
-
         calendarView.setOnDayClickListener{
             val clickedDay = it.calendar
             Log.i("날짜 선택함 !!!!",clickedDay.toString())
@@ -174,9 +173,9 @@ class Pager1SecondFragment : Fragment() {
 
         }
 
-        bottomSheetDialog.setOnDismissListener {
-            fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
-        }
+//        bottomSheetDialog.setOnDismissListener {
+//            fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
+//        }
 
 
 

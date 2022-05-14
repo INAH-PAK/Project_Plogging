@@ -26,9 +26,24 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
+                app:abbreviationsBarColor="#8605DAFE"
+                app:abbreviationsLabelsColor="#8605DAFE"
+                app:anotherMonthsDaysLabelsColor="#B7B7B7"
+
+                app:daysLabelsColor="@android:color/white"
                 app:eventsEnabled="true"
+                app:headerColor="#8605DAFE"
+
+                app:pagesColor="#8605DAFE"
+                app:selectionColor="@android:color/white"
+                app:selectionLabelColor="#3F51B5"
+
                 app:swipeEnabled="true"
-                app:type="one_day_picker" />
+                app:todayLabelColor="#000000"
+                app:type="one_day_picker"
+
+
+                />
 
 
 

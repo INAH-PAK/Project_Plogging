@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wookie_soft.inah.databinding.RecyclerTap1Binding
 import model.Item
-
+//내 일정 기록하기 탭  -  달력의 날짜 클릭 후 일정기입 기능
 class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Item>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
