@@ -25,7 +25,7 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
-    //파이어베이스 인증관리객체
+    //파이어베이스 인증관리객체tt
     lateinit var firebaseAuth:FirebaseAuth
 
     val binging:ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
