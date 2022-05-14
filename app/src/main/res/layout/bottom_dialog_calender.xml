@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/bottomSheetDashBoardLayout"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="false"
+    android:orientation="vertical"
+        app:behavior_peekHeight="700dp"
+        app:behavior_draggable="false"
+        android:background="@drawable/btm_bg"
+    android:layout_gravity="center_horizontal"
+        style="@style/DialogStyle"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:hint="제목"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:ems="20"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    >
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:id="@+id/tv01"
+                    android:textSize="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="시작 "
+                    />
+                <TextView
+                    android:id="@+id/tv02"
+                    android:textSize="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="종료 "
+                    />
+                <EditText
+                    android:id="@+id/et_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="위치"/>
+                <EditText
+                    android:id="@+id/et_msg"
+                    android:textSize="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="메모"
+                    />
+                <TextView
+                    android:id="@+id/tv04"
+                    android:textSize="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="파일 첨부" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn"
+                    android:text="일정 추가하기"
+                    />
+
+
+
+            </LinearLayout>

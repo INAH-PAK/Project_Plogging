@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/drawable/appbar_bacground.xml" value="0.1" />
+        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/drawable/btm_bg.xml" value="0.199" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/drawable/selector_tab_background.xml" value="0.1" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/drawable/tab_background.xml" value="0.199" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/drawable/tab_background_selected.xml" value="0.176" />
@@ -21,10 +22,12 @@
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_map1.xml" value="0.18020833333333333" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_map2.xml" value="0.18020833333333333" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_map3.xml" value="0.18020833333333333" />
-        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_name.xml" value="0.21302083333333333" />
+        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_name.xml" value="0.1" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_sign_up_email.xml" value="0.20833333333333334" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/activity_sign_up_email_avtivity.xml" value="0.19791666666666666" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/add_plan_dialog.xml" value="0.17708333333333334" />
+        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/bottom_dialog_calender.xml" value="0.1" />
+        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/bottom_dialog_recode.xml" value="0.264" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/btm1_tab1_pager.xml" value="0.16" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/btm1_tab2_pager.xml" value="0.17708333333333334" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/btm2_tab1_pager.xml" value="0.17708333333333334" />
@@ -44,6 +47,7 @@
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/recycler_tap2_first.xml" value="0.3647984267453294" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/layout/recycler_tap2_second.xml" value="0.4" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/xml/root_preferences.xml" value="0.21302083333333333" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/xml/setting.xml" value="0.1765625" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/xml/settings.xml" value="0.21302083333333333" />
         <entry key="..\:/Android/MyProject/Project_Plogging/app/src/main/res/xml/tabs.xml" value="0.22760416666666666" />

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
+    tools:context="activities.LoginActivity"
     android:padding="16dp"
     android:background="@color/sky">
 <TextView
@@ -51,12 +51,19 @@
         android:id="@+id/btn_signin_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_gravity="end"
         android:text="이메일로 로그인"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:backgroundTint="@color/white"/>
+    <Button
+        android:id="@+id/btn_signup_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이메일로 회원가입"
+        android:backgroundTint="#79EB27"
+        />
+
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
@@ -92,10 +99,6 @@
         android:layout_height="wrap_content"
         android:text="kakao account 이메일"
         />
-
-
-
-
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,13 +125,7 @@
         android:textColor="@color/white"
         />
 
-    <Button
-        android:id="@+id/btn_signup_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이메일로 회원가입"
-        android:backgroundTint="#79EB27"
-        />
+
     <Button
         android:id="@+id/btn_unlink"
         android:layout_width="match_parent"
