@@ -7,7 +7,7 @@ class StartApplicationForKakao: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //Kakao SDK initialize
+        //Kakao SDK initialize ggggggg
         // 카카오 디벨로퍼 -> 해당 프로젝트 -> 앱 키 -> 네이티브 앱 키
         KakaoSdk.init(this, "eca63ad5e210f83cbd0ecb7118d1f15b")
 

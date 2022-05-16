@@ -1,18 +1,13 @@
 package Network
 
-import model.ItemCalenderVO
-import okhttp3.MultipartBody
+import model.Item
+import model.ScheduleVO
 import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitService {
 
     @POST("TestPlogging/insertDB.php")
-    fun postCalenderDataToServer(
-        @Body item: ArrayList<ItemCalenderVO>
-    ) :Call<ArrayList<ItemCalenderVO>>
-
-
-
+    fun postMethodTest(@Body itemModel:ScheduleVO): Call<ScheduleVO>
 
 }

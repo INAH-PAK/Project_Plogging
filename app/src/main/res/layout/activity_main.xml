@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/tab_background"
     android:backgroundTint="@color/sky"
+    android:orientation="vertical"
     android:padding="10dp"
     tools:context="activities.MainActivity">
 
@@ -69,8 +70,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_weight="1"/>
+        android:background="@color/white" />
 
 
 <!-- 바텀-->
@@ -78,11 +78,12 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:fabAlignmentMode="end"
         android:layout_gravity="bottom"
         app:fabCradleMargin="5dp"
-        app:fabCradleRoundedCornerRadius="10dp">
+        app:fabCradleRoundedCornerRadius="10dp"
+        >
 
 <!--       앱바의 기본 leftmargin에 맞춰서 right 마진 설정  :  android:layout_marginRight="16dp"-->
 <!--       투명 맞춘다. 나중에 알아보기   :   android:background="@android:color/transparent"-->
