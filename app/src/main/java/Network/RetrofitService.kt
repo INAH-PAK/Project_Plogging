@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface RetrofitService {
 
-    @POST("TestPlogging/insertDB.php")
+    @POST("pppDB.php")
     fun postMethodTest(@Body itemModel:ScheduleVO): Call<ScheduleVO>
 
 }

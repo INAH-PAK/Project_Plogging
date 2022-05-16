@@ -9,14 +9,15 @@ data class Item constructor(var no :Int,
                               var user_email:String,
                               var title:String = "")
 
-data class ScheduleVO (var user_email:String,
-                     var date:String,
-                     var title:String,
-                     var message:String,
-                     var location_latitude:String,
-                     var location_longitude:String,
-                     var fil:String,
-                     var is_share: String)
+data class ScheduleVO(
+    var user_email: String,
+    var date:String,
+    var title:String,
+    var message:String,
+    var location_latitude:String,
+    var location_longitude:String,
+    var fil:String,
+    var is_share: String)
 
 data class Borad(var email_user:String,
                  var email_join_user:String,

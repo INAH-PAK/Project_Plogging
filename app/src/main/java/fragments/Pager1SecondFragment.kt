@@ -52,7 +52,7 @@
 
         lateinit var pref: SharedPreferences
         val dialogBinding: CustomDialogBinding by lazy {CustomDialogBinding.inflate(LayoutInflater.from(context)) }
-        lateinit var alartdialog:AlertDialog
+
 
 
         // 다이알로그
@@ -122,6 +122,13 @@
 
                 val dialog = CustomDialog(requireContext())
                 dialog.myDialog()
+                dialog.setOnClickListener(object : CustomDialog.ButtonClickListener{
+                    override fun onClicked(item: ScheduleVO) {
+                        clickBtn(item)
+                        Toast.makeText(context, "성공", Toast.LENGTH_SHORT).show()
+                        Log.i("tttttttttt", "성공" + "히히히히ㅣㅎㅎ")
+                    }
+                })
 
             }
 
@@ -148,17 +155,11 @@
 
 
 
-   fun clickBtn(){
+   fun clickBtn( item: ScheduleVO){
             //Post 방식으로 객체를 서버에 전달하자 !
 
-       calenderItems.add(ScheduleVO( userEmail, calendarView.selectedDates.toString(),dialogBinding.etTitle.text.toString()
-           ,dialogBinding.etMsg.text.toString(),
-           "","","","") )
-
-
-       var item = ScheduleVO( userEmail, calendarView.selectedDates.toString(),dialogBinding.etTitle.text.toString()
-           ,dialogBinding.etMsg.text.toString(),
-           "","","","")
+       calenderItems.add(item)
+       var iiii = item
 
        val retrofit = RetrofitHelper.getRetrofitInstans()
        val retrofitService = retrofit.create(RetrofitService::class.java)
@@ -169,7 +170,8 @@
        call.enqueue( object : Callback<ScheduleVO> {
             override fun onResponse(call: Call<ScheduleVO>, response: Response<ScheduleVO>) {
                 //성공시
-                item = response.body()!!
+
+                iiii = response.body()!!
 
                 Log.i("서버에 잘 갔나", item.user_email +" : "+ item.title)
 
