@@ -1,6 +1,5 @@
 package model
 
-
 //달력 라이브러리 : https://github.com/INAH-PAK/Material-Calendar-View
 
 // 내 닷홈 DB :  plogging.dothome.co.kr/myadmin
@@ -9,6 +8,15 @@ package model
 data class Item constructor(var no :Int,
                               var user_email:String,
                               var title:String = "")
+
+data class ScheduleVO (var user_email:String,
+                     var date:String,
+                     var title:String,
+                     var message:String,
+                     var location_latitude:String,
+                     var location_longitude:String,
+                     var fil:String,
+                     var is_share: String)
 
 data class Borad(var email_user:String,
                  var email_join_user:String,
