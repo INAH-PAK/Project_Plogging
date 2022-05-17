@@ -8,7 +8,10 @@ class MyMap {
     companion object {
 
         val marker by lazy { MapPOIItem() }
+        val markerList by lazy { mutableListOf<MapPOIItem>() }
         lateinit var mapPoint: MapPoint
+
+        var timeResult:Long = 0L
 
     }
 }

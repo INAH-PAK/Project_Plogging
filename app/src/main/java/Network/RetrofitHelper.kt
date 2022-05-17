@@ -11,7 +11,7 @@ class RetrofitHelper {
 
             val gson= GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://plogging.dothome.co.kr/")
+                .baseUrl("http://commit.dothome.co.kr")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson)).build()
 

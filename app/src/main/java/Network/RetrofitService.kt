@@ -8,6 +8,6 @@ import retrofit2.http.*
 interface RetrofitService {
 
     @POST("pppDB.php")
-    fun postMethodTest(@Body itemModel:ScheduleVO): Call<ScheduleVO>
+    fun postMethodTest(@Body itemModel:ScheduleVO): Call<String>
 
 }

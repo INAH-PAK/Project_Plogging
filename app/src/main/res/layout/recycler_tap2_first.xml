@@ -16,16 +16,17 @@
         android:id="@+id/tv01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=" D+2 "
         android:textSize="35dp"
-        android:textStyle="bold"
-        android:text=" D+2 "/>
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv01"
         android:layout_alignBaseline="@id/tv01"
-        android:text=" 2022년 03월 26일 "/>
+        android:layout_toRightOf="@id/tv01"
+        android:text=" 2022년 03월 26일 " />
 
     <ImageView
         android:id="@+id/iv"

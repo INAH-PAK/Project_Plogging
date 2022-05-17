@@ -19,10 +19,13 @@
     import androidx.fragment.app.Fragment
     import androidx.preference.PreferenceManager
     import androidx.recyclerview.widget.RecyclerView
+    import com.applandeo.materialcalendarview.CalendarUtils
     import com.applandeo.materialcalendarview.CalendarView
     import com.applandeo.materialcalendarview.DatePicker
+    import com.applandeo.materialcalendarview.EventDay
     import com.applandeo.materialcalendarview.builders.DatePickerBuilder
     import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
+    import com.applandeo.materialcalendarview.utils.SelectedDay
     import com.wookie_soft.inah.R
     import com.wookie_soft.inah.databinding.CustomDialogBinding
     import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
@@ -36,6 +39,7 @@
     import java.text.SimpleDateFormat
     import java.util.*
     import kotlin.collections.ArrayList
+    import kotlin.time.Duration.Companion.days
 
 
     // 달력 부분!!!
@@ -43,7 +47,7 @@
 
         lateinit var fragmentBinding: FragmentSecondPager1Binding
         lateinit var recyclerView: RecyclerView
-        var calenderItems = mutableListOf<ScheduleVO>()
+        val calenderItems = mutableListOf<ScheduleVO>()
         lateinit var title: String
         val userEmail by lazy { pref.getString("userEmail","").toString() }
 
@@ -54,8 +58,6 @@
         val dialogBinding: CustomDialogBinding by lazy {CustomDialogBinding.inflate(LayoutInflater.from(context)) }
 
 
-
-        // 다이알로그
 
 
         val datePickerBuilder: DatePickerBuilder by lazy {
@@ -84,6 +86,9 @@
 
             var user_email = pref.getString("userEmail", "non Email")
 
+            // 방금 추가가
+           val list = ArrayList<EventDay>()
+
             recyclerView = fragmentBinding.recyclerTab1
             fragmentBinding.recyclerTab1.adapter = childFragmentManager.let {
                 RecyclerAdaopterTab1(
@@ -104,11 +109,10 @@
             var month = SimpleDateFormat("MM", Locale.KOREAN).format(now).toInt()
             var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
 
-            Log.i(" 이번년도 년도냔돈녿", year.toString() + " 달 : " + month + " : " + day)
 
-            var calender = Calendar.getInstance()
-            calender.set(year, month, day)
-            calendarView.setDate(calender)
+//            var calender = Calendar.getInstance()
+//            calender.set(year, month, day)
+//            calendarView.setDate(calender)
 
 
             // 그럼 우리가 저장할 때 마다 이거 쓰잖아?
@@ -116,7 +120,14 @@
 
             calendarView.setOnDayClickListener {
                 val clickedDay = it.calendar
-                Log.i("날짜 선택함 !!!!", clickedDay.toString())
+                list.add(it)
+                list.get(0).calendar
+
+                Log.i("날짜 선택함 !!!!", clickedDay.toString() )
+                Log.i("날짜 선택함 !!!!",  list.get(0).calendar.toString())
+                Log.i("날짜 선택함 !!!!",  list.get(0).calendar.time.toString()) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
                 // 다이알로그 띄우기 ...
                 // 바텀시트 다이알로그로 만들쟝
 
@@ -124,13 +135,14 @@
                 dialog.myDialog()
                 dialog.setOnClickListener(object : CustomDialog.ButtonClickListener{
                     override fun onClicked(item: ScheduleVO) {
-                        clickBtn(item)
-                        Toast.makeText(context, "성공", Toast.LENGTH_SHORT).show()
                         Log.i("tttttttttt", "성공" + "히히히히ㅣㅎㅎ")
                     }
                 })
 
             }
+
+            
+            
 
         }// onViewCreated
 
@@ -151,41 +163,10 @@
     fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
 
     }
-
-
-
-
-   fun clickBtn( item: ScheduleVO){
-            //Post 방식으로 객체를 서버에 전달하자 !
-
-       calenderItems.add(item)
-       var iiii = item
-
-       val retrofit = RetrofitHelper.getRetrofitInstans()
-       val retrofitService = retrofit.create(RetrofitService::class.java)
-       Log.i("데이터는 잘 들어갔나", item.user_email +" : "+ item.title)
-
-       //서버로 보낼 값을 가진 call 바로 보내버리기
-       val call:Call<ScheduleVO> = retrofitService.postMethodTest(item)
-       call.enqueue( object : Callback<ScheduleVO> {
-            override fun onResponse(call: Call<ScheduleVO>, response: Response<ScheduleVO>) {
-                //성공시
-
-                iiii = response.body()!!
-
-                Log.i("서버에 잘 갔나", item.user_email +" : "+ item.title)
-
-            }
-
-            override fun onFailure(call: Call<ScheduleVO>, t: Throwable) {
-                //실패시
-                AlertDialog.Builder(requireContext()).setMessage(t.message).create().show()
-                Log.i("서버에 잘 갔나", t.message.toString())
-            }
-
-        })
-
-
-   }
+        
 
 }
+
+    private fun CalendarView.setOnLongClickListener(function: (View) -> Unit) {
+
+    }
