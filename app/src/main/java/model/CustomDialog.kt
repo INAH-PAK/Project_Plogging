@@ -4,12 +4,16 @@ import Network.RetrofitHelper
 import Network.RetrofitService
 import android.app.Activity
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
+import android.text.format.Time
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceManager
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
@@ -23,14 +27,18 @@ import retrofit2.Response
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 
 
 // 달력에 일정 기입을 위한 커스텀 뷰
 class CustomDialog(context: Context) {
     private val dialog = Dialog(context)
-    val pref:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val context = context
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun myDialog() {
 
         dialog.setContentView(layout.custom_dialog)
@@ -58,11 +66,23 @@ class CustomDialog(context: Context) {
         val okBtn = dialog.findViewById<Button>(R.id.btn_ok)
         val cancelBtn = dialog.findViewById<Button>(R.id.btn_cencle)
 
+        val formDate = SimpleDateFormat("yyyy. MM. dd")
+        val formTime = SimpleDateFormat("HH : mm")
+
 
         okBtn.setOnClickListener {
-            val userEmail: String? = pref.getString("userEmail","inahpakkr@gmail.com")
+            val userEmail: String? = pref.getString("userEmail", "inahpakkr@gmail.com")
             var t = title.text.toString()
-            val item = ScheduleVO("inah@","2022",title.text.toString(),msg.text.toString(),location.text.toString(),location.text.toString(),file.text.toString(),friends.text.toString())
+            val item = ScheduleVO(
+                "inah@",
+                "2022",
+                title.text.toString(),
+                msg.text.toString(),
+                location.text.toString(),
+                location.text.toString(),
+                file.text.toString(),
+                friends.text.toString()
+            )
             clickBtn(item)
             dialog.dismiss()
         }
@@ -72,73 +92,75 @@ class CustomDialog(context: Context) {
 
         // 날짜 시간 선택 리스너
         dateStart.setOnClickListener {
-            myDatePicker()
+            val builder = DatePickerBuilder(context, OnSelectDateListener {
+
+                Log.i("선택한 날짜", it.get(0).time.toString())
+                dateStart.setText(formDate.format(it.get(0).time).toString())
+        }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
+        }
+        datEnd.setOnClickListener {
+            val builder = DatePickerBuilder(context, OnSelectDateListener {
+
+                Log.i("선택한 날짜", it.get(0).time.toString())
+                datEnd.setText(formDate.format(it.get(0).time).toString())
+            }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
+        }
+        timeStart.setOnClickListener {
+            val picker:TimePickerDialog = TimePickerDialog(context,TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
+                var t = String.format("%02d",i)
+                    timeStart.setText("$t : $i2")
+            },0,0,true)
+            picker.show()
+        }
+        timeEnd.setOnClickListener {
+            val picker:TimePickerDialog = TimePickerDialog(context,TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
+                var t = String.format("%02d",i)
+                timeEnd.setText("$t : $i2")
+            },0,0,true)
+            picker.show()
+
         }
 
         dialog.show()
     }
 
-    interface ButtonClickListener{
-        fun onClicked(item:ScheduleVO)
+    interface ButtonClickListener {
+        fun onClicked(item: ScheduleVO)
     }
 
     private lateinit var onClickListener: ButtonClickListener
 
-    fun setOnClickListener(listener: CustomDialog.ButtonClickListener){
+    fun setOnClickListener(listener: CustomDialog.ButtonClickListener) {
         onClickListener = listener
     }
 
 
-
-
-
-    fun clickBtn( item: ScheduleVO) {
+    fun clickBtn(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
 
         //calenderItems.add(item)
 
         val retrofit = RetrofitHelper.getRetrofitInstans()
         val retrofitService = retrofit.create(RetrofitService::class.java)
-        Log.i("fffffffffffffffffffffffffffffffff",item.title)
+        Log.i("fffffffffffffffffffffffffffffffff", item.title)
         Log.i("데이터는 잘 들어갔나", item.user_email + " ssssss" + item.title)
 
         //서버로 보낼 값을 가진 call 바로 보내버리기
         val call: Call<String> = retrofitService.postMethodTest(item)
-            call.enqueue(object: Callback<String>{
+        call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.i("서버 응답 성공시", response.body()+"")
+                Log.i("서버 응답 성공시", response.body() + "")
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("서버 응답 실패", t.message+"")
+                Log.i("서버 응답 실패", t.message + "")
             }
 
-    })
-
-        fun myDatePicker(context:Context){
-
-            lateinit var listener: OnSelectDateListener
-
-            val builder = DatePickerBuilder(context, listener)
-                .setPickerType(CalendarView.ONE_DAY_PICKER)
-                .build()
-                .show()
+        })
+    }
 
 
 
-        }
-
-        fun OnSelectDateListener(){
-             fun onSelect(calendar: MutableList<Calendar>?) {
-               Log.i("선택한 날짜", calendar!!.get(0).time.toString() )
-            }
-        }
-
-
-
-
-
-}
 }
 
 
