@@ -14,7 +14,7 @@ import model.Borad
 import model.ItemTab2First
 
 class RecyclerAdaopterTab2First constructor(val context: Context, var items: MutableList<Borad>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab2First.VH>(){
-
+    //보드
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding: RecyclerTap2FirstBinding = RecyclerTap2FirstBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return VH(binding)
