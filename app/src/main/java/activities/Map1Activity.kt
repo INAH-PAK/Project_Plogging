@@ -15,8 +15,10 @@ import android.widget.Toast
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
 import com.wookie_soft.inah.databinding.ActivityMap1Binding
+import model.Marker
 import model.MyMap
 import model.MyMap.Companion.marker
+import model.User
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
@@ -27,6 +29,8 @@ class Map1Activity : AppCompatActivity() {
     val fusedLocationProviderClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private lateinit var mapView: MapView
     private lateinit var pplocation: Location
+
+    val markerList =  mutableListOf<Marker>()
 
 
     //타이머
@@ -40,7 +44,6 @@ class Map1Activity : AppCompatActivity() {
         //키해시
         val keyHash: String = Utility.getKeyHash(this)
         Log.i("키해시", keyHash)
-
 
 
         // 내위치 받자 !------------------------------------------------------------------------------------------------------------
@@ -64,20 +67,20 @@ class Map1Activity : AppCompatActivity() {
         }
         //타이머 멈춤
         binding.btn03Stop.setOnClickListener {
-            pauseTime = binding.chronometer.base - SystemClock.elapsedRealtime()
             binding.chronometer.stop()
+            pauseTime = binding.chronometer.base - SystemClock.elapsedRealtime()
+            MyMap.timeResult = pauseTime
             binding.btn02Start.isEnabled = true
             binding.btn03Stop.isEnabled = false
         }
 
         binding.btn01.setOnClickListener {
             // 마커 추가 등록 엑티비티 만들기... 인텐트 ...
-
+            binding.chronometer.stop()
             val intent = Intent(this, Map2Activity::class.java)
             intent.putExtra("lat",pplocation.latitude.toDouble())
             intent.putExtra("lng",pplocation.longitude.toDouble())
             startActivity(intent)
-
 
         }
 
@@ -91,6 +94,7 @@ class Map1Activity : AppCompatActivity() {
         }
         return  super.onOptionsItemSelected(item)
     }
+
 
     override fun onPause() {
         super.onPause()
@@ -193,6 +197,8 @@ class Map1Activity : AppCompatActivity() {
             }
         }
     }// 동적퍼미션
+
+
 
 
 

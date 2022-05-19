@@ -17,8 +17,6 @@ import model.ScheduleVO
 class RecyclerAdaopterTab1(val context: Context, var items: MutableList<ScheduleVO>, private val fragmentManager: FragmentManager): RecyclerView.Adapter<RecyclerAdaopterTab1.VH>(){
 
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding:RecyclerTap1Binding = RecyclerTap1Binding.inflate(LayoutInflater.from(parent.context),parent,false)
 
