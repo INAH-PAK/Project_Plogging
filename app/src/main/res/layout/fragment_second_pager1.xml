@@ -54,7 +54,7 @@
         android:text="달력 띄우기 "/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_tab1"
+                android:id="@+id/recycler_tab2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/calender_view"
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@id/recycler_tab1"/>
+        android:layout_below="@id/recycler_tab2"/>
         </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
 </LinearLayout>

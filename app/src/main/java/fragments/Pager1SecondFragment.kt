@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Context.*
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -32,6 +34,7 @@ import com.wookie_soft.inah.databinding.CustomDialogBinding
 import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
 import model.CustomDialog
 import model.ScheduleVO
+import model.User
 
 
 import retrofit2.Call
@@ -83,6 +86,7 @@ class Pager1SecondFragment : Fragment() {
         return fragmentBinding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -91,8 +95,9 @@ class Pager1SecondFragment : Fragment() {
         // 이벤트 데이들
         val list = ArrayList<EventDay>()
 
-        recyclerView = fragmentBinding.recyclerTab1
-        fragmentBinding.recyclerTab1.adapter = childFragmentManager.let {
+        // 달력 밑의 리사이클러
+        recyclerView = fragmentBinding.recyclerTab2
+        fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
             RecyclerAdaopterTab1(activity as Context, calenderItems, it)
 
         }
@@ -132,10 +137,14 @@ class Pager1SecondFragment : Fragment() {
                         dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
                             override fun onClicked(item: ScheduleVO) {
                                 Log.i("tttttttttt", "성공" + "히히히히ㅣㅎㅎ")
-
-
+                                // 여기서 뮤터블 리스트로 아이템을 계속 붙여야 함.
+//                                calenderItems.add( User.glovalItem )
+//                                Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
                             }
                         })
+                        calenderItems.add( User.glovalItem )
+                            Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
+
 
 
                     })
@@ -149,7 +158,13 @@ class Pager1SecondFragment : Fragment() {
                 })
                 .show()
 
+
+
+
         }
+//        calenderItems.add(User.glovalItem)
+//        Log.i("프레그먼트 페이지에서 찍은 글로벌 아이템의 타이틀", User.glovalItem.title )
+
 
 
     }// onViewCreated
@@ -168,7 +183,9 @@ class Pager1SecondFragment : Fragment() {
     // 화면 갱신시 리사이클러뷰 초기화
     override fun onResume() {
         super.onResume()
-        fragmentBinding.recyclerTab1.adapter?.notifyDataSetChanged()
+//        calenderItems.add(User.glovalItem)
+//        Log.i("온리즘 페이지에서 찍ㅇㅇㅇ은 글로벌 아이템의 타이틀", User.glovalItem.title )
+        fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
 
     }
 

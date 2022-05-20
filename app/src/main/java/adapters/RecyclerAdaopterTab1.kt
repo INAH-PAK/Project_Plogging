@@ -2,6 +2,7 @@ package adapters
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -30,14 +31,20 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Schedule
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "이걸 클릭하면 다이알로그를 띄우자.나중에..", Toast.LENGTH_SHORT).show()
         }
-        // 여기서 클릭 이벤트 처리해야 하나? ㄴㄴ 프레그먼트 가자..
 
 
-//
+        holder.title.setText(items[position].title.toString())
+        holder.dDay.setText(items[position].date.toString())
+        holder.time.setText(items[position].message.toString())
+        holder.day.setText(items[position].date )
+
+
+
+////
 //        holder.dDay.setText( items[position].date.toString())
 //        holder.day.setText( items[position].date.toString())
-        holder.time.setText(items[position].user_email.toString())
-        holder.title.setText( items[position].title.toString())
+//        holder.time.setText(items[position].user_email.toString())
+//        holder.title.setText( items[position].title.toString())
 
     }
 

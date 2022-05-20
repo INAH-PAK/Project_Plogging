@@ -84,6 +84,9 @@ class CustomDialog(context: Context) {
                 friends.text.toString()
             )
             clickBtn(item)
+
+
+
             dialog.dismiss()
         }
         cancelBtn.setOnClickListener {
@@ -121,6 +124,14 @@ class CustomDialog(context: Context) {
 
         }
 
+        // 파일 업로드 코드 부분
+
+
+
+
+
+
+
         dialog.show()
     }
 
@@ -138,7 +149,9 @@ class CustomDialog(context: Context) {
     fun clickBtn(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
 
-        //calenderItems.add(item)
+        // 프레그먼트 화면의 리사이클러에 추가 함.
+        User.glovalItem = item
+        Log.i("글로번 아이템", User.glovalItem.title )
 
         val retrofit = RetrofitHelper.getRetrofitInstans()
         val retrofitService = retrofit.create(RetrofitService::class.java)

@@ -12,6 +12,8 @@ class User {
         const val RESTROOM = 2
         const val CAUTION = 3
 
+        var glovalItem :ScheduleVO= ScheduleVO("", title = "")
+
         var loginType:Int = -1
 
         var titlBundel : String = ""
