@@ -2,6 +2,7 @@ package model
 
 import Network.RetrofitHelper
 import Network.RetrofitService
+import adapters.RecyclerAdaopterTab1
 import android.app.Activity
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -35,9 +36,12 @@ import java.util.*
 
 // 달력에 일정 기입을 위한 커스텀 뷰
 class CustomDialog(context: Context) {
-    private val dialog = Dialog(context)
+    val dialog = Dialog(context)
     val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     val context = context
+
+    // Test
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun myDialog() {
@@ -64,6 +68,7 @@ class CustomDialog(context: Context) {
         val timeEnd = dialog.findViewById<Chip>(R.id.chip_time_end)
 
 
+
         val okBtn = dialog.findViewById<Button>(R.id.btn_ok)
         val cancelBtn = dialog.findViewById<Button>(R.id.btn_cencle)
 
@@ -85,9 +90,12 @@ class CustomDialog(context: Context) {
                 friends.text.toString()
             )
             clickBtn(item)
+
             // 프레그먼트 화면의 리사이클러에 추가 함.
-            User.glovalItem = item
-            Log.i("글로번 아이템", User.glovalItem.title )
+            User.glovalItemList.add( item)
+            //User.glovalItem = item
+            Log.i("글로번 아이템", User.glovalItemList[] )
+
 
 
 
@@ -139,7 +147,9 @@ class CustomDialog(context: Context) {
 
         dialog.show()
     }
-   // <- 버튼 클릭 리스너 ->
+
+
+  //   <- 버튼 클릭 리스너  : 작동 안됨.->
     interface ButtonClickListener {
         fun onClicked(item: ScheduleVO)
     }
@@ -148,18 +158,25 @@ class CustomDialog(context: Context) {
 
     fun setOnClickListener(listener: CustomDialog.ButtonClickListener) {
         onClickListener = listener
-    }
+}
 
-    // <- 버튼 죽음 듣는 리스너 : onDismiss -> TODO 얘가 죽는걸 못들으니까 인터페이스 구현 다시 하기.
-    interface OnDismissListener {
-        fun Dismiss(item: ScheduleVO)
-    }
 
-    private lateinit var onDismissListenerListener: DialogInterface.OnDismissListener
 
-    fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
-        onDismissListenerListener = listener
-    }
+
+
+
+
+
+//    // <- 버튼 죽음 듣는 리스너 : onDismiss -> TODO 얘가 죽는걸 못들으니까 인터페이스 구현 다시 하기.
+//    interface OnDismissListener {
+//        fun Dismiss(item: ScheduleVO)
+//    }
+//
+//    private lateinit var onDismissListenerListener: DialogInterface.OnDismissListener
+//
+//    fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
+//        onDismissListenerListener = listener
+//    }
 
 
 

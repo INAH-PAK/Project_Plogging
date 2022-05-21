@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -51,12 +52,15 @@ class Pager1SecondFragment : Fragment() {
     lateinit var fragmentBinding: FragmentSecondPager1Binding
     lateinit var recyclerView: RecyclerView
     val calenderItems = mutableListOf<ScheduleVO>()
+
     lateinit var title: String
     val userEmail by lazy { pref.getString("userEmail", "").toString() }
     val dialog by lazy { CustomDialog(requireContext())  }
 
     val retrofitHelper = RetrofitHelper.getRetrofitInstans()
     val retrofitService = retrofitHelper!!.create(RetrofitService::class.java)
+
+
 
     lateinit var pref: SharedPreferences
     val dialogBinding: CustomDialogBinding by lazy {
@@ -91,6 +95,8 @@ class Pager1SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         var user_email = pref.getString("userEmail", "non Email")
 
         // 이벤트 데이들
@@ -99,8 +105,7 @@ class Pager1SecondFragment : Fragment() {
         // 달력 밑의 리사이클러
         recyclerView = fragmentBinding.recyclerTab2
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
-            RecyclerAdaopterTab1(activity as Context, calenderItems, it)
-
+            RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
         }
 
 
@@ -135,6 +140,7 @@ class Pager1SecondFragment : Fragment() {
 
 
                         dialog.myDialog()
+
                         dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
                             override fun onClicked(item: ScheduleVO) {
                                 Log.i("tttttttttt", "성공" + "히히히히ㅣㅎㅎ")
@@ -146,15 +152,21 @@ class Pager1SecondFragment : Fragment() {
 //                                Log.i("글로번 아이템", User.glovalItem.title )
                             }
                         })
+
+
 //                        //1.  이게 잘못된 것 같은데?
 //                        calenderItems.add( User.glovalItem )
 //                        Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
 
 
-                        calenderItems.add( User.glovalItem )
-                        Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
 
-                    })
+
+                    }).setOnDismissListener {
+                           User.glovalItemList.add( calenderItems )
+
+
+                        Log.i("다이알로그 주금", User.glovalItem.title )
+                }
                 .setNeutralButton("일정보기", DialogInterface.OnClickListener { dialogInterface, i ->
                     // 일정보기 버튼을 누르면 리사이클러로 그 날의 일정을 보여줌
                     // 서버에서 그 날의 일정을 가져와서 보여줘야 함.!!!!!
@@ -165,12 +177,9 @@ class Pager1SecondFragment : Fragment() {
                 })
                 .show()
 
-            dialog.setOnDismissListener( object : DialogInterface.OnDismissListener{
-                override fun onDismiss(p0: DialogInterface?) {
-                    Log.i("다이알로그 주금","다이알로그 주금")
-                }
 
-            })
+
+
         }
 //        calenderItems.add(User.glovalItem)
 //        Log.i("프레그먼트 페이지에서 찍은 글로벌 아이템의 타이틀", User.glovalItem.title )
