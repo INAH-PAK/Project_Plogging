@@ -87,6 +87,7 @@ class Pager1SecondFragment : Fragment() {
     ): View? {
         fragmentBinding = FragmentSecondPager1Binding.inflate(inflater, container, false)
 
+
         pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
         return fragmentBinding.root
     }
@@ -94,7 +95,6 @@ class Pager1SecondFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         var user_email = pref.getString("userEmail", "non Email")
@@ -141,32 +141,9 @@ class Pager1SecondFragment : Fragment() {
 
                         dialog.myDialog()
 
-                        dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
-                            override fun onClicked(item: ScheduleVO) {
-                                Log.i("tttttttttt", "성공" + "히히히히ㅣㅎㅎ")
-                                // 여기서 뮤터블 리스트로 아이템을 계속 붙여야 함.
-//                                calenderItems.add( User.glovalItem )
-//                                Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
-                                // 프레그먼트 화면의 리사이클러에 추가 함.
-//                                User.glovalItem = item
-//                                Log.i("글로번 아이템", User.glovalItem.title )
-                            }
-                        })
 
 
-//                        //1.  이게 잘못된 것 같은데?
-//                        calenderItems.add( User.glovalItem )
-//                        Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
-
-
-
-
-                    }).setOnDismissListener {
-                           User.glovalItemList.add( calenderItems )
-
-
-                        Log.i("다이알로그 주금", User.glovalItem.title )
-                }
+                    })
                 .setNeutralButton("일정보기", DialogInterface.OnClickListener { dialogInterface, i ->
                     // 일정보기 버튼을 누르면 리사이클러로 그 날의 일정을 보여줌
                     // 서버에서 그 날의 일정을 가져와서 보여줘야 함.!!!!!
@@ -179,10 +156,7 @@ class Pager1SecondFragment : Fragment() {
 
 
 
-
         }
-//        calenderItems.add(User.glovalItem)
-//        Log.i("프레그먼트 페이지에서 찍은 글로벌 아이템의 타이틀", User.glovalItem.title )
 
 
 
@@ -204,8 +178,6 @@ class Pager1SecondFragment : Fragment() {
     // 화면 갱신시 리사이클러뷰 초기화
     override fun onResume() {
         super.onResume()
-//        calenderItems.add(User.glovalItem)
-//        Log.i("온리즘 페이지에서 찍ㅇㅇㅇ은 글로벌 아이템의 타이틀", User.glovalItem.title )
         fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
 
     }

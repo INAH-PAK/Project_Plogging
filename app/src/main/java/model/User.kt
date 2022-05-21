@@ -12,7 +12,6 @@ class User {
         const val RESTROOM = 2
         const val CAUTION = 3
 
-        var glovalItem :ScheduleVO= ScheduleVO("", title = "")
         val glovalItemList : MutableList<ScheduleVO> = mutableListOf<ScheduleVO>()
 
         var loginType:Int = -1

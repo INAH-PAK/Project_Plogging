@@ -35,13 +35,10 @@ import java.util.*
 
 
 // 달력에 일정 기입을 위한 커스텀 뷰
-class CustomDialog(context: Context) {
+class CustomDialog(context: Context) : AlertDialog(context) {
     val dialog = Dialog(context)
     val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val context = context
-
-    // Test
-
+    //val context = context
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun myDialog() {
@@ -54,6 +51,10 @@ class CustomDialog(context: Context) {
         )
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
+
+        dialog.setOnDismissListener {
+
+        }
 
 
         val title = dialog.findViewById<EditText>(R.id.et_title)
@@ -89,21 +90,29 @@ class CustomDialog(context: Context) {
                 file.text.toString(),
                 friends.text.toString()
             )
-            clickBtn(item)
+            insertDB(item)
 
+            //A
             // 프레그먼트 화면의 리사이클러에 추가 함.
-            User.glovalItemList.add( item)
+            User.glovalItemList.add( 0,item)
             //User.glovalItem = item
-            Log.i("글로번 아이템", User.glovalItemList[] )
-
-
+           Log.i("글로번 아이템", User.glovalItemList[0].title.toString() )
 
 
             dialog.dismiss()
+
+
+
         }
+
         cancelBtn.setOnClickListener {
             dialog.dismiss()
         }
+
+        dialog.setOnDismissListener {
+           Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
+        }
+
 
         // 날짜 시간 선택 리스너
         dateStart.setOnClickListener {
@@ -138,50 +147,24 @@ class CustomDialog(context: Context) {
 
         // 파일 업로드 코드 부분
 
-
-
-
-
-
-
-
         dialog.show()
     }
 
 
   //   <- 버튼 클릭 리스너  : 작동 안됨.->
-    interface ButtonClickListener {
-        fun onClicked(item: ScheduleVO)
-    }
-
-    private lateinit var onClickListener: ButtonClickListener
-
-    fun setOnClickListener(listener: CustomDialog.ButtonClickListener) {
-        onClickListener = listener
-}
-
-
-
-
-
-
-
-
-//    // <- 버튼 죽음 듣는 리스너 : onDismiss -> TODO 얘가 죽는걸 못들으니까 인터페이스 구현 다시 하기.
-//    interface OnDismissListener {
-//        fun Dismiss(item: ScheduleVO)
+//    interface ButtonClickListener {
+//        fun onClicked(item: ScheduleVO)
 //    }
 //
-//    private lateinit var onDismissListenerListener: DialogInterface.OnDismissListener
+//    private lateinit var onClickListener: ButtonClickListener
 //
-//    fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
-//        onDismissListenerListener = listener
-//    }
+//    fun setOnClickListener(listener: CustomDialog.ButtonClickListener) {
+//        onClickListener = listener
+//}
 
 
 
-
-    fun clickBtn(item: ScheduleVO) {
+    fun insertDB(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
 
 
