@@ -21,6 +21,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +50,7 @@ import kotlin.time.Duration.Companion.days
 // 달력 부분!!!
 class Pager1SecondFragment : Fragment() {
 
-    lateinit var fragmentBinding: FragmentSecondPager1Binding
+
     lateinit var recyclerView: RecyclerView
     val calenderItems = mutableListOf<ScheduleVO>()
 
@@ -60,7 +61,14 @@ class Pager1SecondFragment : Fragment() {
     val retrofitHelper = RetrofitHelper.getRetrofitInstans()
     val retrofitService = retrofitHelper!!.create(RetrofitService::class.java)
 
+    companion object{
 
+        private lateinit var fragmentBinding: FragmentSecondPager1Binding
+
+        fun noti(){
+            fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
+        }
+    }
 
     lateinit var pref: SharedPreferences
     val dialogBinding: CustomDialogBinding by lazy {
@@ -86,8 +94,6 @@ class Pager1SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         fragmentBinding = FragmentSecondPager1Binding.inflate(inflater, container, false)
-
-
         pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
         return fragmentBinding.root
     }
@@ -117,12 +123,19 @@ class Pager1SecondFragment : Fragment() {
         var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
 
 
-        // 그럼 우리가 저장할 때 마다 이거 쓰잖아?
 
         // 롱클릭 리스너 람다식 표기법 사용하는 법
         // https://workingdev.net/android,/kotlin/2018/08/01/handling-clicks-and-long-clicks.html
 
+
         calendarView.setOnDayClickListener {
+
+            Log.i("날짜", calendarView.currentPageDate.toString())
+            Log.i("날짜", calendarView.currentPageDate.toString())
+            var size = calendarView.selectedDates.size-1
+            Log.i("ddd", calendarView.selectedDates[size].toString())
+
+
 
             val builder = AlertDialog.Builder(context as Activity)
                 .setNegativeButton("기록하기",
@@ -137,7 +150,7 @@ class Pager1SecondFragment : Fragment() {
                             list.get(0).calendar.time.toString()
                         ) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
+                        item
 
                         dialog.myDialog()
 
@@ -171,9 +184,10 @@ class Pager1SecondFragment : Fragment() {
         manager.showSoftInput(dialogBinding.etTitle, InputMethodManager.SHOW_FORCED)
     }
 
-    private val listener: OnSelectDateListener = OnSelectDateListener {
-        Toast.makeText(context, "날짜를 클릭하셨음", Toast.LENGTH_SHORT).show()
-    }
+//    private val listener: OnSelectDateListener = OnSelectDateListener {
+//        Toast.makeText(context, "날짜를 클릭하셨음", Toast.LENGTH_SHORT).show()
+//
+//    }
 
     // 화면 갱신시 리사이클러뷰 초기화
     override fun onResume() {

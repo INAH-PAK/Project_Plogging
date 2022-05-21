@@ -33,11 +33,10 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Schedule
         }
 
 
-        holder.title.setText(items[position].title.toString())
-        holder.dDay.setText(items[position].date.toString())
-        holder.time.setText(items[position].message.toString())
-        holder.day.setText(items[position].date )
-
+        holder.title.text = items[position].title.toString()
+        holder.dDay.text = items[position].date.toString()
+        holder.time.text = items[position].message.toString()
+        holder.day.text = items[position].date.toString()
 
 
 ////
@@ -52,7 +51,7 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Schedule
 
     inner class VH(val binding: RecyclerTap1Binding) :RecyclerView.ViewHolder(binding.root){
 
-        val dDay:TextView = binding.tvDate
+        val dDay:TextView = binding.tvDday
         val day:TextView = binding.tvDate
         val time:TextView = binding.tvTime
         val title:TextView = binding.tvTitle

@@ -29,6 +29,7 @@ import retrofit2.Response
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import fragments.Pager1SecondFragment
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.util.*
@@ -52,11 +53,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
 
-        dialog.setOnDismissListener {
-
-        }
-
-
         val title = dialog.findViewById<EditText>(R.id.et_title)
         val location = dialog.findViewById<EditText>(R.id.et_location)
         val file = dialog.findViewById<TextView>(R.id.tv_file)
@@ -69,7 +65,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         val timeEnd = dialog.findViewById<Chip>(R.id.chip_time_end)
 
 
-
         val okBtn = dialog.findViewById<Button>(R.id.btn_ok)
         val cancelBtn = dialog.findViewById<Button>(R.id.btn_cencle)
 
@@ -80,10 +75,11 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         okBtn.setOnClickListener {
             val userEmail: String? = pref.getString("userEmail", "inahpakkr@gmail.com")
             var t = title.text.toString()
+
             val item = ScheduleVO(
                 "inah@",
-                "2022",
-                title.text.toString(),
+                ///z캘린더 뷰의 나ㄹ짜 가져오기기///,
+               title.text.toString(),
                 msg.text.toString(),
                 location.text.toString(),
                 location.text.toString(),
@@ -111,6 +107,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         dialog.setOnDismissListener {
            Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
+            Pager1SecondFragment.noti()
         }
 
 
@@ -149,18 +146,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         dialog.show()
     }
-
-
-  //   <- 버튼 클릭 리스너  : 작동 안됨.->
-//    interface ButtonClickListener {
-//        fun onClicked(item: ScheduleVO)
-//    }
-//
-//    private lateinit var onClickListener: ButtonClickListener
-//
-//    fun setOnClickListener(listener: CustomDialog.ButtonClickListener) {
-//        onClickListener = listener
-//}
 
 
 
