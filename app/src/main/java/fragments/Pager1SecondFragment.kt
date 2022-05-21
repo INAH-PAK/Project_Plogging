@@ -53,6 +53,7 @@ class Pager1SecondFragment : Fragment() {
     val calenderItems = mutableListOf<ScheduleVO>()
     lateinit var title: String
     val userEmail by lazy { pref.getString("userEmail", "").toString() }
+    val dialog by lazy { CustomDialog(requireContext())  }
 
     val retrofitHelper = RetrofitHelper.getRetrofitInstans()
     val retrofitService = retrofitHelper!!.create(RetrofitService::class.java)
@@ -132,7 +133,7 @@ class Pager1SecondFragment : Fragment() {
                         ) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-                        val dialog = CustomDialog(requireContext())
+
                         dialog.myDialog()
                         dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
                             override fun onClicked(item: ScheduleVO) {
@@ -140,12 +141,18 @@ class Pager1SecondFragment : Fragment() {
                                 // 여기서 뮤터블 리스트로 아이템을 계속 붙여야 함.
 //                                calenderItems.add( User.glovalItem )
 //                                Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
+                                // 프레그먼트 화면의 리사이클러에 추가 함.
+//                                User.glovalItem = item
+//                                Log.i("글로번 아이템", User.glovalItem.title )
                             }
                         })
+//                        //1.  이게 잘못된 것 같은데?
+//                        calenderItems.add( User.glovalItem )
+//                        Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
+
+
                         calenderItems.add( User.glovalItem )
-                            Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
-
-
+                        Log.i("커스텀 다이알로그 아이템", User.glovalItem.title )
 
                     })
                 .setNeutralButton("일정보기", DialogInterface.OnClickListener { dialogInterface, i ->
@@ -158,9 +165,12 @@ class Pager1SecondFragment : Fragment() {
                 })
                 .show()
 
+            dialog.setOnDismissListener( object : DialogInterface.OnDismissListener{
+                override fun onDismiss(p0: DialogInterface?) {
+                    Log.i("다이알로그 주금","다이알로그 주금")
+                }
 
-
-
+            })
         }
 //        calenderItems.add(User.glovalItem)
 //        Log.i("프레그먼트 페이지에서 찍은 글로벌 아이템의 타이틀", User.glovalItem.title )
@@ -168,6 +178,8 @@ class Pager1SecondFragment : Fragment() {
 
 
     }// onViewCreated
+
+
 
 
     fun showKeyboardFrom(view: View) { // 키보드가 보여질 때

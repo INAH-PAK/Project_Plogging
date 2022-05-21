@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Build
 import android.text.format.Time
@@ -84,6 +85,9 @@ class CustomDialog(context: Context) {
                 friends.text.toString()
             )
             clickBtn(item)
+            // 프레그먼트 화면의 리사이클러에 추가 함.
+            User.glovalItem = item
+            Log.i("글로번 아이템", User.glovalItem.title )
 
 
 
@@ -132,9 +136,10 @@ class CustomDialog(context: Context) {
 
 
 
+
         dialog.show()
     }
-
+   // <- 버튼 클릭 리스너 ->
     interface ButtonClickListener {
         fun onClicked(item: ScheduleVO)
     }
@@ -145,20 +150,32 @@ class CustomDialog(context: Context) {
         onClickListener = listener
     }
 
+    // <- 버튼 죽음 듣는 리스너 : onDismiss -> TODO 얘가 죽는걸 못들으니까 인터페이스 구현 다시 하기.
+    interface OnDismissListener {
+        fun Dismiss(item: ScheduleVO)
+    }
+
+    private lateinit var onDismissListenerListener: DialogInterface.OnDismissListener
+
+    fun setOnDismissListener(listener: DialogInterface.OnDismissListener) {
+        onDismissListenerListener = listener
+    }
+
+
+
 
     fun clickBtn(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
 
-        // 프레그먼트 화면의 리사이클러에 추가 함.
-        User.glovalItem = item
-        Log.i("글로번 아이템", User.glovalItem.title )
+
 
         val retrofit = RetrofitHelper.getRetrofitInstans()
         val retrofitService = retrofit.create(RetrofitService::class.java)
         Log.i("fffffffffffffffffffffffffffffffff", item.title)
         Log.i("데이터는 잘 들어갔나", item.user_email + " ssssss" + item.title)
 
-        //서버로 보낼 값을 가진 call 바로 보내버리기
+
+                //서버로 보낼 값을 가진 call 바로 보내버리기
         val call: Call<String> = retrofitService.postMethodTest(item)
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
