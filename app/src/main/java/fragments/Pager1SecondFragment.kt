@@ -150,8 +150,6 @@ class Pager1SecondFragment : Fragment() {
                             list.get(0).calendar.time.toString()
                         ) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                        item
-
                         dialog.myDialog()
 
 
@@ -184,10 +182,10 @@ class Pager1SecondFragment : Fragment() {
         manager.showSoftInput(dialogBinding.etTitle, InputMethodManager.SHOW_FORCED)
     }
 
-//    private val listener: OnSelectDateListener = OnSelectDateListener {
-//        Toast.makeText(context, "날짜를 클릭하셨음", Toast.LENGTH_SHORT).show()
-//
-//    }
+    private val listener: OnSelectDateListener = OnSelectDateListener {
+        Toast.makeText(context, "날짜를 클릭하셨음", Toast.LENGTH_SHORT).show()
+
+    }
 
     // 화면 갱신시 리사이클러뷰 초기화
     override fun onResume() {

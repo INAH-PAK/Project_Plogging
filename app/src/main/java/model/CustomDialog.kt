@@ -39,13 +39,12 @@ import java.util.*
 class CustomDialog(context: Context) : AlertDialog(context) {
     val dialog = Dialog(context)
     val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    //val context = context
+    lateinit var pickerDate:String
+    lateinit var pickerTime:String
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun myDialog() {
-
         dialog.setContentView(layout.custom_dialog)
-
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -64,7 +63,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         val timeStart = dialog.findViewById<Chip>(R.id.chip_time_start)
         val timeEnd = dialog.findViewById<Chip>(R.id.chip_time_end)
 
-
         val okBtn = dialog.findViewById<Button>(R.id.btn_ok)
         val cancelBtn = dialog.findViewById<Button>(R.id.btn_cencle)
 
@@ -72,38 +70,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         val formTime = SimpleDateFormat("HH : mm")
 
 
-        okBtn.setOnClickListener {
-            val userEmail: String? = pref.getString("userEmail", "inahpakkr@gmail.com")
-            var t = title.text.toString()
-
-            val item = ScheduleVO(
-                "inah@",v
-                ///z캘린더 뷰의 나ㄹ짜 가져오기기///,
-               title.text.toString(),
-                msg.text.toString(),
-                location.text.toString(),
-                location.text.toString(),
-                file.text.toString(),
-                friends.text.toString()
-            )
-            insertDB(item)
-
-            //A
-            // 프레그먼트 화면의 리사이클러에 추가 함.
-            User.glovalItemList.add( 0,item)
-            //User.glovalItem = item
-           Log.i("글로번 아이템", User.glovalItemList[0].title.toString() )
-
-
-            dialog.dismiss()
-
-
-
-        }
-
-        cancelBtn.setOnClickListener {
-            dialog.dismiss()
-        }
 
         dialog.setOnDismissListener {
            Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
@@ -111,11 +77,19 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         }
 
 
-        // 날짜 시간 선택 리스너
+        // 날짜 시간 Picker 리스너
         dateStart.setOnClickListener {
             val builder = DatePickerBuilder(context, OnSelectDateListener {
-
+                pickerDate = it.get(0).time.toString()
                 Log.i("선택한 날짜", it.get(0).time.toString())
+                Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
+                Log.i("선택한 날짜", it.get(0).time.toString()[1].toString())
+                Log.i("선택한 날짜", it.get(0).time.toString()[2].toString())
+
+                for( var i = 0 ; i < 3 ; i++ ){
+                    it.get(i).time.toString()
+                }
+
                 dateStart.setText(formDate.format(it.get(0).time).toString())
         }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
         }
@@ -130,7 +104,9 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             val picker:TimePickerDialog = TimePickerDialog(context,TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
                 var t = String.format("%02d",i)
                     timeStart.setText("$t : $i2")
+                pickerTime = String.format("%02d",i) +" : "+ timeStart.setText("$t : $i2")
             },0,0,true)
+
             picker.show()
         }
         timeEnd.setOnClickListener {
@@ -142,7 +118,37 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         }
 
-        // 파일 업로드 코드 부분
+        // 확인 버튼
+        okBtn.setOnClickListener {
+            val userEmail: String? = pref.getString("userEmail", "inahpakkr@gmail.com")
+            var t = title.text.toString()
+
+            val item = ScheduleVO(
+                "inah@",pickerDate + pickerTime,
+                title.text.toString(),
+                msg.text.toString(),
+                location.text.toString(),
+                location.text.toString(),
+                file.text.toString(),
+                friends.text.toString()
+            )
+            insertDB(item)
+
+            //A
+            // 프레그먼트 화면의 리사이클러에 추가 함.
+            User.glovalItemList.add( 0,item)
+            //User.glovalItem = item
+            Log.i("글로번 아이템", User.glovalItemList[0].title.toString() )
+
+
+            dialog.dismiss()
+
+        }
+
+        // 취소 버튼
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
 
         dialog.show()
     }
