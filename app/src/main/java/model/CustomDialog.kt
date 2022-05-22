@@ -77,7 +77,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             var t = title.text.toString()
 
             val item = ScheduleVO(
-                "inah@",
+                "inah@",v
                 ///z캘린더 뷰의 나ㄹ짜 가져오기기///,
                title.text.toString(),
                 msg.text.toString(),
