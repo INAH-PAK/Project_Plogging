@@ -1,9 +1,17 @@
 package com.wookie_soft.inah.activities
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityMainBinding
 import com.wookie_soft.inah.fragments.SettingsFragment
@@ -14,6 +22,9 @@ import com.wookie_soft.inah.fragments.Tab3MainFragment
 class MainActivity : AppCompatActivity() {
 
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    //위치 퍼미션
+    private val ACCESS_FINE_LOCATION = 10     // Request Code
+    val fusedLocationProviderClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
 
     val fragments:MutableList<Fragment> by lazy { mutableListOf() }
 
@@ -67,21 +78,29 @@ class MainActivity : AppCompatActivity() {
             }
             tran.commit()
 
+            // 내위치 받자 !------------------------------------------------------------------------------------------------------------
+            // 1. 동적 퍼미션
+            val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+            var checkResult = checkSelfPermission(permissions[0])
+            if( checkResult == PackageManager.PERMISSION_DENIED){
+                requestPermissions(permissions , ACCESS_FINE_LOCATION )
+            }else{
+               //위치 퍼미션 받기 완료.
+            }
+
             //SAM 변환시는 return 이라는 단어를 아예 안써야 리턴이 됨.
             true
 
         }
 
         binding.floatingButton.setOnClickListener {
-            val intent: Intent = Intent(this, Map1Activity::class.java)
+            val intent: Intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
 
 
 
     }//on
-
-
 
 
 

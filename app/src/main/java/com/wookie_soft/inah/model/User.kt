@@ -4,9 +4,9 @@ class User {
 
     companion object{
 
-        const val GOOGLE = 1
-        const val KAKAOLOGIN = 2
-        const val EMAIL = 3
+        const val EMAIL = 11
+        const val GOOGLE = 22
+        const val KAKAOLOGIN = 33
 
         const val RECYCLE = 1
         const val RESTROOM = 2

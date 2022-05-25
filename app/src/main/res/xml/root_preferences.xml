@@ -9,7 +9,7 @@
         <PreferenceScreen
             app:title="사용자 계정"
             app:key="userAccount"
-            app:summary="계정 로그인으로 확장된 기능을 무료로 누려보세요">
+            app:summary="계정 확인하기">
             <intent android:targetPackage="com.wookie_soft.inah.activities"
                 android:targetClass="com.wookie_soft.inah.activities.FinalLoginActivity"/>
         </PreferenceScreen>

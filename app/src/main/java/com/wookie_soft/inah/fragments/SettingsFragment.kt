@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.*
 import com.wookie_soft.inah.R
-import com.wookie_soft.inah.databinding.ActivityLoginBinding
+import com.wookie_soft.inah.databinding.ActivityFinalLoginBinding
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

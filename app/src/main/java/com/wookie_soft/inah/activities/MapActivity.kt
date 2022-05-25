@@ -1,5 +1,6 @@
 package com.wookie_soft.inah.activities
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,19 +15,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
-import com.wookie_soft.inah.databinding.ActivityMap1Binding
+import com.wookie_soft.inah.databinding.ActivityMapBinding
 import com.wookie_soft.inah.model.Marker
 import com.wookie_soft.inah.model.MyMap
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
 
-class Map1Activity : AppCompatActivity() {
-    val binding: ActivityMap1Binding by lazy { ActivityMap1Binding.inflate(layoutInflater) }
+class MapActivity : AppCompatActivity() {
+    val binding: ActivityMapBinding by lazy { ActivityMapBinding.inflate(layoutInflater) }
     private val ACCESS_FINE_LOCATION = 10     // Request Code
     val fusedLocationProviderClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private lateinit var mapView: MapView
     private lateinit var pplocation: Location
+
+    private var isFabOpen = false
 
     val markerList =  mutableListOf<Marker>()
 
@@ -44,16 +47,6 @@ class Map1Activity : AppCompatActivity() {
         Log.i("키해시", keyHash)
 
 
-        // 내위치 받자 !------------------------------------------------------------------------------------------------------------
-        // 1. 동적 퍼미션
-        val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
-        var checkResult = checkSelfPermission(permissions[0])
-        if( checkResult == PackageManager.PERMISSION_DENIED){
-            requestPermissions(permissions , ACCESS_FINE_LOCATION )
-        }else{
-            requestLocationUpdate() // 5초마다 위치정보 받아오기 메소드
-        }
-        // mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat2, lng2), true);
 
         // 타이머 재생 -
         binding.btn02Start.setOnClickListener {
@@ -72,19 +65,16 @@ class Map1Activity : AppCompatActivity() {
             binding.btn03Stop.isEnabled = false
         }
 
-        binding.btn01.setOnClickListener {
-            // 마커 추가 등록 엑티비티 만들기... 인텐트 ...
-            binding.chronometer.stop()
-            val intent = Intent(this, Map2Activity::class.java)
-            intent.putExtra("lat",pplocation.latitude.toDouble())
-            intent.putExtra("lng",pplocation.longitude.toDouble())
-            startActivity(intent)
+        binding.extendedFab.setOnClickListener { clickFab() }
 
-        }
 
 
 
     }//onCreatMethod
+
+    fun clickFab(){
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -163,7 +153,7 @@ class Map1Activity : AppCompatActivity() {
 
 
             Toast.makeText(
-                this@Map1Activity,
+                this@MapActivity,
                 "GPS Location changed, Latitude: $lat, Longitude: $lng",
                 Toast.LENGTH_SHORT
             ).show()
@@ -195,6 +185,7 @@ class Map1Activity : AppCompatActivity() {
             }
         }
     }// 동적퍼미션
+
 
 
 

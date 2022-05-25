@@ -10,12 +10,13 @@ import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityIntroBinding
+import com.wookie_soft.inah.model.MySharedPreferenceManager
 
 class IntroActivity : AppCompatActivity() {
     val binding: ActivityIntroBinding by lazy { ActivityIntroBinding.inflate(layoutInflater) }
     val ani: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.anim_intro) }
     var isFirstRun:Boolean = true
-    lateinit var userName:String
+    val userEmail:String by lazy { MySharedPreferenceManager.userEmail }
     lateinit var pref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,10 @@ class IntroActivity : AppCompatActivity() {
         pref  =  PreferenceManager.getDefaultSharedPreferences(this)
 //        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
 //        Log.d("키해쉬", keyHash)
+        MySharedPreferenceManager.init(this)
+        if(MySharedPreferenceManager.userEmail == ""){
+            MySharedPreferenceManager.userEmail = "non"
+        }
 
             loadPreference()  // SharedPreference 값 읽어오기
 
@@ -33,12 +38,12 @@ class IntroActivity : AppCompatActivity() {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
 
-                    val intent = when(userName) {
-                        "" -> {
-                            Intent( this@IntroActivity, NameActivity::class.java)
+                    val intent = when(userEmail) {
+                        "non" -> {
+                            Intent( this@IntroActivity, FinalLoginActivity::class.java)
                         }
                         else -> {
-                            Toast.makeText(this@IntroActivity, "환영합니다  $userName", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@IntroActivity, "환영합니다!", Toast.LENGTH_SHORT).show()
                             Intent(this@IntroActivity, MainActivity::class.java)
                         }
                     }
@@ -56,7 +61,10 @@ class IntroActivity : AppCompatActivity() {
         // 저장되어 있는 shered preference에 저장된 값들을 읽어오기 ( 사용자가 설정한 값들 ~~)
         private fun loadPreference(){
             isFirstRun = pref.getBoolean("isFirstRun",false)
-            userName = pref.getString("userName","").toString()
+
+
+
+            // 설정에 필요한 값들
             var isLogin:Boolean = pref.getBoolean(("login"),false)
             var isMessage:Boolean = pref.getBoolean("massege",false) // getBoolean( 식별자 , 디폴트값 )
             var isVibrate:Boolean = pref.getBoolean("vibration",false) // getBoolean( 식별자 , 디폴트값 )
