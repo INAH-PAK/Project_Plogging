@@ -3,31 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <PreferenceCategory
         app:title=" 개인 설정" >
+
         <PreferenceScreen
             app:title="사용자 계정"
             app:key="userAccount"
-            app:summary="계정 로그인으로 확장된 기능을 무료로 누려보세요"/>
-            <intent android:targetPackage="activities"
-                android:targetClass="activities.LoginActivity"/>
-
+            app:summary="계정 로그인으로 확장된 기능을 무료로 누려보세요">
+            <intent android:targetPackage="com.wookie_soft.inah.activities"
+                android:targetClass="com.wookie_soft.inah.activities.FinalLoginActivity"/>
+        </PreferenceScreen>
 
         <PreferenceScreen
             app:title="로그아웃"
             app:summary="등록된 계정을 로그아웃 합니다."
             app:key="logout_app" app:dependency="userAccount"/>
 
-
-
     </PreferenceCategory>
         <EditTextPreference
             app:key="userName"
             app:title=" 사용자 이름 "
             app:summary="user"/>
-
-
 
     <PreferenceCategory
         app:title=" 앱 설정" >
@@ -39,7 +35,6 @@
             app:key="vibration"
             app:title="진동 알림"
             app:summary="진동 알림을 받으려면 체크하세요"/>
-
 
     </PreferenceCategory>
 

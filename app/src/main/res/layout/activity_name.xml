@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/sky"
     android:padding="8dp"
-    tools:context="activities.NameActivity">
+    tools:context=".activities.NameActivity">
 
 
     <TextView

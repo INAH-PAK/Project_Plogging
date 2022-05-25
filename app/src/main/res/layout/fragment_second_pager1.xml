@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="fragments.Pager1SecondFragment">
+    tools:context=".fragments.Pager1SecondFragment">
 
 <!--    내 일정 페이지 -->
 
@@ -19,7 +19,9 @@
 <!--     달력     -->
 <!--    커스텀 문서 :  https://github.com/INAH-PAK/Material-Calendar-View -->
             <com.applandeo.materialcalendarview.CalendarView
+                android:layout_margin="16dp"
                 android:id="@+id/calender_view"
+                android:background="@drawable/btm_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -42,16 +44,8 @@
                 app:todayLabelColor="#000000"
                 app:type="one_day_picker"
 
-
                 />
 
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calender_view"
-        android:text="달력 띄우기 "/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_tab2"
@@ -59,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/calender_view"
                 android:scrollbars="vertical"
+                android:layout_margin="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <TextView
