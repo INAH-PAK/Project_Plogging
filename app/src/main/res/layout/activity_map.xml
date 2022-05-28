@@ -42,38 +42,54 @@
 
         <LinearLayout
             android:id="@+id/mapview"
-            android:layout_below="@id/chip_group"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:layout_below="@id/chip_group"
             android:layout_margin="8dp"
-            android:orientation="vertical"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical" />
 
 <!--   https://jinsangjin.tistory.com/12    -->
 <!--     Flaoting Button  고고 할 수 이써ㅓ서ㅓㅓㅓ-->
 
+<!--         재활용 아이콘 버튼 -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/recycleBtn"
+            android:id="@+id/febBtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/extendedFab"
+            android:layout_marginTop="260dp"
+            android:elevation="6dp"
+            android:visibility="invisible"
+            app:fabSize="mini"
+            app:pressedTranslationZ="12dp" />
+<!-- 주의 아이콘 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/febBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/extendedFab"
+            android:layout_marginTop="310dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="80dp"
+            android:visibility="invisible"
+            app:fabSize="mini" />
+<!--         화장실 아이콘 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/febBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/extendedFab"
             android:layout_alignBottom="@id/mapview"
             android:elevation="6dp"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:fabSize="mini"
             app:pressedTranslationZ="12dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cautionBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="80dp"
-            android:visibility="visible"
-
-            app:fabSize="mini" />
-
-
+<!--         메인 Fab 아이콘 버튼 -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/extendedFab"
             android:layout_width="wrap_content"
@@ -110,14 +126,15 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:backgroundTint="@color/teal_200"/>
+
         <Button
             android:id="@+id/btn03_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_200"
             android:text="계속"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/teal_200"/>
+            android:textStyle="bold" />
 
 </RelativeLayout>
 

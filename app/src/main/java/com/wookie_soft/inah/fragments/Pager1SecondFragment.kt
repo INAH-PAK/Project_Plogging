@@ -26,7 +26,6 @@ import com.applandeo.materialcalendarview.DatePicker
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
-import com.wookie_soft.inah.databinding.CustomDialogBinding
 import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
 import com.wookie_soft.inah.model.CustomDialog
 import com.wookie_soft.inah.model.ScheduleVO
@@ -61,14 +60,6 @@ class Pager1SecondFragment : Fragment() {
     }
 
     lateinit var pref: SharedPreferences
-    val dialogBinding: CustomDialogBinding by lazy {
-        CustomDialogBinding.inflate(
-            LayoutInflater.from(
-                context
-            )
-        )
-    }
-
     val datePickerBuilder: DatePickerBuilder by lazy {
         DatePickerBuilder(
             requireContext(),
@@ -76,7 +67,6 @@ class Pager1SecondFragment : Fragment() {
         ).setPickerType(CalendarView.ONE_DAY_PICKER)
     }
     val datePicker: DatePicker by lazy { datePickerBuilder.build() }
-    val calendarView: CalendarView by lazy { fragmentBinding.calenderView }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,10 +86,10 @@ class Pager1SecondFragment : Fragment() {
         var user_email = pref.getString("userEmail", "non Email")
 
         // 이벤트 데이들
-        val list = ArrayList<EventDay>()
+        var events = ArrayList<EventDay>()
 
         // 달력 밑의 리사이클러
-        recyclerView = fragmentBinding.recyclerTab2
+        recyclerView = fragmentBinding.recyclerTab2fkjlksodwijdqlwnfiurbglKJEGM
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
         }

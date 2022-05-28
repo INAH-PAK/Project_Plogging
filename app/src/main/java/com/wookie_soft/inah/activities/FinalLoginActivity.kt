@@ -75,6 +75,8 @@ class FinalLoginActivity : AppCompatActivity() {
 
         //구글
         binging.googleLogin.setOnClickListener { clickGoogleLogin() }
+
+        binging.tv01.setOnClickListener { nextActivity() }
     }// onCreat
 
     private fun clickSignInEmail() {

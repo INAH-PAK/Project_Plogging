@@ -12,9 +12,12 @@ import android.os.SystemClock
 import android.util.Log
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
+import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityMapBinding
 import com.wookie_soft.inah.model.Marker
 import com.wookie_soft.inah.model.MyMap
@@ -29,7 +32,14 @@ class MapActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var pplocation: Location
 
-    private var isFabOpen = false
+    var isFabOpen : Boolean = false
+
+    val fabOpen : Animation = AnimationUtils.loadAnimation(this, R.anim.fab_open)
+    val fabClose : Animation = AnimationUtils.loadAnimation(this, R.anim.fab_close)
+    val rotateForward : Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_forward)
+    val rotateBackward : Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_backward)
+
+
 
     val markerList =  mutableListOf<Marker>()
 

@@ -102,21 +102,6 @@
                 android:layout_marginBottom="8dp"
                 android:hint="위치" />
 
-
-            <TextView
-                android:id="@+id/tv_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/et_location"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/et_bg"
-                android:text="파일 첨부"
-                android:textSize="25dp" />
-
-
         <EditText
             android:id="@+id/et_msg"
             android:textSize="25dp"
@@ -126,22 +111,8 @@
             android:layout_margin="8dp"
             android:hint="메모"
             />
-        <EditText
-            android:id="@+id/et_friends"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/et_bg"
-            android:layout_margin="8dp"
-            android:hint="함께한 사람"/>
 
-        <CheckBox
-            android:id="@+id/check_share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
 
-            android:text=" 다른사람과 공유하기"
-            />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
