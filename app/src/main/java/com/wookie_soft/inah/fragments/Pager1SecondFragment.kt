@@ -98,7 +98,7 @@ class Pager1SecondFragment : Fragment() {
         // 오늘 날짜
 
         var now = System.currentTimeMillis()
-        var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()
+        var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()dfsdsdsd
         var month = SimpleDateFormat("MM", Locale.KOREAN).format(now).toInt()
         var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
 
