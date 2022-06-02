@@ -89,7 +89,7 @@ class Pager1SecondFragment : Fragment() {
         var events = ArrayList<EventDay>()
 
         // 달력 밑의 리사이클러
-        recyclerView = fragmentBinding.recyclerTab2fkjlksodwijdqlwnfiurbglKJEGM
+        recyclerView = fragmentBinding.recyclerTab2
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
         }
@@ -100,12 +100,9 @@ class Pager1SecondFragment : Fragment() {
         var now = System.currentTimeMillis()
         var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()dfsdsdsd
         var month = SimpleDateFormat("MM", Locale.KOREAN).format(now).toInt()
-        var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
-
-
-
+        var day = SimpleDateFormat(
         // 롱클릭 리스너 람다식 표기법 사용하는 법
-        // https://workingdev.net/android,/kotlin/2018/08/01/handling-clicks-and-long-clicks.html
+        // https://workingdev.net/android,/kotlin/2wn018/08/01/handling-clicks-and-long-clicks.html
 
 
         calendarView.setOnDayClickListener {
