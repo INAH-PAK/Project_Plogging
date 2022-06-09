@@ -35,7 +35,7 @@ class IntroActivity : AppCompatActivity() {
 
                     val intent = when(userName) {
                         "" -> {
-                            Intent( this@IntroActivity, NameActivity::class.java)
+                            Intent( this@IntroActivity, LoginActivity::class.java)
                         }
                         else -> {
                             Toast.makeText(this@IntroActivity, "환영합니다  $userName", Toast.LENGTH_SHORT).show()

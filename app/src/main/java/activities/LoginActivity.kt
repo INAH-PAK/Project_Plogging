@@ -27,6 +27,7 @@ import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
+    // 로그인 화면 Activity
 
     //파이어베이스 인증관리객체tt
     lateinit var firebaseAuth:FirebaseAuth
@@ -50,15 +51,16 @@ class LoginActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.kakao_login_medium_wide).into(binging.ivKakao)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        //로그인 - 이메일
-        binging.btnSigninEmail.setOnClickListener{ clickSignInEmail()}
-        //가입 - 이메일
-        binging.btnSignupEmail.setOnClickListener { clickSignUpEmail() }
 
-        binging.btnGoogle.setOnClickListener{ clickGoogle()}
-        binging.ivKakao.setOnClickListener{ clickKakao()}
-        binging.btnUnlink.setOnClickListener { clickUnlink() }
+        binging.btnSigninEmail.setOnClickListener{ clickSignInEmail()}// firebase Email 로그인
 
+        binging.btnSignupEmail.setOnClickListener { clickSignUpEmail() }    // firebase Email 회원가입
+
+        binging.btnGoogle.setOnClickListener{ clickGoogle()}    // 구글 로그인
+        binging.ivKakao.setOnClickListener{ clickKakao()} // 카카오 로그인
+        // clickUnlink()  // 로그아웃 기능. 나중에 둘러보기
+
+        binging.btnSigninNoInfo.setOnClickListener {  }
 
     }//onCreate
 
@@ -72,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                     if(firebaseAuth.currentUser!!.isEmailVerified){
                         Toast.makeText(this, "이메일 로그인 성공", Toast.LENGTH_SHORT).show()
                         val mail: String = firebaseAuth.currentUser!!.email.toString()
-                        binging.tvEmail.text = "사용자 이메일 :" + mail
+                        Log.i(" 파베 이메일 로그인 ", mail)
                         User.loginType = User.EMAIL
                      } else {
                     Toast.makeText(this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
@@ -144,8 +146,7 @@ class LoginActivity : AppCompatActivity() {
             var account:GoogleSignInAccount = task.result
             var email:String = account.email.toString()
             prefEditor.putString("userEmail",email).commit()
-
-            binging.tvGoogleAccount.setText(" 구글 이메일은 : $email")
+            Log.i(" 구글 로그인 이메일  ", email)
             User.loginType = User.GOOGLE
 
         })
@@ -202,8 +203,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "연결끊기 실패", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(this, "연결끊기 성공", Toast.LENGTH_SHORT).show()
-                        binging.tvKakaoNickname.text = "닉네임"
-                        binging.tvKakaoEmail.text = "카카오 로그인해주세여 - 이메일"
+                        Log.i(" 로그아웃 "," 구글, 이메일, 카카오 다 로그아웃 함." )
                         //Glide.with(this).load(R.mipmap.ic_launcher_round).into(binging.civProfile)
                     }
                 }
@@ -223,10 +223,10 @@ class LoginActivity : AppCompatActivity() {
                 val memberId:Long? = user.id    // 회원번호 -> 회원식별자로 사용 가능 . . . 근데 지금 우린 별로 필료하지 않음
                 pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
                // val nickName : 카카오 별명
-                val email = user.kakaoAccount?.email
+                val email:String? = user.kakaoAccount?.email
 
              //   binging.tvKakaoNickname.text = nickName
-                binging.tvKakaoEmail.text = email
+                Log.i(" 카카오 로그인 이메일  ", email?: "카카오 이메일 null")
             //    Glide.with(this).load(profileImag).into(binging.civProfile)
             }
         }
