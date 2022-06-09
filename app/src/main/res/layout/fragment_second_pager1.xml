@@ -1,43 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context="fragments.Pager1SecondFragment">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
 
 <!--    내 일정 페이지 -->
 
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 <!--     달력     -->
 <!--    커스텀 문서 :  https://github.com/INAH-PAK/Material-Calendar-View -->
-<com.applandeo.materialcalendarview.CalendarView
-    android:id="@+id/calender_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:type="one_day_picker"
-    app:eventsEnabled="true"
-    android:layout_margin="4dp"
-    app:swipeEnabled="false"/>
+            <com.applandeo.materialcalendarview.CalendarView
+                android:id="@+id/calender_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                app:abbreviationsBarColor="#8605DAFE"
+                app:abbreviationsLabelsColor="#8605DAFE"
+                app:anotherMonthsDaysLabelsColor="#B7B7B7"
+
+                app:daysLabelsColor="@android:color/white"
+                app:eventsEnabled="true"
+                app:headerColor="#8605DAFE"
+
+                app:pagesColor="#8605DAFE"
+                app:selectionColor="@android:color/white"
+                app:selectionLabelColor="#3F51B5"
+
+                app:swipeEnabled="true"
+                app:todayLabelColor="#000000"
+                app:type="one_day_picker"
+
+
+                />
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/calender_view"
         android:text="달력 띄우기 "/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_tab1"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_tab2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calender_view"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:scrollbars="vertical"/>
-
-
-</LinearLayout>
+        android:layout_height="80dp"
+        android:layout_below="@id/recycler_tab2"/>
+        </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+
+

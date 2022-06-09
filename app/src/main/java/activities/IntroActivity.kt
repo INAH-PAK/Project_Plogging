@@ -20,7 +20,7 @@ class IntroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    setContentView(binding.root)
+         setContentView(binding.root)
         pref  =  PreferenceManager.getDefaultSharedPreferences(this)
 //        val keyHash = Utility.getKeyHash(this)//onCreate 안에 입력해주자
 //        Log.d("키해쉬", keyHash)

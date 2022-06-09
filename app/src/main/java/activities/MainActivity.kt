@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val userName = intent.getStringExtra("UserName")
-        binding.tv01.setText(" 반가워요 $userName !")
+       // binding.tv01.setText(" 반가워요 $userName !")
 
         // 총 4개의 탭
         fragments.add(Tab1MainFragment()) //0 - 홈

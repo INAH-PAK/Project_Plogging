@@ -15,6 +15,8 @@ class Tab1MainFragment:Fragment(){
 
 
     lateinit var binding:FragmentMainTab1Binding
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

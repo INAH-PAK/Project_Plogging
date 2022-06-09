@@ -9,13 +9,16 @@ import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
 import com.wookie_soft.inah.databinding.ActivityMap1Binding
+import model.Marker
 import model.MyMap
 import model.MyMap.Companion.marker
+import model.User
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
@@ -26,6 +29,8 @@ class Map1Activity : AppCompatActivity() {
     val fusedLocationProviderClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private lateinit var mapView: MapView
     private lateinit var pplocation: Location
+
+    val markerList =  mutableListOf<Marker>()
 
 
     //타이머
@@ -39,7 +44,6 @@ class Map1Activity : AppCompatActivity() {
         //키해시
         val keyHash: String = Utility.getKeyHash(this)
         Log.i("키해시", keyHash)
-
 
 
         // 내위치 받자 !------------------------------------------------------------------------------------------------------------
@@ -63,26 +67,34 @@ class Map1Activity : AppCompatActivity() {
         }
         //타이머 멈춤
         binding.btn03Stop.setOnClickListener {
-            pauseTime = binding.chronometer.base - SystemClock.elapsedRealtime()
             binding.chronometer.stop()
+            pauseTime = binding.chronometer.base - SystemClock.elapsedRealtime()
+            MyMap.timeResult = pauseTime
             binding.btn02Start.isEnabled = true
             binding.btn03Stop.isEnabled = false
         }
 
         binding.btn01.setOnClickListener {
             // 마커 추가 등록 엑티비티 만들기... 인텐트 ...
-
+            binding.chronometer.stop()
             val intent = Intent(this, Map2Activity::class.java)
             intent.putExtra("lat",pplocation.latitude.toDouble())
             intent.putExtra("lng",pplocation.longitude.toDouble())
             startActivity(intent)
-
 
         }
 
 
 
     }//onCreatMethod
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+        }
+        return  super.onOptionsItemSelected(item)
+    }
+
 
     override fun onPause() {
         super.onPause()
@@ -108,11 +120,13 @@ class Map1Activity : AppCompatActivity() {
 
         MyMap.marker.itemName = "Default Marker"
         MyMap.marker.tag = 0
+        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icons3
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
         //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
+        MyMap.marker.markerType = MapPOIItem.MarkerType.CustomImage
 
         MyMap.mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also {  MyMap.marker.mapPoint = it }
-        MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+       // MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
         MyMap.marker.selectedMarkerType =
             MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         mapView.addPOIItem(MyMap.marker)
@@ -183,6 +197,8 @@ class Map1Activity : AppCompatActivity() {
             }
         }
     }// 동적퍼미션
+
+
 
 
 

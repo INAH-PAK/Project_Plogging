@@ -47,4 +47,8 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:scrollbars="vertical"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
 </LinearLayout>
