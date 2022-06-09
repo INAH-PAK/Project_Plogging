@@ -85,10 +85,10 @@ class CustomDialog(context: Context) : AlertDialog(context) {
                 Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
                 Log.i("선택한 날짜", it.get(0).time.toString()[1].toString())
                 Log.i("선택한 날짜", it.get(0).time.toString()[2].toString())
-
-                for( var i = 0 ; i < 3 ; i++ ){
-                    it.get(i).time.toString()
-                }
+//                var i = 0
+//                for( i= 0  ; i < 3 ; i++ ){
+//                    it.get(i).time.toString()
+//                }
 
                 dateStart.setText(formDate.format(it.get(0).time).toString())
         }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()

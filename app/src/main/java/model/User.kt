@@ -12,6 +12,9 @@ class User {
         const val RESTROOM = 2
         const val CAUTION = 3
 
+        // 앱 로그인을 위한 사용자 이메일 , 비밀번호
+
+
         val glovalItemList : MutableList<ScheduleVO> = mutableListOf<ScheduleVO>()
 
         var loginType:Int = -1
@@ -19,6 +22,8 @@ class User {
         var titlBundel : String = ""
         var j:Borad = Borad(title = titlBundel)
         var isisis = false
+
+
 
 
     }

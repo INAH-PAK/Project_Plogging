@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip01"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/ic_baseline_recycling_24"
+            android:text="분리수거장"
+            android:layout_marginEnd="8dp"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip02"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipIcon="@drawable/ic_baseline_wc_24"
+            android:layout_marginEnd="8dp"
+            android:text="화장실"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip03"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주의"
+            android:layout_marginStart="8dp"
+            app:chipIcon="@drawable/ic_baseline_priority_high_24"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:text="위치 설명"
+            android:textSize="16sp"
+            android:gravity="center"/>
+        <EditText
+            android:layout_marginTop="16dp"
+            android:id="@+id/dialog_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"
+            android:hint="위치에 대한 설명을 추가해주세요"
+            android:textSize="12sp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package activities
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -12,13 +13,13 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
 import com.wookie_soft.inah.databinding.ActivityMap1Binding
+import com.wookie_soft.inah.R
 import model.Marker
 import model.MyMap
-import model.MyMap.Companion.marker
-import model.User
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
@@ -40,6 +41,14 @@ class Map1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        //  툴바를 제목줄로 설정
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 위에서 만든 액션바를 불러온건데 널 일 수 있으니 ?.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 홈버튼을 뒤로가기로 하게따따
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24) // 내가 만든 아이코능로 설정
+        supportActionBar?.setTitle("Map")
+
 
         //키해시
         val keyHash: String = Utility.getKeyHash(this)
@@ -77,16 +86,32 @@ class Map1Activity : AppCompatActivity() {
         binding.btn01.setOnClickListener {
             // 마커 추가 등록 엑티비티 만들기... 인텐트 ...
             binding.chronometer.stop()
-            val intent = Intent(this, Map2Activity::class.java)
-            intent.putExtra("lat",pplocation.latitude.toDouble())
-            intent.putExtra("lng",pplocation.longitude.toDouble())
-            startActivity(intent)
+//            val intent = Intent(this, Map2Activity::class.java)
+//            intent.putExtra("lat",pplocation.latitude.toDouble())
+//            intent.putExtra("lng",pplocation.longitude.toDouble())
+//            startActivity(intent)
+            AlertDialog.Builder(this)
+                .setTitle("Add Marker")
+                .setIcon(R.drawable.ic_baseline_add_location_alt_24)
+                .setView(R.layout.dialog_add_marker)
+                .setPositiveButton("추가하기", DialogInterface.OnClickListener { dialogInterface, i ->
+                    // TODO 서버로 마커 추가 코드 기입예정
+                })
+                .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                    Toast.makeText(this, "마커 추가 취소", Toast.LENGTH_SHORT).show()
+                })
+                .create().show()
 
         }
 
 
 
     }//onCreatMethod
+
+    override fun onSupportNavigateUp(): Boolean { // 사용자가 업 버튼을 눌렀을 때
+        onBackPressed() // 업버튼 눌렀을 때 뒤로가기 기능 을 실현하겠다.
+        return super.onSupportNavigateUp()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

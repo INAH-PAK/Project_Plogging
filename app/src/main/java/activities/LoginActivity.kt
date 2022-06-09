@@ -23,6 +23,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.ActivityLoginBinding
 import model.User
+import model.UserAccount
 import java.util.*
 
 
@@ -58,9 +59,12 @@ class LoginActivity : AppCompatActivity() {
 
         binging.btnGoogle.setOnClickListener{ clickGoogle()}    // 구글 로그인
         binging.ivKakao.setOnClickListener{ clickKakao()} // 카카오 로그인
-        // clickUnlink()  // 로그아웃 기능. 나중에 둘러보기
+        // clickUnlink()  // 로그아웃 기능.
 
-        binging.btnSigninNoInfo.setOnClickListener {  }
+        binging.btnSigninNoInfo.setOnClickListener {  // 나중에 둘러보기
+            startActivity((Intent(this@LoginActivity,MainActivity::class.java)))
+            finish()
+        }
 
     }//onCreate
 
@@ -73,9 +77,11 @@ class LoginActivity : AppCompatActivity() {
 
                     if(firebaseAuth.currentUser!!.isEmailVerified){
                         Toast.makeText(this, "이메일 로그인 성공", Toast.LENGTH_SHORT).show()
-                        val mail: String = firebaseAuth.currentUser!!.email.toString()
-                        Log.i(" 파베 이메일 로그인 ", mail)
+                        val email: String = firebaseAuth.currentUser!!.email.toString()
+                        Log.i(" 파베 이메일 로그인 ", email)
                         User.loginType = User.EMAIL
+                        val id:String = firebaseAuth.currentUser?.uid?:"fail"
+                        G.userAccount = UserAccount( id, email)
                      } else {
                     Toast.makeText(this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                     }
@@ -89,9 +95,7 @@ class LoginActivity : AppCompatActivity() {
 //이메일 및 비밀번호 인증 방식의 회원가입 - 입력된 이메일로 [인증확인]메일이 보내지고 사용자가 확인했을때 가입이 완료되는 방식
         val email:String = binging.etEmail.text.toString()
         val pw:String = binging.etPw.text.toString()
-        val pp = "xowl0000"
 
-        Log.i("이메일 쓴거", email+"")
 
             firebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener { task ->
                 //입력된 이메일과 패스워드가 사용가능한지..유효성 검사 결과
@@ -106,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
                     Objects.requireNonNull(firebaseAuth.currentUser)!!.sendEmailVerification().addOnCompleteListener {
                         if (task.isSuccessful) Toast.makeText(
                             this,
-                            "전송된 이메일을 확인하시고 인증하세요.",
+                            "전송된 이메일로 인증 후, 다시 로그인 해주세요",
                             Toast.LENGTH_SHORT
                         ).show()
                         else Toast.makeText(this, "메일 전송에 실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -142,12 +146,14 @@ class LoginActivity : AppCompatActivity() {
             //Intent로 부터 구글 계정 정보를 가져오는 작업 객체 생성
             var task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
 
-            // 구글 계정 가져와서 텍스트로 찍어보기. -> SharedPreference 로 저장 해야 함
+            // 구글 계정 가져와서 텍스트로 찍어보기.
             var account:GoogleSignInAccount = task.result
+            var id:String = account.id.toString()
             var email:String = account.email.toString()
-            prefEditor.putString("userEmail",email).commit()
+            prefEditor.putString("userEmail",email).commit() // 이건 할지말지 더 고민해보자.
             Log.i(" 구글 로그인 이메일  ", email)
             User.loginType = User.GOOGLE
+            G.userAccount = UserAccount(id, email)
 
         })
 
@@ -181,6 +187,7 @@ class LoginActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this, "카카오 로그인 성공 : ${error}", Toast.LENGTH_SHORT).show()
                     User.loginType = User.KAKAOLOGIN
+
                 }
                 // 어차피 카카오 로그인은 콜백메소드 무조건 실행하니, 여기서 정보를 가져오자.
                 loadKakaoUserInfo()
@@ -193,6 +200,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    //TODO 이건 로그아웃 함수이므로 환경설정으로 빼자!
     private fun clickUnlink(){
         when(User.loginType) {
 
@@ -219,15 +227,11 @@ class LoginActivity : AppCompatActivity() {
         UserApiClient.instance.me { user, error ->
             if(error != null)   Toast.makeText(this, "사용자 정보 요청 실패 ", Toast.LENGTH_SHORT).show()
             else if ( user != null ){
-                // 어떤 정보를 받아올 지 ~~
-                val memberId:Long? = user.id    // 회원번호 -> 회원식별자로 사용 가능 . . . 근데 지금 우린 별로 필료하지 않음
+                val id:String = user.id.toString()
                 pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
-               // val nickName : 카카오 별명
-                val email:String? = user.kakaoAccount?.email
-
-             //   binging.tvKakaoNickname.text = nickName
+                var email:String = user.kakaoAccount?.email?:"kakao email load failed"
+                G.userAccount = UserAccount(id, email, )
                 Log.i(" 카카오 로그인 이메일  ", email?: "카카오 이메일 null")
-            //    Glide.with(this).load(profileImag).into(binging.civProfile)
             }
         }
     }

@@ -7,9 +7,7 @@ import java.io.Serializable
 // 내 닷홈 DB :  plogging.dothome.co.kr/myadmin
 //  no	user_email	date	title	message	 location_latitude	location_longitude	file
 
-data class Item constructor(var no :Int,
-                              var user_email:String,
-                              var title:String = "")
+data class Item constructor(var user_email:String, var title:String = "")
 
 data class ScheduleVO(
     val user_email: String ,

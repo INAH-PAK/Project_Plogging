@@ -8,7 +8,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 class RetrofitHelper {
     companion object{
         fun getRetrofitInstans():Retrofit{
-
             val gson= GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://commit.dothome.co.kr")
