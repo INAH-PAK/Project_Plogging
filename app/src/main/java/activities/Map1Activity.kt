@@ -2,10 +2,8 @@ package activities
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
@@ -14,10 +12,11 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
-import com.wookie_soft.inah.databinding.ActivityMap1Binding
 import com.wookie_soft.inah.R
+import com.wookie_soft.inah.databinding.ActivityMap1Binding
 import model.Marker
 import model.MyMap
 import net.daum.mf.map.api.MapPOIItem
@@ -30,6 +29,14 @@ class Map1Activity : AppCompatActivity() {
     val fusedLocationProviderClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private lateinit var mapView: MapView
     private lateinit var pplocation: Location
+
+    // private lateinit var currentLocation:Location
+
+    val myLocationMarker = MapPOIItem()
+
+
+//
+//    val customMarker:MapPOIItem
 
     val markerList =  mutableListOf<Marker>()
 
@@ -64,7 +71,7 @@ class Map1Activity : AppCompatActivity() {
         }else{
             requestLocationUpdate() // 5초마다 위치정보 받아오기 메소드
         }
-        // mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat2, lng2), true);
+//         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat2, lng2), true); <- ??
 
         // 타이머 재생 -
         binding.btn02Start.setOnClickListener {
@@ -84,18 +91,15 @@ class Map1Activity : AppCompatActivity() {
         }
 
         binding.btn01.setOnClickListener {
-            // 마커 추가 등록 엑티비티 만들기... 인텐트 ...
+
             binding.chronometer.stop()
-//            val intent = Intent(this, Map2Activity::class.java)
-//            intent.putExtra("lat",pplocation.latitude.toDouble())
-//            intent.putExtra("lng",pplocation.longitude.toDouble())
-//            startActivity(intent)
+
             AlertDialog.Builder(this)
                 .setTitle("Add Marker")
                 .setIcon(R.drawable.ic_baseline_add_location_alt_24)
                 .setView(R.layout.dialog_add_marker)
                 .setPositiveButton("추가하기", DialogInterface.OnClickListener { dialogInterface, i ->
-                    // TODO 서버로 마커 추가 코드 기입예정
+                    //addMarker()
                 })
                 .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
                     Toast.makeText(this, "마커 추가 취소", Toast.LENGTH_SHORT).show()
@@ -104,6 +108,11 @@ class Map1Activity : AppCompatActivity() {
 
         }
 
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+            if(it != null){
+                addMarker(it)
+            }
+        }
 
 
     }//onCreatMethod
@@ -135,30 +144,47 @@ class Map1Activity : AppCompatActivity() {
         mapView = MapView(this)
         val mapViewContainer: ViewGroup = binding.mapview
         mapViewContainer.addView(mapView)
+
+        mapView.setShowCurrentLocationMarker(true) // 사용자의 현재 위치에 디폴트 마커 찍힘.
+
     }
 
+    // 마커 이벤트 두개가 필요. -> 1. 현재 내 위치 보여주는 마커 (동적) , 2. 다른 사람들이 등록한 정보를 보여줄 마커 (고정)
 
     // 시스템으로 부터 받은 위치정보를 화면에 갱신해주는 메소드
     fun onLocationChanged(location: Location): Location {
 
+        // 지도화면을 내 위치에 맞게 보여주기
         mapView.setMapCenterPoint( mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble() ) ,true )
 
-        MyMap.marker.itemName = "Default Marker"
-        MyMap.marker.tag = 0
-        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icons3
-        //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
-        //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
-        MyMap.marker.markerType = MapPOIItem.MarkerType.CustomImage
-
-        MyMap.mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also {  MyMap.marker.mapPoint = it }
-       // MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
-        MyMap.marker.selectedMarkerType =
-            MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-        mapView.addPOIItem(MyMap.marker)
-
-        pplocation = location
-
         return location
+    }
+
+    // 마커를 등록해주는 기능 메소드
+    private fun addMarker(location: Location){
+
+        myLocationMarker.itemName = "Default Marker"
+        myLocationMarker.tag = 0
+        myLocationMarker.mapPoint = mapPointWithGeoCoord(location.latitude,location.longitude)
+        myLocationMarker.markerType = MapPOIItem.MarkerType.RedPin // 기본으로 제공하는 BluePin 마커 모양.
+        myLocationMarker.selectedMarkerType = MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        mapView.addPOIItem(myLocationMarker)
+
+
+//
+//        MyMap.marker.itemName = "Default Marker"
+//        MyMap.marker.tag = 0
+//        MyMap.marker.customImageResourceId = com.wookie_soft.inah.R.drawable.icons3
+//        //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
+//        //카카오맵은 참고로 new MapPoint()로  생성못함. 좌표기준이 여러개라 이렇게 메소드로 생성해야함
+//        MyMap.marker.markerType = MapPOIItem.MarkerType.CustomImage
+//
+//        //MyMap.mapPoint = mapPointWithGeoCoord(location.latitude.toDouble(),location.longitude.toDouble()).also {  MyMap.marker.mapPoint = it }
+//        // MyMap.marker.markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+//        MyMap.marker.selectedMarkerType =
+//        MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+//        mapView.addPOIItem(MyMap.marker)
+
     }
 
     @SuppressLint("MissingPermission")
@@ -168,12 +194,11 @@ class Map1Activity : AppCompatActivity() {
         //Fused API : Google 지도에 사용되고 있는 위치정보 제공자 최적화 라이브러리
         //Google Fused API 라이브러리를 추가 : play-services-location
 
-
         //위치 정보 요청 객체 생성 및 설정
         val locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
         locationRequest.interval = 1000 //5000ms[5초]간격으로 갱신
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
 
     }
 
@@ -184,23 +209,8 @@ class Map1Activity : AppCompatActivity() {
     private val locationCallback = object: LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
 
-            val lat = p0.lastLocation.latitude //위
-            val lng = p0.lastLocation.longitude
             onLocationChanged(p0.locations[0] )
 
-
-            Toast.makeText(
-                this@Map1Activity,
-                "GPS Location changed, Latitude: $lat, Longitude: $lng",
-                Toast.LENGTH_SHORT
-            ).show()
-            Log.d("Test", "GPS Location changed, Latitude: $lat, Longitude: $lng")
-
-            val result = floatArrayOf()
-            //Location.distanceBetween(lat, lng, 37.561235, 127.038207, result);
-
-            //result[0]에 두 좌표사이의 m 거리가 계산되어 저장되어 있음.
-            //if(result[0]<50){ //두 좌표사이의 거리가 50m 이내인가?
 
         }
     }

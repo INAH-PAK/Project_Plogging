@@ -55,6 +55,8 @@
     <string name="material_calendar_negative_button">Cancel</string>
 
 
+    <string name="select_marker_type"></string>
+
 
 
 </resources>

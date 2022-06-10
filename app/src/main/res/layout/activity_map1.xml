@@ -25,27 +25,35 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip01"
-                style="@style/Widget.MaterialComponents.Chip.Action"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                app:chipIconEnabled="true"
+                app:checkedIconEnabled="false"
                 app:chipIcon="@drawable/ic_baseline_recycling_24"
+                android:layout_height="wrap_content"
                 android:text="분리수거장"
                 android:layout_marginEnd="8dp"
                 />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip02"
-                style="@style/Widget.MaterialComponents.Chip.Action"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIconEnabled="true"
+                app:checkedIconTint="@color/red"
+                app:checkedIconEnabled="false"
                 app:chipIcon="@drawable/ic_baseline_wc_24"
                 android:layout_marginEnd="8dp"
                 android:text="화장실"/>
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip03"
-                style="@style/Widget.MaterialComponents.Chip.Action"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:chipIconEnabled="true"
+                app:checkedIconEnabled="false"
                 android:text="주의"
                 android:layout_marginStart="8dp"
                 app:chipIcon="@drawable/ic_baseline_priority_high_24"/>
