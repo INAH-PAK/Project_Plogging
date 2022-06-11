@@ -75,13 +75,7 @@
             android:layout_gravity="end"
             android:layout_margin="8dp"
             android:text="마커 추가"/>
-        <TextView
-            android:id="@+id/tv01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:text=" 현재 위치 : "
-            />
+
         <TextView
             android:id="@+id/tv02"
             android:layout_width="match_parent"
