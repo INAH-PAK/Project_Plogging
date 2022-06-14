@@ -102,6 +102,7 @@ class Pager1SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        calendarView.setEvents(G.eventDays)
 
         var user_email = pref.getString("userEmail", "non Email")
 
@@ -123,9 +124,9 @@ class Pager1SecondFragment : Fragment() {
         var day = SimpleDateFormat("dd", Locale.KOREAN).format(now).toInt()
 
 
-
         // 롱클릭 리스너 람다식 표기법 사용하는 법
         // https://workingdev.net/android,/kotlin/2018/08/01/handling-clicks-and-long-clicks.html
+
 
 
         calendarView.setOnDayClickListener {
@@ -135,15 +136,19 @@ class Pager1SecondFragment : Fragment() {
             var size = calendarView.selectedDates.size-1
             Log.i("ddd", calendarView.selectedDates[size].toString())
 
-
-
             val builder = AlertDialog.Builder(context as Activity)
+                //기록하기 버튼을 누르면 내가 만든 커스텀 다이알로그 보여주기
                 .setNegativeButton("기록하기",
                     DialogInterface.OnClickListener { dialogInterface, i ->
-                        //기록하기 버튼을 누르면 내가 만든 커스텀 다이알로그 보여주기
-                        val clickedDay = it.calendar
+
+                        //아이콘 찍는 코드
+                        G.eventDays.add(EventDay(it.calendar,R.drawable.ic_baseline_circle_8))
+                        calendarView.setEvents(G.eventDays)
+
                         list.add(it)
                         list.get(0).calendar
+
+
 
                         Log.i(
                             "날짜 선택함 !!!!",
@@ -151,6 +156,7 @@ class Pager1SecondFragment : Fragment() {
                         ) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                         dialog.myDialog()
+
 
 
 
@@ -166,14 +172,12 @@ class Pager1SecondFragment : Fragment() {
                 .show()
 
 
-
         }
 
 
 
+
     }// onViewCreated
-
-
 
 
     fun showKeyboardFrom(view: View) { // 키보드가 보여질 때
@@ -190,9 +194,11 @@ class Pager1SecondFragment : Fragment() {
     // 화면 갱신시 리사이클러뷰 초기화
     override fun onResume() {
         super.onResume()
+        calendarView.setEvents(G.eventDays)
         fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
 
     }
+
 
 
 }

@@ -1,46 +1,46 @@
 package model
 
+import G
 import Network.RetrofitHelper
 import Network.RetrofitService
-import adapters.RecyclerAdaopterTab1
-import android.app.Activity
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Build
-import android.text.format.Time
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceManager
+import com.applandeo.materialcalendarview.CalendarUtils
+import com.applandeo.materialcalendarview.CalendarView
+import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.google.android.material.chip.Chip
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.R.layout
-import com.wookie_soft.inah.databinding.CustomDialogBinding
+import fragments.Pager1SecondFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.applandeo.materialcalendarview.CalendarView
-import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
-import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
-import fragments.Pager1SecondFragment
 import java.text.SimpleDateFormat
-import java.time.LocalTime
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.reflect.typeOf
 
 
 // 달력에 일정 기입을 위한 커스텀 뷰
 class CustomDialog(context: Context) : AlertDialog(context) {
     val dialog = Dialog(context)
     val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    lateinit var pickerDate:String
-    lateinit var pickerTime:String
+    var position = 0
+
+    var pickerDate:String = "null"
+    var pickerTime:String = "null"
+    val calendarList = mutableListOf<Calendar>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun myDialog() {
@@ -70,25 +70,26 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         val formTime = SimpleDateFormat("HH : mm")
 
 
-
+        // 다이알로그가 떴다가 죽으면,
         dialog.setOnDismissListener {
-           Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
+            Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
+
+
             Pager1SecondFragment.noti()
         }
+
 
 
         // 날짜 시간 Picker 리스너
         dateStart.setOnClickListener {
             val builder = DatePickerBuilder(context, OnSelectDateListener {
-                pickerDate = it.get(0).time.toString()
-                Log.i("선택한 날짜", it.get(0).time.toString())
+
+                pickerDate= it.get(it.size).time.toString()
+
+                Log.i("선택한 날짜", it.get(0).time.toString()) // 이거임.
                 Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
                 Log.i("선택한 날짜", it.get(0).time.toString()[1].toString())
                 Log.i("선택한 날짜", it.get(0).time.toString()[2].toString())
-//                var i = 0
-//                for( i= 0  ; i < 3 ; i++ ){
-//                    it.get(i).time.toString()
-//                }
 
                 dateStart.setText(formDate.format(it.get(0).time).toString())
         }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
@@ -120,6 +121,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         // 확인 버튼
         okBtn.setOnClickListener {
+            // 일정 기록 확인버튼. -> 1. 2.
             val userEmail: String? = pref.getString("userEmail", "inahpakkr@gmail.com")
             var t = title.text.toString()
 
@@ -134,19 +136,22 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             )
             insertDB(item)
 
+
             //A
             // 프레그먼트 화면의 리사이클러에 추가 함.
             User.glovalItemList.add( 0,item)
             //User.glovalItem = item
             Log.i("글로번 아이템", User.glovalItemList[0].title.toString() )
 
-
             dialog.dismiss()
+
+
 
         }
 
         // 취소 버튼
         cancelBtn.setOnClickListener {
+
             dialog.dismiss()
         }
 
@@ -154,11 +159,8 @@ class CustomDialog(context: Context) : AlertDialog(context) {
     }
 
 
-
     fun insertDB(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
-
-
 
         val retrofit = RetrofitHelper.getRetrofitInstans()
         val retrofitService = retrofit.create(RetrofitService::class.java)
