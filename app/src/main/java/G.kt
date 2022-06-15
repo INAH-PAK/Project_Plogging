@@ -11,6 +11,6 @@ class G {
         val calendarList = mutableListOf<Calendar>()
         val eventDays = ArrayList<EventDay>()
 
-        var calendarInstance = Calendar.getInstance()
+
     }
 }

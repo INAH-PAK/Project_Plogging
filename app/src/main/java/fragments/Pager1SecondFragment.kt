@@ -54,6 +54,7 @@ class Pager1SecondFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     val calenderItems = mutableListOf<ScheduleVO>()
 
+
     lateinit var title: String
     val userEmail by lazy { pref.getString("userEmail", "").toString() }
     val dialog by lazy { CustomDialog(requireContext())  }
@@ -64,9 +65,14 @@ class Pager1SecondFragment : Fragment() {
     companion object{
 
         private lateinit var fragmentBinding: FragmentSecondPager1Binding
+        val calendarView: CalendarView by lazy { fragmentBinding.calenderView }
+
+        var calendarInstance = Calendar.getInstance()
 
         fun setCalenderViewEventDays(){
+            G.eventDays.add(EventDay(calendarInstance,R.drawable.ic_baseline_circle_8))
 
+            calendarView.setEvents(G.eventDays)
         }
 
         fun noti(){
@@ -131,8 +137,6 @@ class Pager1SecondFragment : Fragment() {
         // 롱클릭 리스너 람다식 표기법 사용하는 법
         // https://workingdev.net/android,/kotlin/2018/08/01/handling-clicks-and-long-clicks.html
 
-
-
         calendarView.setOnDayClickListener {
 
             Log.i("날짜", calendarView.currentPageDate.toString())
@@ -145,9 +149,11 @@ class Pager1SecondFragment : Fragment() {
                 .setNegativeButton("기록하기",
                     DialogInterface.OnClickListener { dialogInterface, i ->
 
+                        calendarInstance = it.calendar
+
                         //아이콘 찍는 코드
-                        G.eventDays.add(EventDay(it.calendar,R.drawable.ic_baseline_circle_8))
-                        calendarView.setEvents(G.eventDays)
+//                        G.eventDays.add(EventDay(it.calendar,R.drawable.ic_baseline_circle_8))
+//                        calendarView.setEvents(G.eventDays)
 
                         list.add(it)
                         list.get(0).calendar

@@ -136,7 +136,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             )
             insertDB(item)
 
-            Pager1SecondFragment.
+            Pager1SecondFragment.setCalenderViewEventDays()
 
 
             //A
@@ -182,6 +182,11 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             }
 
         })
+    }
+
+    fun loadDB(){
+        //Post 방식으로 객체를 서버에 전달하자 !
+
     }
 
 
