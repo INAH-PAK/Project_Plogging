@@ -42,6 +42,7 @@ class Pager1SecondFragment : Fragment() {
 
     lateinit var recyclerView: RecyclerView
     val calenderItems = mutableListOf<ScheduleVO>()
+    val calendarView:CalendarView by lazy { fragmentBinding.calenderView }
 
     lateinit var title: String
     val userEmail by lazy { pref.getString("userEmail", "").toString() }
@@ -53,6 +54,11 @@ class Pager1SecondFragment : Fragment() {
     companion object{
 
         private lateinit var fragmentBinding: FragmentSecondPager1Binding
+
+        fun setCalenderView(){
+
+
+        }
 
         fun noti(){
             fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
@@ -98,9 +104,9 @@ class Pager1SecondFragment : Fragment() {
         // 오늘 날짜
 
         var now = System.currentTimeMillis()
-        var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()dfsdsdsd
+        var year = SimpleDateFormat("yyyy", Locale.KOREAN).format(now).toInt()
         var month = SimpleDateFormat("MM", Locale.KOREAN).format(now).toInt()
-        var day = SimpleDateFormat(
+        var day = SimpleDateFormat()
         // 롱클릭 리스너 람다식 표기법 사용하는 법
         // https://workingdev.net/android,/kotlin/2wn018/08/01/handling-clicks-and-long-clicks.html
 
