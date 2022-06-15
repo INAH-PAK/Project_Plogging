@@ -65,6 +65,10 @@ class Pager1SecondFragment : Fragment() {
 
         private lateinit var fragmentBinding: FragmentSecondPager1Binding
 
+        fun setCalenderViewEventDays(){
+
+        }
+
         fun noti(){
             fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
         }

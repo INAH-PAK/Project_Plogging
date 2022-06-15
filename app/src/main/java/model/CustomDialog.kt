@@ -136,6 +136,8 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             )
             insertDB(item)
 
+            Pager1SecondFragment.
+
 
             //A
             // 프레그먼트 화면의 리사이클러에 추가 함.
@@ -181,6 +183,9 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         })
     }
+
+
+
 
 
 
