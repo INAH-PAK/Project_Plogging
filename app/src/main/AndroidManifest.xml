@@ -45,7 +45,7 @@
             android:name="activities.Map2Activity"
             android:exported="false" />
         <activity
-            android:name="activities.Map1Activity"
+            android:name="activities.MapActivity"
             android:exported="false" />
 
         <meta-data

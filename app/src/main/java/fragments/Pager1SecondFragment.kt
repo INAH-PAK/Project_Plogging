@@ -158,8 +158,6 @@ class Pager1SecondFragment : Fragment() {
                         list.add(it)
                         list.get(0).calendar
 
-
-
                         Log.i(
                             "날짜 선택함 !!!!",
                             list.get(0).calendar.time.toString()

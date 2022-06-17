@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
         // clickUnlink()  // 로그아웃 기능.
 
         binging.btnSigninNoInfo.setOnClickListener {  // 나중에 둘러보기
+            G.userAccount = UserAccount("둘러보기","둘러보기",User.NON.toString())
             startActivity((Intent(this@LoginActivity,MainActivity::class.java)))
             finish()
         }
@@ -81,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                         Log.i(" 파베 이메일 로그인 ", email)
                         User.loginType = User.EMAIL
                         val id:String = firebaseAuth.currentUser?.uid?:"fail"
-                        G.userAccount = UserAccount( id, email)
+                        G.userAccount = UserAccount( id, email,User.NON.toString())
                      } else {
                     Toast.makeText(this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                     }
@@ -153,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
             prefEditor.putString("userEmail",email).commit() // 이건 할지말지 더 고민해보자.
             Log.i(" 구글 로그인 이메일  ", email)
             User.loginType = User.GOOGLE
-            G.userAccount = UserAccount(id, email)
+            G.userAccount = UserAccount(id, email,User.NON.toString())
 
         })
 
@@ -230,7 +231,7 @@ class LoginActivity : AppCompatActivity() {
                 val id:String = user.id.toString()
                 pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
                 var email:String = user.kakaoAccount?.email?:"kakao email load failed"
-                G.userAccount = UserAccount(id, email, )
+                G.userAccount = UserAccount(id, email,User.NON.toString() )
                 Log.i(" 카카오 로그인 이메일  ", email?: "카카오 이메일 null")
             }
         }

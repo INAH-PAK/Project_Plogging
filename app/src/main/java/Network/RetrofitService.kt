@@ -1,5 +1,6 @@
 package Network
 
+import model.Marker
 import model.ScheduleVO
 import model.UserAccount
 import retrofit2.Call
@@ -19,6 +20,9 @@ interface RetrofitService {
     // 테스트 용으로 ..
     @POST("pppDB.php")
     fun postMethodTest(@Body itemModel:ScheduleVO): Call<String>
+
+    @POST("insertDBMarkers.php")
+    fun insertDBMarkers(@Body markerInfo:Marker): Call<String>
 
 
 

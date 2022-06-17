@@ -34,9 +34,13 @@ data class FavHistory(var user_email:String,
                       var board_num:String )
 
 data class Marker(var user_email:String,
-                   var location_latitude:String,
-                   var location_longitude:String,
-                   var type:Int)
+                   var latitude:Double,
+                   var longitude:Double,
+                   var type:String,
+                   var message:String,
+                   )
+
+
 
 data class Garden(var user_email:String,
                   var ear_challenge:String,
@@ -44,27 +48,3 @@ data class Garden(var user_email:String,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//    (
-//                                        var date:String,
-//                                       var title:String,
-//                                       var message:String = "no Massege" ,
-//                                       var user_email:String = "non Email",
-//                                       var location_latitude:Double = 0.0,
-//                                       var location_longitude:Double = 0.0,
-//                                       var file:String = ""){
-//
-//}
