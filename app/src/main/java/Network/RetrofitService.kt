@@ -17,13 +17,23 @@ interface RetrofitService {
     fun loadUserAccountFromDB():Call<UserAccount>
 
 
-    // 테스트 용으로 ..
+    // 달력 DB로 일정 데이터 보내기
     @POST("pppDB.php")
     fun postMethodTest(@Body itemModel:ScheduleVO): Call<String>
 
+    // 마커 DB로 마커추가 데이터 보내기
     @POST("insertDBMarkers.php")
     fun insertDBMarkers(@Body markerInfo:Marker): Call<String>
 
+    // 달력 DB에서 일정 데이터 불러오기
+
+
+    // 마커 DB에서 마커 데이터 불러오기
+    @POST("loadDB.php")
+    fun loadDBMarkers():Call<ArrayList<Marker>>
+
+//    @POST("loadDB.php")
+//    fun loadDBMarkers():Call<String>
 
 
 }

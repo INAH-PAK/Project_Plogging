@@ -46,6 +46,7 @@ class MapActivity : AppCompatActivity() {
 
     val binding: ActivityMap1Binding by lazy { ActivityMap1Binding.inflate(layoutInflater) }
     val retrofit = RetrofitHelper.getRetrofitInstans()
+    val retrofitService = retrofit.create(RetrofitService::class.java)
     val mapView:MapView by lazy { MapView(this) }
 
     // 구글 FusedLocation
@@ -108,6 +109,8 @@ class MapActivity : AppCompatActivity() {
         // 마카 or 말풍선의 클릭이벤트에 반응하는 리스너 등록
         // ** 반드시 마커 추가하는 것보다 먼저 등록되어 있어야 동작함. **
         mapView.setPOIItemEventListener(markerEventListener)
+
+        loadDBFromMarker()
 
         lat = userLocation?.latitude ?: 37.5666805
         lng = userLocation?.longitude ?: 126.9784147
@@ -188,14 +191,31 @@ class MapActivity : AppCompatActivity() {
     // 서버 DB에 저장된 마커들을 불러오는 메소드
     private fun loadDBFromMarker(){
 
+        // 여기서는 retrofit으로 서버 DB에 저장 된 마커들을 불러와서 찍기.
+        val call:Call<ArrayList<Marker>> = retrofitService.loadDBMarkers()
+        call.enqueue(object : Callback<ArrayList<Marker>>{
+            override fun onResponse(
+                call: Call<ArrayList<Marker>>,
+                response: Response<ArrayList<Marker>>
+            ) {
+             Log.i(" 성공", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<ArrayList<Marker>>, t: Throwable) {
+                Log.i("시ㄹ패","실패패패패패   ===   $t")
+            }
+
+        })
     }
+
+
+
+
+
+
 
     // 마커 추가시 서버로 정보 보내는 메소드
     private fun insertDBToMakers(marker:Marker){
-
-        val retrofit = RetrofitHelper.getRetrofitInstans()
-        val retrofitService = retrofit.create(RetrofitService::class.java)
-
         //서버로 보낼 값을 가진 call 바로 보내버리기
         val call: Call<String> = retrofitService.insertDBMarkers(marker)
         call.enqueue(object : Callback<String> {

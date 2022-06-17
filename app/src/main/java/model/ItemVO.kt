@@ -34,8 +34,8 @@ data class FavHistory(var user_email:String,
                       var board_num:String )
 
 data class Marker(var user_email:String,
-                   var latitude:Double,
-                   var longitude:Double,
+                   var latitude:String,
+                   var longitude:String,
                    var type:String,
                    var message:String,
                    )
