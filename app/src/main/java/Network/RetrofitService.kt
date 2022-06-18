@@ -26,10 +26,11 @@ interface RetrofitService {
     fun insertDBMarkers(@Body markerInfo:Marker): Call<String>
 
     // 달력 DB에서 일정 데이터 불러오기
-
+    @POST("loadDBSchedule.php")
+    fun loadDBScheduleVO():Call<ArrayList<ScheduleVO>>
 
     // 마커 DB에서 마커 데이터 불러오기
-    @POST("loadDB.php")
+    @POST("loadDBMarker.php")
     fun loadDBMarkers():Call<ArrayList<Marker>>
 
 //    @POST("loadDB.php")

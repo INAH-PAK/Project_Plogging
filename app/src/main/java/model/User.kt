@@ -7,10 +7,10 @@ class User {
 
     companion object{
 
-        const val GOOGLE = 1
-        const val KAKAOLOGIN = 2
-        const val EMAIL = 3
-        const val NON = -1
+        const val GOOGLE : String = "GOOGLE"
+        const val KAKAO  : String= "KAKAO"
+        const val EMAIL : String = "EMAIL"
+        const val NON  : String= "NON"
 
         const val RECYCLE = 1
         const val RESTROOM = 2

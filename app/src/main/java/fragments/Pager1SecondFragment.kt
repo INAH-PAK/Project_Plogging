@@ -14,14 +14,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,12 +25,12 @@ import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.DatePicker
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.wookie_soft.inah.R
 import com.wookie_soft.inah.databinding.CustomDialogBinding
 import com.wookie_soft.inah.databinding.FragmentSecondPager1Binding
 import model.CustomDialog
+import model.Marker
 import model.ScheduleVO
 import model.User
 
@@ -122,6 +118,7 @@ class Pager1SecondFragment : Fragment() {
         // 달력 밑의 리사이클러
         recyclerView = fragmentBinding.recyclerTab2
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
+            loadDBSchedule()
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
         }
 
@@ -165,9 +162,6 @@ class Pager1SecondFragment : Fragment() {
 
                         dialog.myDialog()
 
-
-
-
                     })
                 .setNeutralButton("일정보기", DialogInterface.OnClickListener { dialogInterface, i ->
                     // 일정보기 버튼을 누르면 리사이클러로 그 날의 일정을 보여줌
@@ -179,11 +173,7 @@ class Pager1SecondFragment : Fragment() {
                 })
                 .show()
 
-
         }
-
-
-
 
     }// onViewCreated
 
@@ -204,6 +194,32 @@ class Pager1SecondFragment : Fragment() {
         super.onResume()
         calendarView.setEvents(G.eventDays)
         fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
+
+    }
+
+    private  fun loadDBSchedule(){
+        // 서버 DB - Schedule 에서 사용자의 일정들을 불러오기
+        val schedule = ArrayList<ScheduleVO>()
+        val call : Call<ArrayList<ScheduleVO>> = retrofitService.loadDBScheduleVO()
+        call.enqueue( object  : Callback<ArrayList<ScheduleVO>>{
+            override fun onResponse(
+                call: Call<ArrayList<ScheduleVO>>,
+                response: Response<ArrayList<ScheduleVO>>
+            ) {
+                val mSchedule: ArrayList<ScheduleVO>? = response.body()
+                if (mSchedule == null ) return
+                else {
+                    mSchedule.forEach {
+                        // 이 값을 아답터에 전달해줘야 함.
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<ArrayList<ScheduleVO>>, t: Throwable) {
+                Toast.makeText(context, " 서버에 접속할 수 없습니다. 네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
     }
 

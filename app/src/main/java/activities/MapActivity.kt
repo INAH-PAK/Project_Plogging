@@ -5,17 +5,14 @@ import Network.RetrofitService
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -25,13 +22,9 @@ import androidx.preference.PreferenceManager
 import com.google.android.gms.location.*
 import com.kakao.util.maps.helper.Utility
 import com.wookie_soft.inah.R
-import com.wookie_soft.inah.databinding.ActivityMap1Binding
-import com.wookie_soft.inah.databinding.AddPlanDialogBinding
-import com.wookie_soft.inah.databinding.DialogAddMarkerBinding
+import com.wookie_soft.inah.databinding.ActivityMapBinding
 import model.Marker
 import model.MyMap
-import model.User
-import model.UserAccount
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
@@ -43,7 +36,7 @@ import retrofit2.Response
 class MapActivity : AppCompatActivity() {
 
 
-    val binding: ActivityMap1Binding by lazy { ActivityMap1Binding.inflate(layoutInflater) }
+    val binding: ActivityMapBinding by lazy { ActivityMapBinding.inflate(layoutInflater) }
     val retrofit = RetrofitHelper.getRetrofitInstans()
     val retrofitService = retrofit.create(RetrofitService::class.java)
     val mapView:MapView by lazy { MapView(this) }
@@ -59,8 +52,8 @@ class MapActivity : AppCompatActivity() {
     private val prefEditor: SharedPreferences.Editor by lazy {  sharedPreferences.edit()}
 
     val marker = MapPOIItem()
-    var lat:Double = 37.5666805
-    var lng:Double = 126.9784147
+    var lat:String = "37.5666805"
+    var lng:String = "126.9784147"
 
     val markerList =  mutableListOf<Marker>()
     //타이머
@@ -71,6 +64,11 @@ class MapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        // 서버DB에 있던 마커들 불러와서 지도에 찍기
+        loadDBFromMarker()
+
+
 
         setMapAndMarker()
 
@@ -88,8 +86,7 @@ class MapActivity : AppCompatActivity() {
         supportActionBar?.setTitle("Map")
         binding.mapview.addView(mapView)
 
-        // 서버DB에 있던 마커들 불러와서 지도에 찍기
-        loadDBFromMarker()
+
 
         // 타이머 재생 -
         binding.btn02Start.setOnClickListener { startTimer() }
@@ -109,12 +106,10 @@ class MapActivity : AppCompatActivity() {
         // ** 반드시 마커 추가하는 것보다 먼저 등록되어 있어야 동작함. **
         mapView.setPOIItemEventListener(markerEventListener)
 
-        loadDBFromMarker()
+        lat = (userLocation?.latitude ?: "37.5666805").toString()
+        lng = (userLocation?.longitude ?: "126.9784147").toString()
 
-        lat = userLocation?.latitude ?: 37.5666805
-        lng = userLocation?.longitude ?: 126.9784147
-
-       var myMapPoint:MapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
+       var myMapPoint:MapPoint = MapPoint.mapPointWithGeoCoord(lat.toDouble(), lng.toDouble())
         mapView.setMapCenterPointAndZoomLevel(myMapPoint, 5, true)
         mapView.zoomIn(true)
         mapView.zoomOut(true)
@@ -123,7 +118,7 @@ class MapActivity : AppCompatActivity() {
         marker.apply {
             itemName="ME"
             mapPoint= myMapPoint
-            mapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
+            mapPoint = MapPoint.mapPointWithGeoCoord(lat.toDouble(), lng.toDouble())
             markerType= MapPOIItem.MarkerType.BluePin
             selectedMarkerType= MapPOIItem.MarkerType.RedPin
         }
@@ -131,23 +126,6 @@ class MapActivity : AppCompatActivity() {
 
         loadDBFromMarker() // 서버에 저장된 마커들을 찍기
     }
-
-//        // 검색결과 장소들 마커 추가
-//        val documents:MutableList<Place>? = (activity as MainActivity).searchPlaceResponce?.documents
-//        documents?.forEach{
-//            val point: MapPoint = MapPoint.mapPointWithGeoCoord(it.y.toDouble(), it.x.toDouble())
-//
-//            //마커객체 생성
-//            var marker: MapPOIItem= MapPOIItem().apply {
-//                itemName= it.place_name
-//                mapPoint= point
-//                markerType= MapPOIItem.MarkerType.RedPin
-//                selectedMarkerType= MapPOIItem.MarkerType.YellowPin
-//                // 해당 POI item(마커)와 관련된 정보를 저장하고 있는 데이터객체를 보관
-//                userObject= it
-//            }
-//            mapView.addPOIItem(marker)
-//        }
 
 
 
@@ -178,8 +156,8 @@ class MapActivity : AppCompatActivity() {
             .setIcon(R.drawable.ic_baseline_add_location_alt_24)
             .setView(dialogView)
             .setPositiveButton("추가하기", DialogInterface.OnClickListener { dialogInterface, i ->
-               // var markerInstance: Marker = Marker(userEmail , lat,lng, "ddd", et.text.toString() )
-               // insertDBToMakers(markerInstance)
+               val markerInstance: Marker = Marker(userEmail , lat,lng, G.userAccount!!.loginType, et.text.toString() )
+               insertDBToMakers(markerInstance)
             })
             .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
                 Toast.makeText(this, "마커 추가 취소", Toast.LENGTH_SHORT).show()
@@ -196,12 +174,29 @@ class MapActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<ArrayList<Marker>>,
                 response: Response<ArrayList<Marker>>
-            ) {response.body().
+            ) {
              Log.i(" 성공", response.body().toString())
-             for ( i in mMarker ){
-
-             }
-                response.body()
+                val mmMarker: ArrayList<Marker>? = response.body()
+                if (mmMarker == null) {
+                    Toast.makeText(this@MapActivity, " 서버 DB에 저장된 값이 없습니다.", Toast.LENGTH_SHORT).show() }
+                else {
+                    Log.i("ttttt", "실행 됨.")
+                    for ( i in mmMarker ){
+                        mmMarker.add(0,i)
+                           // val point: MapPoint = mapPointWithGeoCoord(i.latitude.toDouble(),i.longitude.toDouble())
+                            val point: MapPoint = mapPointWithGeoCoord(lng.toDouble(),lat.toDouble())
+                            marker.apply {
+                                Log.i("ttttt2222", "실행 됨2222.")
+                                itemName= i.message
+                                mapPoint= point
+                                markerType= MapPOIItem.MarkerType.BluePin
+                                selectedMarkerType= MapPOIItem.MarkerType.YellowPin
+                                // 해당 POI item(마커)와 관련된 정보를 저장하고 있는 데이터객체를 보관
+                                userObject= i
+                        }
+                }
+                    mapView.addPOIItem(marker)
+                }
             }
 
             override fun onFailure(call: Call<ArrayList<Marker>>, t: Throwable) {

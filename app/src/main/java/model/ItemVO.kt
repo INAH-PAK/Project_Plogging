@@ -34,11 +34,12 @@ data class FavHistory(var user_email:String,
                       var board_num:String )
 
 // 사용자의 마커 추가 등록
-data class Marker(var user_email:String,
-                   var latitude:Double,
-                   var longitude:Double,
-                   var type:Int,
-                   var message:String,
+data class Marker(
+    var user_email:String,
+    var latitude:String,
+    var longitude:String,
+    var type: String,
+    var message:String,
                    )
 
 

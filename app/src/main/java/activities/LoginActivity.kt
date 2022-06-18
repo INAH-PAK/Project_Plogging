@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         // clickUnlink()  // 로그아웃 기능.
 
         binging.btnSigninNoInfo.setOnClickListener {  // 나중에 둘러보기
-            G.userAccount = UserAccount("둘러보기","둘러보기",User.NON.toString())
+            G.userAccount = UserAccount("둘러보기","둘러보기","NON")
             startActivity((Intent(this@LoginActivity,MainActivity::class.java)))
             finish()
         }
@@ -80,9 +80,9 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "이메일 로그인 성공", Toast.LENGTH_SHORT).show()
                         val email: String = firebaseAuth.currentUser!!.email.toString()
                         Log.i(" 파베 이메일 로그인 ", email)
-                        User.loginType = User.EMAIL
                         val id:String = firebaseAuth.currentUser?.uid?:"fail"
-                        G.userAccount = UserAccount( id, email,User.NON.toString())
+
+                        G.userAccount = UserAccount( id, email,User.EMAIL)
                      } else {
                     Toast.makeText(this, "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                     }
@@ -153,8 +153,7 @@ class LoginActivity : AppCompatActivity() {
             var email:String = account.email.toString()
             prefEditor.putString("userEmail",email).commit() // 이건 할지말지 더 고민해보자.
             Log.i(" 구글 로그인 이메일  ", email)
-            User.loginType = User.GOOGLE
-            G.userAccount = UserAccount(id, email,User.NON.toString())
+            G.userAccount = UserAccount(id, email,User.GOOGLE)
 
         })
 
@@ -187,7 +186,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "카카오 로그인 실패 : ${error}", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(this, "카카오 로그인 성공 : ${error}", Toast.LENGTH_SHORT).show()
-                    User.loginType = User.KAKAOLOGIN
+
 
                 }
                 // 어차피 카카오 로그인은 콜백메소드 무조건 실행하니, 여기서 정보를 가져오자.
@@ -203,10 +202,10 @@ class LoginActivity : AppCompatActivity() {
 
     //TODO 이건 로그아웃 함수이므로 환경설정으로 빼자!
     private fun clickUnlink(){
-        when(User.loginType) {
+        when(G.userAccount?.loginType) {
 
             User.GOOGLE, User.EMAIL -> firebaseAuth.signOut()
-            User.KAKAOLOGIN -> {
+            User.KAKAO -> {
                 UserApiClient.instance.unlink {
                     if(it != null){
                         Toast.makeText(this, "연결끊기 실패", Toast.LENGTH_SHORT).show()
@@ -231,7 +230,7 @@ class LoginActivity : AppCompatActivity() {
                 val id:String = user.id.toString()
                 pref.edit().putString(user.kakaoAccount?.profile?.nickname.toString(),"userNick")
                 var email:String = user.kakaoAccount?.email?:"kakao email load failed"
-                G.userAccount = UserAccount(id, email,User.NON.toString() )
+                G.userAccount = UserAccount(id, email,User.KAKAO )
                 Log.i(" 카카오 로그인 이메일  ", email?: "카카오 이메일 null")
             }
         }
