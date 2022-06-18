@@ -12,7 +12,6 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.os.SystemClock
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -190,15 +189,19 @@ class MapActivity : AppCompatActivity() {
 
     // 서버 DB에 저장된 마커들을 불러오는 메소드
     private fun loadDBFromMarker(){
-
+        val mMarker = ArrayList<Marker>()
         // 여기서는 retrofit으로 서버 DB에 저장 된 마커들을 불러와서 찍기.
         val call:Call<ArrayList<Marker>> = retrofitService.loadDBMarkers()
         call.enqueue(object : Callback<ArrayList<Marker>>{
             override fun onResponse(
                 call: Call<ArrayList<Marker>>,
                 response: Response<ArrayList<Marker>>
-            ) {
+            ) {response.body().
              Log.i(" 성공", response.body().toString())
+             for ( i in mMarker ){
+
+             }
+                response.body()
             }
 
             override fun onFailure(call: Call<ArrayList<Marker>>, t: Throwable) {
