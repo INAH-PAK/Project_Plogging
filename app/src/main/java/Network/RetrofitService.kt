@@ -1,6 +1,7 @@
 package Network
 
 import model.Marker
+import model.NaverApiResponse
 import model.ScheduleVO
 import model.UserAccount
 import retrofit2.Call
@@ -43,6 +44,6 @@ interface RetrofitService {
 
     @Headers("X-Naver-Client-Id: YJmJ2ShztYmEIn2fYvnx","X-Naver-Client-Secret: XiBJ7piE3A")
     @GET("https://openapi.naver.com/v1/search/news.json")
-    fun naverNewsApi(@Query ("query")query:String, @Query ("display")display:Int, @Query ("sort")sort:String):Call<String>
+    fun naverNewsApi(@Query ("query")query:String, @Query ("display")display:Int, @Query ("sort")sort:String):Call<NaverApiResponse>
 
 }

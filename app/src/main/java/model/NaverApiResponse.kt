@@ -3,7 +3,7 @@ package model
 import java.util.*
 
 data class NaverApiResponse(
-    var lastBuildDate : Date,
+  //  var lastBuildDate : Date,
     val total:Int,
     val start:Int,
     val display:Int,
@@ -14,5 +14,5 @@ data class NaverApiItems(
     val originallink:String,
     val link:String,
     val description:String,
-    val pubDate:Date,
+ //   val pubDate:Date,
 )
