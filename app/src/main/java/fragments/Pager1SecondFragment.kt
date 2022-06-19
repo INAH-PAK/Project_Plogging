@@ -68,7 +68,6 @@ class Pager1SecondFragment : Fragment() {
 
         fun setCalenderViewEventDays(){
             G.eventDays.add(EventDay(calendarInstance,R.drawable.ic_baseline_circle_8))
-
             calendarView.setEvents(G.eventDays)
         }
 

@@ -82,13 +82,6 @@ tools:context="activities.RecordActivity">
         android:layout_margin="8dp"
         android:hint="메모"
         />
-    <EditText
-        android:id="@+id/et_friends"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_bg"
-        android:layout_margin="8dp"
-        android:hint="함께한 사람"/>
 
     <CheckBox
         android:id="@+id/check_share"

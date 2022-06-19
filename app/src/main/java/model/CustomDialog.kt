@@ -57,7 +57,6 @@ class CustomDialog(context: Context ) : AlertDialog(context) {
         val location = dialog.findViewById<EditText>(R.id.et_location)
         val file = dialog.findViewById<TextView>(R.id.tv_file)
         val msg = dialog.findViewById<EditText>(R.id.et_msg)
-        val friends = dialog.findViewById<EditText>(R.id.et_friends)
         val check = dialog.findViewById<CheckBox>(R.id.check_share) // 뺄까
         val dateStart = dialog.findViewById<Chip>(R.id.chip_day_start)
         val datEnd = dialog.findViewById<Chip>(R.id.chip_day_end)
@@ -130,8 +129,6 @@ class CustomDialog(context: Context ) : AlertDialog(context) {
                 msg.text.toString(),
                 location.text.toString(),
                 location.text.toString(),
-                file.text.toString(),
-                friends.text.toString()
             )
             insertDB(item)
 

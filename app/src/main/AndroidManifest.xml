@@ -35,10 +35,6 @@
             android:name="activities.MainActivity"
             android:exported="true" />
         <activity
-            android:name="activities.NameActivity"
-            android:exported="false"
-            android:windowSoftInputMode="stateVisible" />
-        <activity
             android:name="activities.Map3Activity"
             android:exported="false" />
         <activity

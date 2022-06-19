@@ -13,7 +13,7 @@ import fragments.*
 
 class MainActivity : AppCompatActivity() {
 
-    val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     val fragments:MutableList<Fragment> by lazy { mutableListOf() }
 
 
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.bnv_menu_tab1 -> {
+
                     //   supportFragmentManager.beginTransaction().show(fragments[0]).commit()
                     tran.show(fragments[0])
                 }

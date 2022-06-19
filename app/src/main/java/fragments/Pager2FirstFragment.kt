@@ -81,12 +81,13 @@ class Pager2FirstFragment : Fragment() {
 
 
         // 일단 테스트 목적으로 아이템 만들어두자.
-        items.add(Borad("D+1","2022년 4월 26일","ff","ddd",""))
-        items.add(Borad("D+fdgd","2022년 4월 26일","fdff","dddd",""))
-        items.add(Borad("D+ewerfe","2022년 4월 26일","fffwdas","dsffdd",""))
+//        items.add(Borad("D+1","2022년 4월 26일","ff","ddd",""))
+//        items.add(Borad("D+fdgd","2022년 4월 26일","fdff","dddd",""))
+//        items.add(Borad("D+ewerfe","2022년 4월 26일","fffwdas","dsffdd",""))
 
-
-
+        items.add(Borad( title = "2022년 4월 26일",date="도산공원", message = "길동이와 새벽에 산책하다가 넘어졌다"))
+        items.add(Borad(  title = "2022년 4월 29일",date="집 앞 산책", message = "강아지와 아침 산책"))
+        items.add(Borad(  title = "2022년 4월 30일",date="학교 앞", message = "기탁이 데이러 간 날"))
 
         recyclerView = fragmentBinding.recycler
         fragmentBinding.recycler.adapter = childFragmentManager?.let{ RecyclerAdaopterTab2First(activity as Context, items , it) }

@@ -8,12 +8,16 @@
     tools:context="fragments.Pager2SecondFragment">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+
         android:text="커뮤니티"/>
 <com.google.android.material.chip.ChipGroup
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chip01"
@@ -45,6 +49,7 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:scrollbars="vertical"/>
     <TextView

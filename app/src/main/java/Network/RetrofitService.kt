@@ -36,5 +36,13 @@ interface RetrofitService {
 //    @POST("loadDB.php")
 //    fun loadDBMarkers():Call<String>
 
+    // 네이버 API를 사용한 news 데이터 받아오기
+//    @Headers("X-Naver-Client-Id: YJmJ2ShztYmEIn2fYvnx","X-Naver-Client-Secret: XiBJ7piE3A")
+//    @GET("https://openapi.naver.com/v1/search/news.json")
+//    fun naverNewsApi(@Query ("query")query:String, @Query ("display")display:Int, @Query ("sort")sort:String):Call<String>
+
+    @Headers("X-Naver-Client-Id: YJmJ2ShztYmEIn2fYvnx","X-Naver-Client-Secret: XiBJ7piE3A")
+    @GET("https://openapi.naver.com/v1/search/news.json")
+    fun naverNewsApi(@Query ("query")query:String, @Query ("display")display:Int, @Query ("sort")sort:String):Call<String>
 
 }

@@ -5,58 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tab_background"
-    android:backgroundTint="@color/sky"
+    android:background="@color/sky"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context="activities.MainActivity">
 
-
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/white">-->
-
-<!--    <com.google.android.material.appbar.MaterialToolbar-->
-<!--        android:id="@+id/appbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_collapseMode="pin">-->
-
-        <!-- pin: 스크롤 시 고정 -->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:gravity="center"-->
-<!--            android:background="@drawable/appbar_bacground">-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/iv_app_weather"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:src="@drawable/ic_baseline_cloud_24"-->
-<!--                />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv01"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:layout_marginBottom="16dp"-->
-<!--                android:layout_toRightOf="@id/iv_app_weather"-->
-<!--                android:text="반가워요 "-->
-<!--                android:textSize="15dp" />-->
-
-
-<!--        </RelativeLayout>-->
-
-<!--    </com.google.android.material.appbar.MaterialToolbar>-->
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -70,7 +23,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:background="@drawable/bg_main" />
 
 
 <!-- 바텀-->
@@ -101,8 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:backgroundTint="@color/yellow"
-        app:srcCompat="@drawable/icons_go_100"
+        android:backgroundTint="@color/sky"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_baseline_directions_walk_24"
         app:layout_anchor="@id/bottomAppBar"/>
 
 

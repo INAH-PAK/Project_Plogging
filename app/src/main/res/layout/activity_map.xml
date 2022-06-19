@@ -71,42 +71,51 @@
             android:id="@+id/btn01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:chipIcon="@drawable/ic_baseline_add_location_alt_24"
             android:layout_gravity="end"
-            android:layout_margin="8dp"
-            android:text="마커 추가"/>
-
-        <TextView
-            android:id="@+id/tv02"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="마커 추가"
+            app:chipIcon="@drawable/ic_baseline_add_location_alt_24" />
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:text=" 타이머 : "
-            />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn02_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:text="타이머 START"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn03_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btn02_start"
+                android:backgroundTint="@color/teal_200"
+                android:text="타이머 STOP"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold" />
+
+
         <Chronometer
             android:id="@+id/chronometer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="30dp"
-            />
+            android:layout_below="@id/btn03_stop"
+            android:layout_centerInParent="true"
+            android:textSize="30dp" />
 
-        <Button
-            android:id="@+id/btn02_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="START"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/teal_200"/>
-        <Button
-            android:id="@+id/btn03_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="계속"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/teal_200"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 </RelativeLayout>

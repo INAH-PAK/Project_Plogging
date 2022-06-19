@@ -1,6 +1,7 @@
 package adapters
 
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -29,8 +30,14 @@ class RecyclerAdaopterTab2First constructor(val context: Context, var items: Mut
 
         //여기서 아이템뷰 이벤트를 쓰자 !
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, "이걸 클릭하면 다이알로그를 띄우자.나중에..", Toast.LENGTH_SHORT).show()
-
+            AlertDialog.Builder(context)
+                .setTitle("삭제하시겠습니다?")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                    // item 데이터 삭제
+                })
+                .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                    return@OnClickListener
+                }).create().show()
         }
 
 

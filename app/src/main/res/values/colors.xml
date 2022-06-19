@@ -12,5 +12,7 @@
     <color name="yellow">#FFEB3B</color>
     <color name="sky">#FF51BAFF</color>
     <color name="red">#FF0000</color>
+    <color name="main">#AAFFFFFF</color>
+
 
 </resources>

@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wookie_soft.inah.databinding.FragmentMainTab1Binding
 import adapters.PagerFragmentAdapterTap1
+import com.wookie_soft.inah.R
 
 class Tab1MainFragment:Fragment(){
 
@@ -37,8 +38,16 @@ class Tab1MainFragment:Fragment(){
         //페이저 안에 들어갈 fragment 2개 추가
         viewPager.adapter = pagerAdapter
         TabLayoutMediator(tap,viewPager){tab,position->
-            tab.text = "OBJECT ${(position + 1)}"
-        }.attach()
+//            tab.text = "OBJECT ${(position + 1)}"
+            when (position) {
+                0 -> {
+                    tab.text = "내 활동"
+                }
+                1 -> {
+                    tab.text = "일정"
+                }}
+
+            }.attach()
 
 
 

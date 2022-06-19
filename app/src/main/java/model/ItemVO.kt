@@ -15,14 +15,12 @@ data class ScheduleVO(
     val title:String,
     val message:String= "",
     val location_latitude:String= "",
-    val location_longitude:String= "",
-    val file:String= "",
-    val is_share: String= "false")
+    val location_longitude:String= "")
 
 data class Borad(val email_user:String= "",
                  val email_join_user:String= "",
                  val date:String= "",
-                 val title:String,
+                 val title:String = "null",
                  val message:String = "",
                  val location_latitude:String= "",
                  val location_longitude:String= "",

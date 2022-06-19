@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
     android:layout_margin="4dp"
@@ -9,7 +9,8 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="4dp">
+
+    android:padding="8dp">
 
 
     <TextView
@@ -33,17 +34,22 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_below="@id/tv01"
-        android:src="@drawable/siba"/>
+        android:layout_margin="4dp"
+        android:src="@drawable/siba" />
+
     <TextView
         android:id="@+id/tv03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv"
         android:layout_below="@id/tv01"
-        android:layout_margin="6dp"
-        android:ems="150"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toRightOf="@id/iv"
         android:ellipsize="end"
-        android:text=" 길동이와의 저녁산책은 재밌었다 . 길 가다가 언니를 만났는데 루류ㅗ듀ㅏ누ㅜㅇ재ㅐ웆더ㅕ룾둘"/>
+        android:ems="150"
+        android:text=" 길동이와의 저녁산책은 재밌었다 . 길 가다가 언니를 만났는데 루류ㅗ듀ㅏ누ㅜㅇ재ㅐ웆더ㅕ룾둘" />
 
 </RelativeLayout>
 </androidx.cardview.widget.CardView>
