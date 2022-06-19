@@ -2,6 +2,7 @@ package fragments
 
 import Network.RetrofitHelper
 import Network.RetrofitService
+import activities.MainActivity
 import adapters.RecyclerAdaopterTab1
 import android.app.Activity
 import android.content.Context
@@ -53,7 +54,7 @@ class Pager1SecondFragment : Fragment() {
 
     lateinit var title: String
     val userEmail by lazy { pref.getString("userEmail", "").toString() }
-    val dialog by lazy { CustomDialog(requireContext())  }
+    val dialog by lazy { CustomDialog(requireContext() )  }
 
     val retrofitHelper = RetrofitHelper.getRetrofitInstans()
     val retrofitService = retrofitHelper!!.create(RetrofitService::class.java)
@@ -120,6 +121,7 @@ class Pager1SecondFragment : Fragment() {
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
             loadDBSchedule()
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
+
         }
 
 
@@ -159,8 +161,7 @@ class Pager1SecondFragment : Fragment() {
                             "날짜 선택함 !!!!",
                             list.get(0).calendar.time.toString()
                         ) ///  이거다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                        dialog.myDialog()
+                        dialog.myDialog(calendarInstance)
 
                     })
                 .setNeutralButton("일정보기", DialogInterface.OnClickListener { dialogInterface, i ->
@@ -168,8 +169,7 @@ class Pager1SecondFragment : Fragment() {
                     // 서버에서 그 날의 일정을 가져와서 보여줘야 함.!!!!!
 
                     // 레트로핏 서비스로 !!
-
-
+                    loadDBSchedule()
                 })
                 .show()
 
@@ -209,14 +209,16 @@ class Pager1SecondFragment : Fragment() {
                 val mSchedule: ArrayList<ScheduleVO>? = response.body()
                 if (mSchedule == null ) return
                 else {
-                    mSchedule.forEach {
                         // 이 값을 아답터에 전달해줘야 함.
+                        fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
+                            RecyclerAdaopterTab1(activity as Context, mSchedule , it)
                     }
+                    Log.i("dddddddd", " 아답터에 앖 전달함.")
                 }
 
             }
             override fun onFailure(call: Call<ArrayList<ScheduleVO>>, t: Throwable) {
-                Toast.makeText(context, " 서버에 접속할 수 없습니다. 네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, " 콜객체 에러. $t", Toast.LENGTH_SHORT).show()
             }
 
         })

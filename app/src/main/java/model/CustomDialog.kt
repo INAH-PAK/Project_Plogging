@@ -3,6 +3,7 @@ package model
 import G
 import Network.RetrofitHelper
 import Network.RetrofitService
+import adapters.RecyclerAdaopterTab1
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -33,17 +34,14 @@ import kotlin.reflect.typeOf
 
 
 // 달력에 일정 기입을 위한 커스텀 뷰
-class CustomDialog(context: Context) : AlertDialog(context) {
+class CustomDialog(context: Context ) : AlertDialog(context) {
     val dialog = Dialog(context)
     val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     var position = 0
-
-    var pickerDate:String = "null"
-    var pickerTime:String = "null"
     val calendarList = mutableListOf<Calendar>()
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun myDialog() {
+    fun myDialog( calendar: Calendar ) {
         dialog.setContentView(layout.custom_dialog)
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -51,6 +49,9 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         )
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
+
+        var mDate : String = calendar.time.toInstant().toString()
+        var mTime:String = calendar.time.toInstant().toString()
 
         val title = dialog.findViewById<EditText>(R.id.et_title)
         val location = dialog.findViewById<EditText>(R.id.et_location)
@@ -73,8 +74,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         // 다이알로그가 떴다가 죽으면,
         dialog.setOnDismissListener {
             Log.i("다이알로그 커스텀 클래스에서 죽음"," 다이알로그 커스텀 클래스에서 죽음")
-
-
             Pager1SecondFragment.noti()
         }
 
@@ -84,7 +83,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
         dateStart.setOnClickListener {
             val builder = DatePickerBuilder(context, OnSelectDateListener {
 
-                pickerDate= it.get(it.size).time.toString()
+                mDate= it.get(it.size).time.toString()
 
                 Log.i("선택한 날짜", it.get(0).time.toString()) // 이거임.
                 Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
@@ -105,7 +104,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             val picker:TimePickerDialog = TimePickerDialog(context,TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
                 var t = String.format("%02d",i)
                     timeStart.setText("$t : $i2")
-                pickerTime = String.format("%02d",i) +" : "+ timeStart.setText("$t : $i2")
+                mTime = String.format("%02d",i) +" : "+ timeStart.setText("$t : $i2")
             },0,0,true)
 
             picker.show()
@@ -126,7 +125,7 @@ class CustomDialog(context: Context) : AlertDialog(context) {
             var t = title.text.toString()
 
             val item = ScheduleVO(
-                "inah@",pickerDate + pickerTime,
+                "inah@",mDate,
                 title.text.toString(),
                 msg.text.toString(),
                 location.text.toString(),
@@ -183,15 +182,6 @@ class CustomDialog(context: Context) : AlertDialog(context) {
 
         })
     }
-
-    fun loadDB(){
-        //Post 방식으로 객체를 서버에 전달하자 !
-
-    }
-
-
-
-
 
 
 }
