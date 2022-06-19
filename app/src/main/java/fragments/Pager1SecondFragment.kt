@@ -122,6 +122,8 @@ class Pager1SecondFragment : Fragment() {
             loadDBSchedule()
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
 
+
+
         }
 
 
@@ -145,7 +147,7 @@ class Pager1SecondFragment : Fragment() {
 
             val builder = AlertDialog.Builder(context as Activity)
                 //기록하기 버튼을 누르면 내가 만든 커스텀 다이알로그 보여주기
-                .setNegativeButton("기록하기",
+                .setPositiveButton("기록하기",
                     DialogInterface.OnClickListener { dialogInterface, i ->
 
                         calendarInstance = it.calendar
@@ -169,13 +171,19 @@ class Pager1SecondFragment : Fragment() {
                     // 서버에서 그 날의 일정을 가져와서 보여줘야 함.!!!!!
 
                     // 레트로핏 서비스로 !!
-                    loadDBSchedule()
+//                    loadDBSchedule()
                 })
+                .setOnDismissListener {
+                    Log.i("프레그먼트에서의 다아알로그 주금 11111 ","ddddddddddddddddddd")
+                   loadDBSchedule()
+                }
                 .show()
 
         }
 
     }// onViewCreated
+
+
 
 
     fun showKeyboardFrom(view: View) { // 키보드가 보여질 때
@@ -193,6 +201,7 @@ class Pager1SecondFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         calendarView.setEvents(G.eventDays)
+
         fragmentBinding.recyclerTab2.adapter?.notifyDataSetChanged()
 
     }

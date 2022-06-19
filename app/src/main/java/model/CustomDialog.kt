@@ -160,6 +160,8 @@ class CustomDialog(context: Context ) : AlertDialog(context) {
     }
 
 
+
+
     fun insertDB(item: ScheduleVO) {
         //Post 방식으로 객체를 서버에 전달하자 !
 
@@ -174,6 +176,7 @@ class CustomDialog(context: Context ) : AlertDialog(context) {
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 Log.i("서버 응답 성공시", response.body() + "")
+                Pager1SecondFragment.noti()
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
