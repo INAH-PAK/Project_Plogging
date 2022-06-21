@@ -178,24 +178,22 @@ class MapActivity : AppCompatActivity() {
              Log.i(" 성공", response.body().toString())
                 val mmMarker: ArrayList<Marker>? = response.body()
                 if (mmMarker == null) {
-                    Toast.makeText(this@MapActivity, " 서버 DB에 저장된 값이 없습니다.", Toast.LENGTH_SHORT).show() }
-                else {
+                    Toast.makeText(this@MapActivity, " 서버 DB에 저장된 값이 없습니다.", Toast.LENGTH_SHORT).show()
+                }else {
                     Log.i("ttttt", "실행 됨.")
-                    for ( i in mmMarker ){
-                        mmMarker.add(0,i)
-                           // val point: MapPoint = mapPointWithGeoCoord(i.latitude.toDouble(),i.longitude.toDouble())
-                            val point: MapPoint = mapPointWithGeoCoord(lng.toDouble(),lat.toDouble())
-                            marker.apply {
-                                Log.i("ttttt2222", "실행 됨2222.")
-                                itemName= i.message
-                                mapPoint= point
-                                markerType= MapPOIItem.MarkerType.BluePin
-                                selectedMarkerType= MapPOIItem.MarkerType.YellowPin
-                                // 해당 POI item(마커)와 관련된 정보를 저장하고 있는 데이터객체를 보관
-                                userObject= i
+                    mmMarker.forEach {
+                        val point: MapPoint = mapPointWithGeoCoord(it.latitude.toDouble(),it.longitude.toDouble())
+                        marker.apply {
+                            Log.i("ttttt2222", "실행 됨2222.")
+                            itemName= it.message
+                            mapPoint= point
+                            markerType= MapPOIItem.MarkerType.RedPin
+                            selectedMarkerType= MapPOIItem.MarkerType.YellowPin
+                            // 해당 POI item(마커)와 관련된 정보를 저장하고 있는 데이터객체를 보관
+                            userObject= it
                         }
-                }
-                    mapView.addPOIItem(marker)
+                        mapView.addPOIItem(marker)
+                    }
                 }
             }
 

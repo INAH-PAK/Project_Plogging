@@ -120,9 +120,6 @@ class Pager1SecondFragment : Fragment() {
         fragmentBinding.recyclerTab2.adapter = childFragmentManager.let {
             loadDBSchedule()
             RecyclerAdaopterTab1(activity as Context, User.glovalItemList , it)
-
-
-
         }
 
 

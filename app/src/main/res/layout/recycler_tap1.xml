@@ -15,31 +15,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" D-3 "
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_dday"
+        android:layout_below="@id/tv_dday"
+        android:textSize="12dp"
         android:text=" 2022년 03월 26일 " />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_date"
-        android:layout_toRightOf="@id/tv_dday"
-        android:paddingTop="5dp"
-        android:text=" 오후 8시 :  " />
+        android:layout_toRightOf="@id/tv_date"
+        android:layout_alignBottom="@id/tv_date"
+        android:text=" 오후 8시   " />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/tv_time"
-        android:layout_toRightOf="@id/tv_time"
+        android:layout_below="@id/tv_time"
+        android:textSize="12dp"
         android:text=" 길동이랑 도산공원" />
 </RelativeLayout>
 </androidx.cardview.widget.CardView>

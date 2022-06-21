@@ -4,6 +4,7 @@ import Network.RetrofitHelper
 import Network.RetrofitService
 import adapters.RecyclerAdaopterTab1
 import adapters.RecyclerFragmentAdapterTap3
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -60,6 +61,7 @@ lateinit var  binding: FragmentMainTab3Binding
 
                 val call : Call<NaverApiResponse> = retrofitService.naverNewsApi("플로깅",40,"sim" )
         call.enqueue( object  : Callback<NaverApiResponse>{
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<NaverApiResponse>, response: Response<NaverApiResponse>) {
                 //검색 성공
                 if ( response.body() == null ) return
@@ -67,10 +69,9 @@ lateinit var  binding: FragmentMainTab3Binding
                     Log.i("네이버 api 검색 결과" , response.body().toString())
                     val data = response.body()!!
                     Log.i(" 그 중 아이템들 ", data.items[0].title)
-                    recyclerView = binding.recyclerNews
-                    binding.recyclerNews.adapter = childFragmentManager.let {
-                        RecyclerFragmentAdapterTap3(activity as Context, data.items , it)
-                    }
+                    binding.recyclerNews.adapter= RecyclerFragmentAdapterTap3(requireContext(),data.items)
+                    binding.recyclerNews.adapter?.notifyDataSetChanged()
+
 
                 }
 

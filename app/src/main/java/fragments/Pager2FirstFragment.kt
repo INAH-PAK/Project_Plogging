@@ -12,9 +12,11 @@ import com.wookie_soft.inah.R
 import adapters.RecyclerAdaopterTab2First
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.preference.PreferenceManager
@@ -25,15 +27,14 @@ import com.applandeo.materialcalendarview.listeners.OnSelectDateListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wookie_soft.inah.databinding.CustomDialogBinding
 import com.wookie_soft.inah.databinding.FragmentFirstPager2Binding
-import model.Borad
-import model.ItemTab2First
-import model.User
+import model.*
 
 class Pager2FirstFragment : Fragment() {
     lateinit private var  fragmentBinding:FragmentFirstPager2Binding
     lateinit var recyclerView: RecyclerView
     var items = mutableListOf<Borad>()
     lateinit var borrrrItem:Borad
+    val dialog by lazy { CustomDialogDiary(requireContext() )  }
 
     lateinit var tt:Borad
 
@@ -57,6 +58,7 @@ class Pager2FirstFragment : Fragment() {
         return fragmentBinding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 여기서 리사이클러 코드쓰기.
@@ -73,10 +75,13 @@ class Pager2FirstFragment : Fragment() {
 
         val userEmail: String? = pref.getString("userEmail","non Email")
 
-        bundleOf()
+        // 작성하기 버튼 클릭
         fragmentBinding.btn.setOnClickListener {
-            val intent = Intent(requireContext(), RecordActivity::class.java)
-            startActivity(intent)
+
+            dialog.myShow()
+
+
+
         }
 
 

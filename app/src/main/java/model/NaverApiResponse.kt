@@ -14,5 +14,5 @@ data class NaverApiItems(
     val originallink:String,
     val link:String,
     val description:String,
- //   val pubDate:Date,
+    val pubDate:String,
 )

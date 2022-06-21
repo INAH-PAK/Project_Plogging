@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="INAH 님,"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:textSize="25dp"/>
     <TextView
         android:id="@+id/tv02"
@@ -26,27 +27,21 @@
         android:textSize="25dp"
         android:padding="4dp"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
 
         <TextView
-            android:id="@+id/tv03"
+            android:id="@+id/tv04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:text="Today"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tv04"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="경험을 기록해보세요"
-            android:layout_toRightOf="@id/tv03"
-            android:layout_alignBottom="@id/tv03"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:gravity="end"
+            android:layout_marginEnd="15dp"
+            android:textStyle="italic"
+            android:layout_weight="2"/>
 
         <Button
             android:id="@+id/btn"
@@ -55,10 +50,11 @@
             android:layout_alignParentRight="true"
             android:backgroundTint="@color/sky"
             android:text="작성하기"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
-    </RelativeLayout>
+    </LinearLayout>
 <com.google.android.material.divider.MaterialDivider
     android:layout_width="match_parent"
     android:layout_height="2dp"

@@ -41,7 +41,7 @@ class CustomDialog(context: Context ) : AlertDialog(context) {
     val calendarList = mutableListOf<Calendar>()
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun myDialog( calendar: Calendar ) {
+    fun myDialog(calendar: Calendar  ) {
         dialog.setContentView(layout.custom_dialog)
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
