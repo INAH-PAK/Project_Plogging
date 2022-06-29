@@ -55,46 +55,46 @@ class CustomDialogDiary(context: Context) :  AlertDialog(context){
         )
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
-
-        dateStart.setOnClickListener {
-            val builder = DatePickerBuilder(context, OnSelectDateListener {
-
-                mDate= it.get(it.size).time.toString()
-
-                Log.i("선택한 날짜", it.get(0).time.toString()) // 이거임.
-                Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
-                Log.i("선택한 날짜", it.get(0).time.toString()[1].toString())
-                Log.i("선택한 날짜", it.get(0).time.toString()[2].toString())
-
-                dateStart.setText(formDate.format(it.get(0).time).toString())
-            }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
-        }
-        datEnd.setOnClickListener {
-            val builder = DatePickerBuilder(context, OnSelectDateListener {
-
-                Log.i("선택한 날짜", it.get(0).time.toString())
-                datEnd.setText(formDate.format(it.get(0).time).toString())
-            }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
-        }
-        timeStart.setOnClickListener {
-            val picker: TimePickerDialog = TimePickerDialog(context,
-                TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
-                var t = String.format("%02d",i)
-                timeStart.setText("$t : $i2")
-                mTime = String.format("%02d",i) +" : "+ timeStart.setText("$t : $i2")
-            },0,0,true)
-
-            picker.show()
-        }
-        timeEnd.setOnClickListener {
-            val picker: TimePickerDialog = TimePickerDialog(context,
-                TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
-                var t = String.format("%02d",i)
-                timeEnd.setText("$t : $i2")
-            },0,0,true)
-            picker.show()
-
-        }
+//
+//        dateStart.setOnClickListener {
+//            val builder = DatePickerBuilder(context, OnSelectDateListener {
+//
+//                mDate= it.get(it.size).time.toString()
+//
+//                Log.i("선택한 날짜", it.get(0).time.toString()) // 이거임.
+//                Log.i("선택한 날짜", it.get(0).time.toString()[0].toString())
+//                Log.i("선택한 날짜", it.get(0).time.toString()[1].toString())
+//                Log.i("선택한 날짜", it.get(0).time.toString()[2].toString())
+//
+//                dateStart.setText(formDate.format(it.get(0).time).toString())
+//            }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
+//        }
+//        datEnd.setOnClickListener {
+//            val builder = DatePickerBuilder(context, OnSelectDateListener {
+//
+//                Log.i("선택한 날짜", it.get(0).time.toString())
+//                datEnd.setText(formDate.format(it.get(0).time).toString())
+//            }).setPickerType(CalendarView.ONE_DAY_PICKER).build().show()
+//        }
+//        timeStart.setOnClickListener {
+//            val picker: TimePickerDialog = TimePickerDialog(context,
+//                TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
+//                var t = String.format("%02d",i)
+//                timeStart.setText("$t : $i2")
+//                mTime = String.format("%02d",i) +" : "+ timeStart.setText("$t : $i2")
+//            },0,0,true)
+//
+//            picker.show()
+//        }
+//        timeEnd.setOnClickListener {
+//            val picker: TimePickerDialog = TimePickerDialog(context,
+//                TimePickerDialog.OnTimeSetListener { timePicker, i, i2 -> // i : 시 , i2 :  분
+//                var t = String.format("%02d",i)
+//                timeEnd.setText("$t : $i2")
+//            },0,0,true)
+//            picker.show()
+//
+//        }
         dialog.create()
         dialog.show()
 

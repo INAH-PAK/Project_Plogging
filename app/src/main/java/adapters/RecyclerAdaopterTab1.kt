@@ -20,7 +20,6 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Schedule
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val binding:RecyclerTap1Binding = RecyclerTap1Binding.inflate(LayoutInflater.from(parent.context),parent,false)
-
         return VH(binding)
     }
 
@@ -33,17 +32,16 @@ class RecyclerAdaopterTab1(val context: Context, var items: MutableList<Schedule
         }
 
 
-        holder.title.text = items[position].title.toString()
-        holder.dDay.text = items[position].date.toString()
-        holder.time.text = items[position].message.toString()
-        holder.day.text = items[position].date.toString()
-
-
-////
-//        holder.dDay.setText( items[position].date.toString())
-//        holder.day.setText( items[position].date.toString())
-//        holder.time.setText(items[position].user_email.toString())
-//        holder.title.setText( items[position].title.toString())
+//
+//        holder.title.text = items[position].title.toString()
+//        holder.dDay.text = items[position].date.toString()
+//        holder.time.text = items[position].message.toString()
+//        holder.day.text = items[position].date.toString()
+//
+//        holder.title.text = "유미랑 산책가기"
+//        holder.dDay.text = "6월 23일"
+//        holder.time.text = ""
+//        holder.day.text = ""
 
     }
 

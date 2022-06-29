@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Project_Plogging"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="activities.InfoActivity"
+            android:exported="false" />
+        <activity
             android:name="activities.NewsUrlActivity"
             android:exported="false" />
         <activity

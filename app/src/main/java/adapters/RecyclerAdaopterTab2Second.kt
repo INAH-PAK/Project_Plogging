@@ -25,8 +25,11 @@ class RecyclerAdaopterTab2Second constructor(val context: Context, var items: Mu
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "이걸 클릭하면 다이알로그를 띄우자.나중에..", Toast.LENGTH_SHORT).show()
         }
-        holder.binding.tv01.setText("gg")
-        holder.location.setText("요기")
+
+
+        holder.binding.tv01.text = items[position].day
+        holder.location.text = items[position].location_name
+        holder.name.text = items[position].name
 
     }
 

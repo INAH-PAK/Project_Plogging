@@ -1,6 +1,7 @@
 package activities
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
@@ -37,6 +39,9 @@ class LoginActivity : AppCompatActivity() {
 
     private val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
 
+    var etEmail = ""
+    var etPW = ""
+
     // SharedPreference
     private val pref: SharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
     private val sharedPreferences:SharedPreferences by lazy {  getSharedPreferences("name", MODE_PRIVATE)}
@@ -48,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binging.root)
+
+
 
         Glide.with(this).load(R.drawable.kakao_login_medium_wide).into(binging.ivKakao)
 
@@ -71,11 +78,20 @@ class LoginActivity : AppCompatActivity() {
 
     private fun clickSignInEmail(){
         // 이메일과 비번으로 로그인
-        val email = binging.etEmail.text.toString()
-        val pw = binging.etPw.text.toString()
-        firebaseAuth.signInWithEmailAndPassword(email, pw).addOnCompleteListener {
-                if (it.isSuccessful) {
 
+        var etEmail = binging.etEmail.text.toString()
+        var etPW = binging.etPw.text.toString()
+
+        if(etEmail.isEmpty()) {
+            Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+            return}
+        if(etPW.isEmpty()) {
+            Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(etEmail, etPW).addOnCompleteListener {
+                if (it.isSuccessful) {
                     if(firebaseAuth.currentUser!!.isEmailVerified){
                         Toast.makeText(this, "이메일 로그인 성공", Toast.LENGTH_SHORT).show()
                         val email: String = firebaseAuth.currentUser!!.email.toString()
@@ -94,11 +110,19 @@ class LoginActivity : AppCompatActivity() {
     private fun clickSignUpEmail(){
         // 이메일과 비번으로 회원가입
 //이메일 및 비밀번호 인증 방식의 회원가입 - 입력된 이메일로 [인증확인]메일이 보내지고 사용자가 확인했을때 가입이 완료되는 방식
-        val email:String = binging.etEmail.text.toString()
-        val pw:String = binging.etPw.text.toString()
+        etEmail = binging.etEmail.text.toString()
+        etPW = binging.etPw.text.toString()
+
+        if(etEmail.isEmpty()) {
+            Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+            return}
+        if(etPW.isEmpty()) {
+            Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
 
 
-            firebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener { task ->
+            firebaseAuth.createUserWithEmailAndPassword(etEmail, etPW).addOnCompleteListener { task ->
                 //입력된 이메일과 패스워드가 사용가능한지..유효성 검사 결과
                 //1. 이메일 형식에 맞는가? XX@XX.XX
                 //2. 패스워드가 6자리 이상인가?

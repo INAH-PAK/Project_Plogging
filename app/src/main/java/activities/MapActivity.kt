@@ -234,6 +234,7 @@ class MapActivity : AppCompatActivity() {
         request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         // 실시간 위치정보 갱신 요청
 
+        // 퍼미션 검사
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION

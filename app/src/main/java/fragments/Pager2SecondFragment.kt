@@ -32,9 +32,9 @@ class Pager2SecondFragment  : Fragment() {
         // 바인딩 사용하니까, 프레그먼트는 바인드 후에 써야 함 !!!
 
         // 일단 테스트 목적으로 아이템 만들어두자.
-        items.add(ItemTab2Second("D+1", R.drawable.siba,"2022년 4월 26일","도산공원"))
-        items.add(ItemTab2Second("D+4", R.drawable.siba,"2022년 4월 30일","회사 근처"))
-        items.add(ItemTab2Second("D+6", R.drawable.siba,"2022년 4월 2ㅈ6일","집 앞"))
+        items.add(ItemTab2Second("사용자1", R.drawable.siba,"2022년 4월 26일","도산공원에서 행복한 하루"))
+        items.add(ItemTab2Second("사용자2", R.drawable.siba,"2022년 4월 30일"," 상섬동 코엑스 근처 꿀팁"))
+        items.add(ItemTab2Second("사용자3", R.drawable.siba,"2022년 4월 2ㅈ6일","재활용 쓰레기 이렇게 하시는거 아셨어요?"))
 
         recyclerView = fragmentBinding.recycler
         fragmentBinding.recycler.adapter = childFragmentManager?.let{ RecyclerAdaopterTab2Second(activity as Context, items , it) }
